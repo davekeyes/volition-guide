@@ -21,7 +21,7 @@
     /* App shell */
     .app-shell {
       display: grid;
-      grid-template-columns: 175px 1fr;
+      grid-template-columns: 320px 1fr;
       min-height: 100vh;
     }
 
@@ -31,7 +31,7 @@
     .sidebar {
       background: var(--panel-highlight);
       border-right: 1px solid var(--divider-default);
-      padding: var(--space-5) 0 var(--space-8);
+      padding: 0 0 var(--space-8);
       position: sticky;
       top: 0;
       height: 100vh;
@@ -44,9 +44,9 @@
        MAIN CONTENT
        ============================================================ */
     .main-content {
-      padding: var(--space-7);
+      padding: 0;
       min-width: 0;
-      max-width: 720px;
+      max-width: 562px;
     }
 
     /* No-results message */
@@ -131,7 +131,7 @@
     }
 
     .section-header h2 {
-      font-size: var(--fs-xl);
+      font-size: var(--fs-xxl);
       color: var(--text-dark);
     }
 
@@ -142,13 +142,22 @@
 
     .content-block h3 {
       font-size: var(--fs-body-lg);
+      font-weight: var(--font-weight-semibold);
+      line-height: var(--lh-body-lg);
       color: var(--text-dark);
       margin-bottom: var(--space-3);
     }
 
+    .content-block p,
+    .content-block ul,
+    .content-block ol {
+      font-size: var(--fs-base);
+      line-height: var(--lh-base);
+      color: var(--text-mid);
+    }
+
     .content-block p {
       margin-bottom: var(--space-3);
-      color: var(--text-dark);
     }
 
     .content-block p:last-child { margin-bottom: 0; }
@@ -411,23 +420,20 @@
 
     .info-callout__icon {
       flex-shrink: 0;
-      width: 36px;
-      height: 36px;
+      width: 24px;
+      height: 24px;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: var(--bg-100);
-      border-radius: var(--radius-sm);
-      color: var(--text-dark);
-      border: 1px solid var(--divider-default);
+      color: var(--text-mid);
     }
 
     .info-callout p {
       margin: 0;
-      font-size: var(--fs-small);
+      font-size: var(--fs-base);
       color: var(--text-mid);
-      line-height: var(--lh-small);
-      padding-top: 6px;
+      line-height: var(--lh-base);
+      padding-top: 2px;
     }
 
     /* Support view items */
@@ -679,34 +685,46 @@
 
     /* Guide selector */
     .guide-selector {
-      padding: var(--space-5) var(--space-5) var(--space-4);
+      height: 128px;
+      padding: 0;
       border-bottom: 1px solid var(--divider-default);
-      margin-bottom: var(--space-3);
+      margin-bottom: 0;
       position: relative;
     }
 
     .guide-selector__btn {
-      display: flex; align-items: center; justify-content: space-between;
-      gap: var(--space-2); width: 100%; background: none; border: none;
-      cursor: pointer; padding: 0; text-align: left;
+      padding: 24px 24px 0;
+      display: block;
+      width: 100%;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
     }
 
     .guide-selector__title {
-      font-size: var(--fs-body);
+      font-size: var(--fs-xl);
       font-weight: var(--font-weight-semibold);
       color: var(--text-dark);
       line-height: 1.3;
+      height: 40px;
+      display: flex;
+      align-items: center;
     }
 
     .guide-selector__sub {
-      font-size: var(--fs-small);
+      font-size: var(--fs-base);
       color: var(--text-mid);
-      display: flex; align-items: center; gap: 4px;
-      margin-top: 2px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 8px;
+      height: 32px;
     }
 
     .guide-selector__chevron {
-      flex-shrink: 0; color: var(--text-light);
+      flex-shrink: 0;
+      color: var(--text-light);
       transition: transform var(--dur-fast) var(--ease-standard);
     }
 
@@ -715,20 +733,25 @@
     }
 
     .guide-selector__dropdown {
-      position: absolute; top: calc(100% - var(--space-2));
-      left: var(--space-4); right: var(--space-4);
+      position: absolute;
+      top: calc(100% - var(--space-2));
+      left: var(--space-4);
+      right: var(--space-4);
       background: var(--panel-highlight);
       border: 1px solid var(--divider-default);
       border-radius: var(--radius-md);
       box-shadow: var(--elev-3);
-      z-index: 300; overflow: hidden;
+      z-index: 300;
+      overflow: hidden;
     }
 
     .guide-selector__dropdown[hidden] { display: none; }
 
     .guide-selector__option {
-      display: block; padding: var(--space-3) var(--space-4);
-      font-size: var(--fs-small); color: var(--text-mid);
+      display: block;
+      padding: var(--space-3) var(--space-4);
+      font-size: var(--fs-small);
+      color: var(--text-mid);
       text-decoration: none;
       border-bottom: 1px solid var(--divider-default);
       transition: background var(--dur-fast) var(--ease-standard);
@@ -739,73 +762,179 @@
 
     /* Sidebar section list */
     .sidebar__sections {
-      list-style: none; padding: 0 var(--space-2); margin: 0;
-      display: flex; flex-direction: column; gap: 1px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
     }
 
     .sidebar__section-link {
-      display: flex; align-items: center;
-      padding: 7px var(--space-3);
-      border-radius: var(--radius-md);
-      font-size: var(--fs-small);
+      display: flex;
+      align-items: center;
+      height: 60px;
+      padding: 0 24px;
+      font-size: var(--fs-body-lg);
+      line-height: var(--lh-body-lg);
       color: var(--text-mid);
       text-decoration: none;
       font-weight: var(--font-weight-regular);
       transition: background var(--dur-fast) var(--ease-standard), color var(--dur-fast) var(--ease-standard);
-      line-height: 1.35;
     }
-    .sidebar__section-link:hover { background: var(--bg-100); color: var(--text-dark); }
+    .sidebar__section-link:hover { background: var(--bg-100); }
     .sidebar__section-link.active {
       background: var(--button-base);
       color: var(--text-inverted);
       font-weight: var(--font-weight-medium);
+      border-radius: 0;
     }
     .sidebar__section-link.active:hover { background: var(--button-base); opacity: 0.9; }
+
+    /* Sidebar sub-items */
+    .sidebar__sub-items {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: none;
+    }
+    .sidebar__sub-items.visible { display: block; }
+    .sidebar__sub-link {
+      display: flex;
+      align-items: center;
+      height: 44px;
+      padding: 0 24px 0 48px;
+      font-size: var(--fs-body-lg);
+      color: var(--text-mid);
+      text-decoration: none;
+    }
+    .sidebar__sub-link:hover { background: var(--bg-100); }
 
     /* Guide pages */
     .guide-page { display: none; }
     .guide-page.active { display: block; }
 
+    /* Page layout wrappers */
+    .page-header { padding: 24px 56px 0; }
+    .page-header--inner { padding: 0 56px; }
+    .page-content { padding: 0 56px 0; }
+    .page-divider {
+      border: none;
+      border-top: 1px solid var(--divider-default);
+      margin: 40px 56px;
+    }
+    .page-divider--flush { margin: 0; }
+
     /* Page 1 intro header */
-    .page-intro-header { margin-bottom: var(--space-6); }
-    .guide-title { font-size: var(--fs-xxl); color: var(--text-dark); margin-bottom: var(--space-2); line-height: 1.2; }
-    .guide-subtitle { font-size: var(--fs-body); color: var(--text-mid); margin: 0; }
+    .page-intro-header {
+      padding: 24px 56px 0;
+      margin-bottom: 0;
+    }
+
+    .guide-title {
+      font-size: var(--fs-hero);
+      line-height: var(--lh-hero);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-dark);
+      margin-bottom: 0;
+    }
+
+    .guide-subtitle {
+      font-size: var(--fs-base);
+      line-height: var(--lh-base);
+      color: var(--text-mid);
+      margin: 0;
+    }
 
     /* Section heading within page 1 (h2, "1. Introduction") */
     .page-section-heading {
-      font-size: var(--fs-xl); color: var(--text-dark);
-      margin-bottom: var(--space-4); margin-top: var(--space-6);
+      font-size: var(--fs-hero);
+      line-height: var(--lh-hero);
       font-weight: var(--font-weight-semibold);
+      color: var(--text-dark);
+      margin: 40px 0 0;
+      padding: 0 56px;
     }
 
     /* Intro lede — plain lead paragraph */
     .intro-lede {
-      font-size: var(--fs-body); color: var(--text-dark);
-      margin-bottom: var(--space-6);
-      line-height: var(--lh-body);
+      font-size: var(--fs-base);
+      line-height: var(--lh-base);
+      color: var(--text-dark);
+      margin-bottom: var(--space-5);
+      padding: 0;
     }
+
+    /* Intro illustration */
+    .intro-illustration {
+      display: block;
+      max-width: 440px;
+      height: auto;
+      margin: 32px auto;
+    }
+
+    /* App screenshots */
+    .screen-shot {
+      display: flex;
+      justify-content: center;
+      margin: 32px 0;
+    }
+    .screen-shot img {
+      max-width: 160px;
+      height: auto;
+      border-radius: 16px;
+      box-shadow: var(--elev-3);
+    }
+    .screen-shot--wide img { max-width: 450px; }
 
     /* Page heading (pages 2–7) */
     .page-heading {
-      font-size: var(--fs-xxl); color: var(--text-dark);
-      margin-bottom: var(--space-7); line-height: 1.2;
+      font-size: var(--fs-hero);
+      line-height: var(--lh-hero);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-dark);
+      margin-bottom: 0;
+      padding: 41px 56px 0;
     }
     .page-heading__num { margin-right: var(--space-1); }
 
-    /* Page footer */
+    /* Page footer — revised layout */
     .page-footer {
-      display: flex; flex-direction: column; gap: var(--space-4);
-      margin-top: var(--space-10); padding-top: var(--space-6);
-      border-top: 1px solid var(--divider-default);
+      margin-top: var(--space-10);
+      padding: 0 56px;
     }
 
-    .was-helpful { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; }
-    .was-helpful__label { font-size: var(--fs-small); color: var(--text-mid); }
+    .page-footer__divider {
+      border: none;
+      border-top: 1px solid var(--divider-default);
+      margin: 0;
+    }
+
+    .was-helpful {
+      padding: 16px 0;
+    }
+
+    .was-helpful__label {
+      display: block;
+      font-size: var(--fs-base);
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+
+    .was-helpful__actions {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+    }
 
     .was-helpful__btn {
-      background: none; border: none; padding: 0;
-      font-size: var(--fs-small); color: var(--text-mid);
-      cursor: pointer; font-family: var(--font-family);
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: var(--fs-small);
+      color: var(--text-mid);
+      cursor: pointer;
+      font-family: var(--font-family);
       text-decoration: underline;
       text-underline-offset: 2px;
       transition: color var(--dur-fast) var(--ease-standard);
@@ -814,16 +943,29 @@
     .was-helpful__btn.selected { color: var(--button-base); font-weight: var(--font-weight-medium); }
 
     .next-btn {
-      display: inline-flex; align-items: center; gap: var(--space-2);
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
       padding: var(--space-3) var(--space-5);
-      background: var(--button-base); color: var(--text-inverted);
-      border: none; border-radius: var(--radius-pill);
-      font-size: var(--fs-small); font-weight: var(--font-weight-semibold);
-      font-family: var(--font-family); cursor: pointer;
+      background: var(--button-base);
+      color: var(--text-inverted);
+      border: none;
+      border-radius: var(--radius-pill);
+      font-size: var(--fs-small);
+      font-weight: var(--font-weight-semibold);
+      font-family: var(--font-family);
+      cursor: pointer;
+      margin-top: 24px;
       transition: opacity var(--dur-fast) var(--ease-standard);
-      align-self: flex-start;
     }
     .next-btn:hover { opacity: 0.85; }
+
+    /* Page content padding wrappers — wraps guide-section content */
+    .guide-page > .guide-section,
+    .guide-page > .content-area {
+      padding-left: 56px;
+      padding-right: 56px;
+    }
 
     /* ============================================================
        RESPONSIVE
@@ -835,7 +977,7 @@
 
       .sidebar {
         position: fixed; top: 0; left: 0; bottom: 0;
-        width: min(240px, 85vw); z-index: 200;
+        width: min(320px, 85vw); z-index: 200;
         transform: translateX(-100%);
         transition: transform var(--dur-base) var(--ease-entrance);
         box-shadow: var(--elev-4);
@@ -858,6 +1000,22 @@
       .phase-grid { grid-template-columns: 1fr; }
       .role-grid { grid-template-columns: 1fr 1fr; }
       .site-footer { padding: var(--space-5) var(--space-4); }
+
+      .page-intro-header,
+      .page-section-heading,
+      .page-heading,
+      .page-footer,
+      .page-divider {
+        padding-left: var(--space-4);
+        padding-right: var(--space-4);
+      }
+      .page-divider { margin-left: var(--space-4); margin-right: var(--space-4); }
+
+      .guide-page > .guide-section,
+      .guide-page > .content-area {
+        padding-left: var(--space-4);
+        padding-right: var(--space-4);
+      }
     }
 
     @media (max-width: 480px) {
@@ -942,14 +1100,12 @@
       <!-- Guide selector -->
       <div class="guide-selector">
         <button class="guide-selector__btn" id="guideSelectorBtn" aria-haspopup="true" aria-expanded="false">
-          <div class="guide-selector__text">
-            <div class="guide-selector__title">Volition guide</div>
-            <div class="guide-selector__sub">
-              For org support staff
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" class="guide-selector__chevron" aria-hidden="true">
-                <path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
+          <div class="guide-selector__title">Volition guide</div>
+          <div class="guide-selector__sub">
+            For org support staff
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" class="guide-selector__chevron" aria-hidden="true">
+              <path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
           </div>
         </button>
         <ul class="guide-selector__dropdown" id="guideSelectorDropdown" role="listbox" hidden>
@@ -961,9 +1117,15 @@
         </ul>
       </div>
 
-      <!-- 7 numbered sections -->
+      <!-- 7 numbered sections with sub-items for intro -->
       <ol class="sidebar__sections">
-        <li><a class="sidebar__section-link active" href="#" data-page="intro">1. Introduction</a></li>
+        <li>
+          <a class="sidebar__section-link active" href="#" data-page="intro">1. Introduction</a>
+          <ul class="sidebar__sub-items visible" id="sub-intro">
+            <li><a class="sidebar__sub-link" href="#">Supported Decision Making</a></li>
+            <li><a class="sidebar__sub-link" href="#">Volition users</a></li>
+          </ul>
+        </li>
         <li><a class="sidebar__section-link" href="#" data-page="getting-started">2. Getting started</a></li>
         <li><a class="sidebar__section-link" href="#" data-page="basics">3. Using the basics</a></li>
         <li><a class="sidebar__section-link" href="#" data-page="sessions">4. Support sessions</a></li>
@@ -992,13 +1154,19 @@
           <p class="guide-subtitle">For organisation support staff</p>
         </div>
 
+        <hr class="page-divider">
+
         <!-- Section heading within page -->
         <h2 class="page-section-heading">1. Introduction</h2>
 
-        <p class="intro-lede">Volition is a digital preference app and tool for Supported Decision Making.</p>
+        <div style="padding: 24px 56px 0;">
+          <p class="intro-lede">Volition is a digital preference app and tool for Supported Decision Making.</p>
+
+          <img src="guide-assets/illustration-intro.png" alt="Volition brand illustration" class="intro-illustration" width="440" height="292">
+        </div>
 
         <!-- Welcome detail -->
-        <section class="guide-section" aria-labelledby="heading-welcome">
+        <section class="guide-section" aria-labelledby="heading-welcome" style="padding: 0 56px;">
           <span class="guide-section__anchor" id="welcome-detail"></span>
           <div class="content-block">
             <h3>For Decision Makers</h3>
@@ -1018,7 +1186,7 @@
         </section>
 
         <!-- SDM -->
-        <section class="guide-section" aria-labelledby="heading-sdm">
+        <section class="guide-section" aria-labelledby="heading-sdm" style="padding: 0 56px;">
           <span class="guide-section__anchor" id="sdm"></span>
           <div class="section-header">
             <div class="section-number">3</div>
@@ -1047,7 +1215,7 @@
         </section>
 
         <!-- Volition users -->
-        <section class="guide-section" aria-labelledby="heading-whos-who">
+        <section class="guide-section" aria-labelledby="heading-whos-who" style="padding: 0 56px;">
           <span class="guide-section__anchor" id="whos-who"></span>
           <div class="section-header">
             <div class="section-number">4</div>
@@ -1083,11 +1251,15 @@
         </section>
 
         <div class="page-footer">
+          <hr class="page-footer__divider">
           <div class="was-helpful">
             <span class="was-helpful__label">Was this helpful?</span>
-            <button class="was-helpful__btn" type="button">Yes, thanks</button>
-            <button class="was-helpful__btn" type="button">Not really</button>
+            <div class="was-helpful__actions">
+              <button class="was-helpful__btn" type="button">Yes, thanks</button>
+              <button class="was-helpful__btn" type="button">Not really</button>
+            </div>
           </div>
+          <hr class="page-footer__divider">
           <button class="next-btn" type="button" data-next="getting-started">Next: Getting started →</button>
         </div>
       </div><!-- /page-intro -->
@@ -1097,10 +1269,12 @@
            ==================================================== -->
       <div class="guide-page" id="page-getting-started">
 
+        <hr class="page-divider page-divider--flush" style="margin: 24px 56px 0;">
+
         <h2 class="page-heading"><span class="page-heading__num">2.</span> Getting started</h2>
 
         <!-- Setting up your account -->
-        <section class="guide-section" aria-labelledby="heading-getting-started">
+        <section class="guide-section" aria-labelledby="heading-getting-started" style="padding: 88px 56px 0;">
           <span class="guide-section__anchor" id="getting-started"></span>
           <div class="section-header">
             <div class="section-number">5</div>
@@ -1128,31 +1302,52 @@
               </li>
             </ol>
 
+            <!-- screen-login image after step 2 -->
+            <div class="screen-shot">
+              <img src="guide-assets/screen-login.png" alt="Volition login and join screen on iPhone" width="160" height="332">
+            </div>
+
             <div class="info-callout-group">
               <div class="info-callout">
                 <div class="info-callout__icon" aria-hidden="true">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-                    <rect x="3" y="3" width="18" height="18" rx="4" stroke="currentColor" stroke-width="1.5"/>
-                    <path d="M8 12h8M12 8v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16.403 14.9497L16.403 20.443C16.403 20.6474 16.4444 20.8499 16.5249 21.0388C16.6054 21.2277 16.7234 21.3994 16.8722 21.544C17.0208 21.6885 17.1975 21.8032 17.3918 21.8815C17.5863 21.9597 17.7945 21.9999 18.0049 22C19.2045 22 20.2625 20.2939 21 19.5L19.6056 18L19.6048 17.9L21 16.5L19.6032 15L19.6019 14.9504C20.4438 14.5927 21.1334 13.9643 21.5547 13.1707C21.976 12.3771 22.1034 11.4667 21.9154 10.5925C21.7275 9.71841 21.2356 8.93381 20.5226 8.37064C19.8096 7.80741 18.9188 7.5 18 7.5C17.0812 7.5 16.1905 7.80741 15.4774 8.37064C14.7644 8.93374 14.2726 9.71841 14.0846 10.5926C13.8966 11.4667 14.024 12.377 14.4453 13.1706C14.8667 13.9643 15.5562 14.5927 16.3981 14.9504L16.403 14.9497Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M18.0437 11.4375C17.8539 11.4375 17.7 11.2836 17.7 11.0938C17.7 10.9039 17.8539 10.75 18.0437 10.75" stroke="currentColor" stroke-width="2"/>
+                    <path d="M18.0437 11.4375C18.2336 11.4375 18.3875 11.2836 18.3875 11.0938C18.3875 10.9039 18.2336 10.75 18.0437 10.75" stroke="currentColor" stroke-width="2"/>
+                    <path d="M7.875 9.5625C9.96332 9.5625 11.6562 7.86957 11.6562 5.78125C11.6562 3.69293 9.96332 2 7.875 2C5.78668 2 4.09375 3.69293 4.09375 5.78125C4.09375 7.86957 5.78668 9.5625 7.875 9.5625Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 18H1.6875V17.1874C1.68608 15.9699 2.04431 14.7791 2.71724 13.7644C3.39015 12.7498 4.34779 11.9565 5.46994 11.4841C6.5921 11.0118 7.82877 10.8813 9.02477 11.1093C9.62142 11.223 10.1947 11.4234 10.7274 11.7015" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </div>
                 <p>You do not need a password. Volition uses email login links and optional passkeys to stay secure.</p>
               </div>
               <div class="info-callout">
                 <div class="info-callout__icon" aria-hidden="true">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                    <rect x="5" y="2" width="14" height="20" rx="3" stroke="currentColor" stroke-width="1.5"/>
-                    <path d="M12 18h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15.4375 1.6875H8.5625C7.04372 1.6875 5.8125 2.91872 5.8125 4.4375V19.5625C5.8125 21.0813 7.04372 22.3125 8.5625 22.3125H15.4375C16.9563 22.3125 18.1875 21.0813 18.1875 19.5625V4.4375C18.1875 2.91872 16.9563 1.6875 15.4375 1.6875Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M5.8125 17.2705H18.1875" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </div>
                 <p>Use the Volition phone app, or go to <strong>volition.tools</strong> on any web browser, using your work email.</p>
               </div>
               <div class="info-callout">
                 <div class="info-callout__icon" aria-hidden="true">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                    <rect x="2" y="7" width="20" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/>
-                    <path d="M7 7V5a5 5 0 0 1 10 0v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20.9375 4.4375H3.0625C2.30311 4.4375 1.6875 5.05311 1.6875 5.8125V20.9375C1.6875 21.6969 2.30311 22.3125 3.0625 22.3125H20.9375C21.6969 22.3125 22.3125 21.6969 22.3125 20.9375V5.8125C22.3125 5.05311 21.6969 4.4375 20.9375 4.4375Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M1.6875 9.9375H22.3125" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M7.1875 6.5V1.6875" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M16.8125 6.5V1.6875" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6.15625 14.0625C5.9664 14.0625 5.8125 13.9086 5.8125 13.7188C5.8125 13.5289 5.9664 13.375 6.15625 13.375" stroke="currentColor" stroke-width="2"/>
+                    <path d="M6.15625 14.0625C6.3461 14.0625 6.5 13.9086 6.5 13.7188C6.5 13.5289 6.3461 13.375 6.15625 13.375" stroke="currentColor" stroke-width="2"/>
+                    <path d="M6.15625 18.875C5.9664 18.875 5.8125 18.7211 5.8125 18.5312C5.8125 18.3414 5.9664 18.1875 6.15625 18.1875" stroke="currentColor" stroke-width="2"/>
+                    <path d="M6.15625 18.875C6.3461 18.875 6.5 18.7211 6.5 18.5312C6.5 18.3414 6.3461 18.1875 6.15625 18.1875" stroke="currentColor" stroke-width="2"/>
+                    <path d="M12 14.0625C11.8102 14.0625 11.6562 13.9086 11.6562 13.7188C11.6562 13.5289 11.8102 13.375 12 13.375" stroke="currentColor" stroke-width="2"/>
+                    <path d="M12 14.0625C12.1898 14.0625 12.3438 13.9086 12.3438 13.7188C12.3438 13.5289 12.1898 13.375 12 13.375" stroke="currentColor" stroke-width="2"/>
+                    <path d="M12 18.875C11.8102 18.875 11.6562 18.7211 11.6562 18.5312C11.6562 18.3414 11.8102 18.1875 12 18.1875" stroke="currentColor" stroke-width="2"/>
+                    <path d="M12 18.875C12.1898 18.875 12.3438 18.7211 12.3438 18.5312C12.3438 18.3414 12.1898 18.1875 12 18.1875" stroke="currentColor" stroke-width="2"/>
+                    <path d="M17.8438 14.0625C17.6539 14.0625 17.5 13.9086 17.5 13.7188C17.5 13.5289 17.6539 13.375 17.8438 13.375" stroke="currentColor" stroke-width="2"/>
+                    <path d="M17.8438 14.0625C18.0336 14.0625 18.1875 13.9086 18.1875 13.7188C18.1875 13.5289 18.0336 13.375 17.8438 13.375" stroke="currentColor" stroke-width="2"/>
+                    <path d="M17.8438 18.875C17.6539 18.875 17.5 18.7211 17.5 18.5312C17.5 18.3414 17.6539 18.1875 17.8438 18.1875" stroke="currentColor" stroke-width="2"/>
+                    <path d="M17.8438 18.875C18.0336 18.875 18.1875 18.7211 18.1875 18.5312C18.1875 18.3414 18.0336 18.1875 17.8438 18.1875" stroke="currentColor" stroke-width="2"/>
                   </svg>
                 </div>
                 <p>You will remain logged in on that device for a year, unless you log yourself out sooner.</p>
@@ -1162,7 +1357,7 @@
         </section>
 
         <!-- Your profile and caseload -->
-        <section class="guide-section" aria-labelledby="heading-profile-caseload">
+        <section class="guide-section" aria-labelledby="heading-profile-caseload" style="padding: 0 56px;">
           <span class="guide-section__anchor" id="profile-caseload"></span>
           <div class="section-header">
             <div class="section-number">6</div>
@@ -1178,6 +1373,14 @@
                   <p>From the menu, navigate to your profile. Add your name and a photo. Decision Makers will see your profile when you are added to their Circle of Support. A clear photo and full name help build trust.</p>
                 </div>
               </li>
+            </ol>
+
+            <!-- screen-profile image after step 3 -->
+            <div class="screen-shot">
+              <img src="guide-assets/screen-profile.png" alt="Volition profile screen on iPhone" width="160" height="332">
+            </div>
+
+            <ol class="step-list">
               <li>
                 <div class="step-num">4</div>
                 <div class="step-content">
@@ -1205,11 +1408,15 @@
         </section>
 
         <div class="page-footer">
+          <hr class="page-footer__divider">
           <div class="was-helpful">
             <span class="was-helpful__label">Was this helpful?</span>
-            <button class="was-helpful__btn" type="button">Yes, thanks</button>
-            <button class="was-helpful__btn" type="button">Not really</button>
+            <div class="was-helpful__actions">
+              <button class="was-helpful__btn" type="button">Yes, thanks</button>
+              <button class="was-helpful__btn" type="button">Not really</button>
+            </div>
           </div>
+          <hr class="page-footer__divider">
           <button class="next-btn" type="button" data-next="basics">Next: Using the basics →</button>
         </div>
       </div><!-- /page-getting-started -->
@@ -1219,10 +1426,12 @@
            ==================================================== -->
       <div class="guide-page" id="page-basics">
 
+        <hr class="page-divider page-divider--flush" style="margin: 24px 56px 0;">
+
         <h2 class="page-heading"><span class="page-heading__num">3.</span> Using the basics</h2>
 
         <!-- Support view -->
-        <section class="guide-section" aria-labelledby="heading-support-view">
+        <section class="guide-section" aria-labelledby="heading-support-view" style="padding: 88px 56px 0;">
           <span class="guide-section__anchor" id="support-view"></span>
           <div class="section-header">
             <div class="section-number">7</div>
@@ -1247,6 +1456,11 @@
               </div>
             </div>
 
+            <!-- screen-circle image after Your Circle of Support -->
+            <div class="screen-shot screen-shot--wide">
+              <img src="guide-assets/screen-circle.png" alt="Circle of Support shown across two iPhone screens" width="450" height="692">
+            </div>
+
             <div class="support-view-item">
               <div class="support-view-item__icon" aria-hidden="true">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
@@ -1258,11 +1472,16 @@
                 <p>Your Personal Details, activity log, passkey setup, feedback, and Supporter check-in.</p>
               </div>
             </div>
+
+            <!-- screen-menu image in Menu section -->
+            <div class="screen-shot">
+              <img src="guide-assets/screen-menu.png" alt="Volition menu screen on iPhone" width="160" height="332">
+            </div>
           </div>
         </section>
 
         <!-- The Vault -->
-        <section class="guide-section" aria-labelledby="heading-vault">
+        <section class="guide-section" aria-labelledby="heading-vault" style="padding: 0 56px;">
           <span class="guide-section__anchor" id="vault"></span>
           <div class="section-header">
             <div class="section-number">8</div>
@@ -1277,7 +1496,7 @@
         </section>
 
         <!-- The Volition App -->
-        <section class="guide-section" aria-labelledby="heading-app">
+        <section class="guide-section" aria-labelledby="heading-app" style="padding: 0 56px;">
           <span class="guide-section__anchor" id="app"></span>
           <div class="section-header">
             <div class="section-number">9</div>
@@ -1295,11 +1514,15 @@
         </section>
 
         <div class="page-footer">
+          <hr class="page-footer__divider">
           <div class="was-helpful">
             <span class="was-helpful__label">Was this helpful?</span>
-            <button class="was-helpful__btn" type="button">Yes, thanks</button>
-            <button class="was-helpful__btn" type="button">Not really</button>
+            <div class="was-helpful__actions">
+              <button class="was-helpful__btn" type="button">Yes, thanks</button>
+              <button class="was-helpful__btn" type="button">Not really</button>
+            </div>
           </div>
+          <hr class="page-footer__divider">
           <button class="next-btn" type="button" data-next="sessions">Next: Support sessions →</button>
         </div>
       </div><!-- /page-basics -->
@@ -1309,10 +1532,12 @@
            ==================================================== -->
       <div class="guide-page" id="page-sessions">
 
+        <hr class="page-divider page-divider--flush" style="margin: 24px 56px 0;">
+
         <h2 class="page-heading"><span class="page-heading__num">4.</span> Support sessions</h2>
 
         <!-- What is a support session? -->
-        <section class="guide-section" aria-labelledby="heading-sessions-intro">
+        <section class="guide-section" aria-labelledby="heading-sessions-intro" style="padding: 88px 56px 0;">
           <span class="guide-section__anchor" id="sessions-intro"></span>
           <div class="section-header">
             <div class="section-number">12</div>
@@ -1331,7 +1556,7 @@
         </section>
 
         <!-- During a session -->
-        <section class="guide-section" aria-labelledby="heading-sessions-during">
+        <section class="guide-section" aria-labelledby="heading-sessions-during" style="padding: 0 56px;">
           <span class="guide-section__anchor" id="sessions-during"></span>
           <div class="section-header">
             <div class="section-number">13</div>
@@ -1359,7 +1584,7 @@
         </section>
 
         <!-- How to start a session -->
-        <section class="guide-section" aria-labelledby="heading-sessions-how">
+        <section class="guide-section" aria-labelledby="heading-sessions-how" style="padding: 0 56px;">
           <span class="guide-section__anchor" id="sessions-how"></span>
           <div class="section-header">
             <div class="section-number">14</div>
@@ -1412,11 +1637,15 @@
         </section>
 
         <div class="page-footer">
+          <hr class="page-footer__divider">
           <div class="was-helpful">
             <span class="was-helpful__label">Was this helpful?</span>
-            <button class="was-helpful__btn" type="button">Yes, thanks</button>
-            <button class="was-helpful__btn" type="button">Not really</button>
+            <div class="was-helpful__actions">
+              <button class="was-helpful__btn" type="button">Yes, thanks</button>
+              <button class="was-helpful__btn" type="button">Not really</button>
+            </div>
           </div>
+          <hr class="page-footer__divider">
           <button class="next-btn" type="button" data-next="preferences">Next: Respecting preferences →</button>
         </div>
       </div><!-- /page-sessions -->
@@ -1426,10 +1655,12 @@
            ==================================================== -->
       <div class="guide-page" id="page-preferences">
 
+        <hr class="page-divider page-divider--flush" style="margin: 24px 56px 0;">
+
         <h2 class="page-heading"><span class="page-heading__num">5.</span> Respecting preferences</h2>
 
         <!-- Permissions: what you see -->
-        <section class="guide-section" aria-labelledby="heading-permissions-view">
+        <section class="guide-section" aria-labelledby="heading-permissions-view" style="padding: 88px 56px 0;">
           <span class="guide-section__anchor" id="permissions-view"></span>
           <div class="section-header">
             <div class="section-number">10</div>
@@ -1455,7 +1686,7 @@
         </section>
 
         <!-- Permissions: what you do -->
-        <section class="guide-section" aria-labelledby="heading-permissions-do">
+        <section class="guide-section" aria-labelledby="heading-permissions-do" style="padding: 0 56px;">
           <span class="guide-section__anchor" id="permissions-do"></span>
           <div class="section-header">
             <div class="section-number">11</div>
@@ -1487,7 +1718,7 @@
         </section>
 
         <!-- Contributing -->
-        <section class="guide-section" aria-labelledby="heading-contributing">
+        <section class="guide-section" aria-labelledby="heading-contributing" style="padding: 0 56px;">
           <span class="guide-section__anchor" id="contributing"></span>
           <div class="section-header">
             <div class="section-number">15</div>
@@ -1512,7 +1743,7 @@
         </section>
 
         <!-- Editing -->
-        <section class="guide-section" aria-labelledby="heading-editing">
+        <section class="guide-section" aria-labelledby="heading-editing" style="padding: 0 56px;">
           <span class="guide-section__anchor" id="editing"></span>
           <div class="section-header">
             <div class="section-number">16</div>
@@ -1540,7 +1771,7 @@
         </section>
 
         <!-- Sharing -->
-        <section class="guide-section" aria-labelledby="heading-sharing">
+        <section class="guide-section" aria-labelledby="heading-sharing" style="padding: 0 56px;">
           <span class="guide-section__anchor" id="sharing"></span>
           <div class="section-header">
             <div class="section-number">17</div>
@@ -1575,11 +1806,15 @@
         </section>
 
         <div class="page-footer">
+          <hr class="page-footer__divider">
           <div class="was-helpful">
             <span class="was-helpful__label">Was this helpful?</span>
-            <button class="was-helpful__btn" type="button">Yes, thanks</button>
-            <button class="was-helpful__btn" type="button">Not really</button>
+            <div class="was-helpful__actions">
+              <button class="was-helpful__btn" type="button">Yes, thanks</button>
+              <button class="was-helpful__btn" type="button">Not really</button>
+            </div>
           </div>
+          <hr class="page-footer__divider">
           <button class="next-btn" type="button" data-next="responsibilities">Next: Your responsibilities →</button>
         </div>
       </div><!-- /page-preferences -->
@@ -1589,10 +1824,12 @@
            ==================================================== -->
       <div class="guide-page" id="page-responsibilities">
 
+        <hr class="page-divider page-divider--flush" style="margin: 24px 56px 0;">
+
         <h2 class="page-heading"><span class="page-heading__num">6.</span> Your responsibilities</h2>
 
         <!-- Privacy -->
-        <section class="guide-section" aria-labelledby="heading-privacy">
+        <section class="guide-section" aria-labelledby="heading-privacy" style="padding: 88px 56px 0;">
           <span class="guide-section__anchor" id="privacy"></span>
           <div class="section-header">
             <div class="section-number">18</div>
@@ -1616,7 +1853,7 @@
         </section>
 
         <!-- Activity Log -->
-        <section class="guide-section" aria-labelledby="heading-activity-log">
+        <section class="guide-section" aria-labelledby="heading-activity-log" style="padding: 0 56px;">
           <span class="guide-section__anchor" id="activity-log"></span>
           <div class="section-header">
             <div class="section-number">19</div>
@@ -1635,11 +1872,15 @@
         </section>
 
         <div class="page-footer">
+          <hr class="page-footer__divider">
           <div class="was-helpful">
             <span class="was-helpful__label">Was this helpful?</span>
-            <button class="was-helpful__btn" type="button">Yes, thanks</button>
-            <button class="was-helpful__btn" type="button">Not really</button>
+            <div class="was-helpful__actions">
+              <button class="was-helpful__btn" type="button">Yes, thanks</button>
+              <button class="was-helpful__btn" type="button">Not really</button>
+            </div>
           </div>
+          <hr class="page-footer__divider">
           <button class="next-btn" type="button" data-next="next">Next: What's next? →</button>
         </div>
       </div><!-- /page-responsibilities -->
@@ -1649,10 +1890,12 @@
            ==================================================== -->
       <div class="guide-page" id="page-next">
 
+        <hr class="page-divider page-divider--flush" style="margin: 24px 56px 0;">
+
         <h2 class="page-heading"><span class="page-heading__num">7.</span> What's next?</h2>
 
         <!-- Coming soon -->
-        <section class="guide-section" aria-labelledby="heading-coming-soon">
+        <section class="guide-section" aria-labelledby="heading-coming-soon" style="padding: 88px 56px 0;">
           <span class="guide-section__anchor" id="coming-soon"></span>
           <div class="section-header">
             <div class="section-number">20</div>
@@ -1703,7 +1946,7 @@
         </section>
 
         <!-- Support and feedback -->
-        <section class="guide-section" aria-labelledby="heading-support-feedback">
+        <section class="guide-section" aria-labelledby="heading-support-feedback" style="padding: 0 56px;">
           <span class="guide-section__anchor" id="support-feedback"></span>
           <div class="section-header">
             <div class="section-number">21</div>
@@ -1737,7 +1980,7 @@
         </section>
 
         <!-- FAQs -->
-        <section class="guide-section" aria-labelledby="heading-faqs">
+        <section class="guide-section" aria-labelledby="heading-faqs" style="padding: 0 56px;">
           <span class="guide-section__anchor" id="faqs"></span>
           <div class="section-header">
             <div class="section-number">22</div>
@@ -1778,11 +2021,15 @@
         </section>
 
         <div class="page-footer">
+          <hr class="page-footer__divider">
           <div class="was-helpful">
             <span class="was-helpful__label">Was this helpful?</span>
-            <button class="was-helpful__btn" type="button">Yes, thanks</button>
-            <button class="was-helpful__btn" type="button">Not really</button>
+            <div class="was-helpful__actions">
+              <button class="was-helpful__btn" type="button">Yes, thanks</button>
+              <button class="was-helpful__btn" type="button">Not really</button>
+            </div>
           </div>
+          <hr class="page-footer__divider">
         </div>
       </div><!-- /page-next -->
 
@@ -1823,6 +2070,10 @@
         if (isActive) l.setAttribute('aria-current', 'page');
         else l.removeAttribute('aria-current');
       });
+      // Hide all sub-items, show the one for current page
+      document.querySelectorAll('.sidebar__sub-items').forEach(el => el.classList.remove('visible'));
+      const subItems = document.querySelector('[data-page="' + pageId + '"] + .sidebar__sub-items');
+      if (subItems) subItems.classList.add('visible');
       // Update hash
       history.pushState(null, '', '#' + pageId);
       // Scroll to top of content
