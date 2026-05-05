@@ -953,6 +953,21 @@
     }
     .screen-shot--wide img { max-width: 450px; }
 
+    /* Two phones side by side */
+    .screen-pair {
+      display: flex;
+      gap: var(--space-4);
+      justify-content: center;
+      margin: 32px 0;
+    }
+    .screen-pair img {
+      width: 160px;
+      height: auto;
+      border-radius: 24px;
+      box-shadow: var(--elev-3);
+      flex-shrink: 0;
+    }
+
     /* Page heading (pages 2–7) */
     .page-heading {
       font-size: var(--fs-hero);
@@ -1105,6 +1120,10 @@
 
       /* Wide screenshot (circle of support) fits mobile width */
       .screen-shot--wide img { max-width: 100%; }
+
+      /* Screen pair tightens gap on narrow screens */
+      .screen-pair { gap: var(--space-2); }
+      .screen-pair img { width: 140px; }
 
       /* Next button — full width, easier to tap */
       .next-btn {
@@ -1268,7 +1287,7 @@
             <p class="intro-lede">Volition is a digital preference app and tool for Supported Decision Making.</p>
           </div>
           <div class="intro-split__image">
-            <img src="guide-assets/illustration-intro.png" srcset="guide-assets/illustration-intro.png 1x, guide-assets/illustration-intro@3x.png 3x" alt="Volition brand illustration" width="440" height="292">
+            <img src="guide-assets/volguidestaff_intro_illustration.png" alt="Volition brand illustration" width="1307" height="876">
           </div>
         </div>
 
@@ -1410,7 +1429,7 @@
 
             <!-- screen-login image after step 2 -->
             <div class="screen-shot">
-              <img src="guide-assets/screen-login.png" srcset="guide-assets/screen-login.png 1x, guide-assets/screen-login@3x.png 3x" alt="Volition login and join screen on iPhone" width="160" height="332">
+              <img src="guide-assets/Log%20in.png" alt="Join Volition registration screen on iPhone" width="479" height="995">
             </div>
 
             <div class="info-callout-group">
@@ -1475,7 +1494,7 @@
 
           <!-- screen-profile image after step 3 -->
           <div class="screen-shot">
-            <img src="guide-assets/screen-profile.png" srcset="guide-assets/screen-profile.png 1x, guide-assets/screen-profile@3x.png 3x" alt="Volition profile screen on iPhone" width="160" height="332">
+            <img src="guide-assets/Profile.png" alt="Personal details screen on iPhone" width="479" height="995">
           </div>
 
           <ol class="step-list">
@@ -1550,9 +1569,14 @@
             </div>
             <p>The Decision Makers in your caseload. Click on a person's name to see their profile and explore their Volition.</p>
 
-            <!-- screen-circle image after Your Circle of Support -->
-            <div class="screen-shot screen-shot--wide">
-              <img src="guide-assets/screen-circle.png" srcset="guide-assets/screen-circle.png 1x, guide-assets/screen-circle@3x.png 3x" alt="Circle of Support shown across two iPhone screens" width="450" height="692">
+            <!-- Circle of support screens: list + illustrated view side by side -->
+            <div class="screen-pair">
+              <img src="guide-assets/circle_supporting3.png" alt="Circle of support showing three Decision Makers" width="479" height="995">
+              <img src="guide-assets/circle_empty.png" alt="Circle of support illustrated view" width="479" height="995">
+            </div>
+            <!-- Person profile detail -->
+            <div class="screen-shot">
+              <img src="guide-assets/dm_profile.png" alt="Jennifer Carington's profile and Volition access on iPhone" width="479" height="995">
             </div>
 
             <div class="section-heading-with-icon">
@@ -1567,7 +1591,7 @@
 
             <!-- screen-menu image in Menu section -->
             <div class="screen-shot">
-              <img src="guide-assets/screen-menu.png" srcset="guide-assets/screen-menu.png 1x, guide-assets/screen-menu@3x.png 3x" alt="Volition menu screen on iPhone" width="160" height="332">
+              <img src="guide-assets/menu.png" alt="Volition menu screen on iPhone" width="479" height="995">
             </div>
           </div>
         </section>
