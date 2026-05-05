@@ -132,7 +132,10 @@
 
     .section-header h2 {
       font-size: var(--fs-xxl);
+      line-height: var(--lh-xxl);
+      font-weight: var(--font-weight-semibold);
       color: var(--text-dark);
+      margin: 0;
     }
 
     /* Content blocks */
@@ -153,7 +156,7 @@
     .content-block ol {
       font-size: var(--fs-base);
       line-height: var(--lh-base);
-      color: var(--text-mid);
+      color: var(--text-dark);
     }
 
     .content-block p {
@@ -344,19 +347,23 @@
 
     /* Highlight box */
     .highlight-box {
-      background: var(--bg-100);
-      border-left: 4px solid var(--button-base);
-      border-radius: 0 var(--radius-md) var(--radius-md) 0;
-      padding: var(--space-4) var(--space-5);
+      background: var(--panel-highlight);
+      border-left: none;
+      border-radius: 16px;
+      padding: 20px 24px 24px;
       margin: var(--space-4) 0;
     }
 
-    .highlight-box p {
-      font-size: var(--fs-small);
+    .highlight-box p,
+    .highlight-box ul,
+    .highlight-box li {
+      font-size: var(--fs-base);
+      line-height: var(--lh-base);
       color: var(--text-dark);
       margin: 0;
-      line-height: var(--lh-small);
     }
+    .highlight-box p + p { margin-top: var(--space-2); }
+    .highlight-box ul { padding-left: var(--space-5); margin-top: var(--space-2); }
 
     /* Warning box */
     .caution-box {
@@ -825,8 +832,8 @@
     /* Page 2 large intro callout */
     .page-intro-callout { padding: 0 56px; }
     .page-intro-callout__quote {
-      font-size: var(--fs-xxl);
-      line-height: var(--lh-xxl);
+      font-size: var(--fs-xl);
+      line-height: var(--lh-xl);
       font-weight: var(--font-weight-semibold);
       color: var(--text-dark);
       margin: 0 0 var(--space-3);
@@ -834,7 +841,7 @@
     .page-intro-callout__body {
       font-size: var(--fs-base);
       line-height: var(--lh-base);
-      color: var(--text-mid);
+      color: var(--text-dark);
       margin: 0 0 var(--space-7);
     }
 
@@ -885,17 +892,18 @@
     }
 
     .guide-title {
-      font-size: var(--fs-hero);
-      line-height: var(--lh-hero);
+      font-size: 56px;
+      line-height: 56px;
       font-weight: var(--font-weight-semibold);
       color: var(--text-dark);
-      margin-bottom: 0;
+      margin-bottom: var(--space-3);
     }
 
     .guide-subtitle {
-      font-size: var(--fs-base);
-      line-height: var(--lh-base);
-      color: var(--text-mid);
+      font-size: var(--fs-xxl);
+      line-height: var(--lh-xxl);
+      font-weight: var(--font-weight-regular);
+      color: var(--text-dark);
       margin: 0;
     }
 
@@ -911,32 +919,20 @@
 
     /* Intro lede — plain lead paragraph */
     .intro-lede {
-      font-size: var(--fs-base);
-      line-height: var(--lh-base);
+      font-size: var(--fs-xl);
+      line-height: var(--lh-xl);
+      font-weight: var(--font-weight-semibold);
       color: var(--text-dark);
       margin-bottom: var(--space-5);
       padding: 0;
     }
 
-    /* Intro split — lede text left, illustration right */
-    .intro-split {
-      display: flex;
-      align-items: flex-start;
-      gap: var(--space-6);
-      padding: 32px 56px 0;
-    }
-    .intro-split__text {
-      flex: 1;
-      min-width: 0;
-    }
-    .intro-split__image {
-      flex: 0 0 170px;
-      width: 170px;
-    }
-    .intro-split__image img {
+    /* Intro illustration — full width below lede */
+    .intro-illustration {
+      display: block;
       width: 100%;
       height: auto;
-      display: block;
+      margin-top: var(--space-5);
     }
 
     /* App screenshots */
@@ -1105,19 +1101,6 @@
         padding-right: var(--space-4);
       }
 
-      /* Intro illustration stacks below text on mobile */
-      .intro-split {
-        flex-direction: column;
-        gap: var(--space-5);
-        padding-left: var(--space-4);
-        padding-right: var(--space-4);
-      }
-      .intro-split__image {
-        flex: none;
-        width: 200px;
-        margin: 0 auto;
-      }
-
       /* Wide screenshot (circle of support) fits mobile width */
       .screen-shot--wide img { max-width: 100%; }
 
@@ -1282,13 +1265,9 @@
         <!-- Section heading within page -->
         <h2 class="page-section-heading">1. Introduction</h2>
 
-        <div class="intro-split">
-          <div class="intro-split__text">
-            <p class="intro-lede">Volition is a digital preference app and tool for Supported Decision Making.</p>
-          </div>
-          <div class="intro-split__image">
-            <img src="guide-assets/volguidestaff_intro_illustration.png" alt="Volition brand illustration" width="1307" height="876">
-          </div>
+        <div style="padding: 32px 56px 0;">
+          <p class="intro-lede">Volition is a digital preference app and tool for Supported Decision Making.</p>
+          <img src="guide-assets/volguidestaff_intro_illustration.png" alt="Volition brand illustration" class="intro-illustration" width="1307" height="876">
         </div>
 
         <!-- Welcome detail -->
