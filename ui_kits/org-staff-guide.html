@@ -12,7 +12,7 @@
     *, *::before, *::after { box-sizing: border-box; }
 
     body {
-      background: var(--panel-highlight);
+      background: var(--sand-100);
       color: var(--text-dark);
       margin: 0;
       min-height: 100vh;
@@ -702,8 +702,8 @@
     .page-header--inner { padding: 0 80px; }
     .page-content { padding: 0 80px 0; }
 
-    /* Page content sits on Sand 100 */
-    .main-content { background: var(--sand-100); }
+    /* Page content inherits Sand 100 from body */
+    .main-content { background: transparent; }
 
     /* Page 2 large intro callout */
     .page-intro-callout { padding: 0 80px; }
