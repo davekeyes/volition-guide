@@ -777,7 +777,7 @@
       padding: 0 24px;
       font-size: var(--fs-body-lg);
       line-height: var(--lh-body-lg);
-      color: var(--text-mid);
+      color: var(--text-dark);
       text-decoration: none;
       font-weight: var(--font-weight-regular);
       transition: background var(--dur-fast) var(--ease-standard), color var(--dur-fast) var(--ease-standard);
@@ -818,6 +818,59 @@
     .page-header { padding: 24px 56px 0; }
     .page-header--inner { padding: 0 56px; }
     .page-content { padding: 0 56px 0; }
+
+    /* White content canvas */
+    .main-content { background: var(--panel-highlight); }
+
+    /* Page 2 large intro callout */
+    .page-intro-callout { padding: 0 56px; }
+    .page-intro-callout__quote {
+      font-size: var(--fs-xxl);
+      line-height: var(--lh-xxl);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-dark);
+      margin: 0 0 var(--space-3);
+    }
+    .page-intro-callout__body {
+      font-size: var(--fs-base);
+      line-height: var(--lh-base);
+      color: var(--text-mid);
+      margin: 0 0 var(--space-7);
+    }
+
+    /* Page 3 intro heading */
+    .page-intro-subhead {
+      font-size: var(--fs-xl);
+      line-height: var(--lh-xl);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-dark);
+      margin: 0 0 var(--space-5);
+    }
+
+    /* Circle of support heading with inline icon */
+    .section-heading-with-icon {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      margin-bottom: var(--space-3);
+    }
+    .section-heading-with-icon h3 {
+      margin: 0;
+      font-size: var(--fs-body-lg);
+      font-weight: var(--font-weight-semibold);
+      line-height: var(--lh-body-lg);
+      color: var(--text-dark);
+    }
+    .section-heading-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+      color: var(--text-mid);
+    }
+
     .page-divider {
       border: none;
       border-top: 1px solid var(--divider-default);
@@ -865,12 +918,25 @@
       padding: 0;
     }
 
-    /* Intro illustration */
-    .intro-illustration {
-      display: block;
-      max-width: 440px;
+    /* Intro split — lede text left, illustration right */
+    .intro-split {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-6);
+      padding: 32px 56px 0;
+    }
+    .intro-split__text {
+      flex: 1;
+      min-width: 0;
+    }
+    .intro-split__image {
+      flex: 0 0 170px;
+      width: 170px;
+    }
+    .intro-split__image img {
+      width: 100%;
       height: auto;
-      margin: 32px auto;
+      display: block;
     }
 
     /* App screenshots */
@@ -1123,7 +1189,7 @@
           <a class="sidebar__section-link active" href="#" data-page="intro">1. Introduction</a>
           <ul class="sidebar__sub-items visible" id="sub-intro">
             <li><a class="sidebar__sub-link" href="#">Supported Decision Making</a></li>
-            <li><a class="sidebar__sub-link" href="#">Volition users</a></li>
+            <li><a class="sidebar__sub-link" href="#">Who's who</a></li>
           </ul>
         </li>
         <li><a class="sidebar__section-link" href="#" data-page="getting-started">2. Getting started</a></li>
@@ -1159,10 +1225,13 @@
         <!-- Section heading within page -->
         <h2 class="page-section-heading">1. Introduction</h2>
 
-        <div style="padding: 24px 56px 0;">
-          <p class="intro-lede">Volition is a digital preference app and tool for Supported Decision Making.</p>
-
-          <img src="guide-assets/illustration-intro.png" alt="Volition brand illustration" class="intro-illustration" width="440" height="292">
+        <div class="intro-split">
+          <div class="intro-split__text">
+            <p class="intro-lede">Volition is a digital preference app and tool for Supported Decision Making.</p>
+          </div>
+          <div class="intro-split__image">
+            <img src="guide-assets/illustration-intro.png" srcset="guide-assets/illustration-intro.png 1x, guide-assets/illustration-intro@2x.png 2x" alt="Volition brand illustration" width="440" height="292">
+          </div>
         </div>
 
         <!-- Welcome detail -->
@@ -1273,17 +1342,16 @@
 
         <h2 class="page-heading"><span class="page-heading__num">2.</span> Getting started</h2>
 
-        <!-- Setting up your account -->
-        <section class="guide-section" aria-labelledby="heading-getting-started" style="padding: 88px 56px 0;">
+        <div class="page-intro-callout">
+          <p class="page-intro-callout__quote">Your organisation's Account Owner will email you an invitation to join Volition.</p>
+          <p class="page-intro-callout__body">It is important to join using this invitation, so you are connected with your organisation.</p>
+        </div>
+
+        <!-- Getting started steps -->
+        <section class="guide-section" aria-labelledby="heading-getting-started" style="padding: 0 56px;">
           <span class="guide-section__anchor" id="getting-started"></span>
-          <div class="section-header">
-            <div class="section-number">5</div>
-            <h2 id="heading-getting-started">Setting up your account</h2>
-          </div>
 
           <div class="content-block">
-            <p>Your organisation's Account Owner will send you an invitation to join Volition.</p>
-            <p>It is important to join with this invitation, so you are connected with your organisation.</p>
 
             <ol class="step-list">
               <li>
@@ -1304,7 +1372,7 @@
 
             <!-- screen-login image after step 2 -->
             <div class="screen-shot">
-              <img src="guide-assets/screen-login.png" alt="Volition login and join screen on iPhone" width="160" height="332">
+              <img src="guide-assets/screen-login.png" srcset="guide-assets/screen-login.png 1x, guide-assets/screen-login@2x.png 2x" alt="Volition login and join screen on iPhone" width="160" height="332">
             </div>
 
             <div class="info-callout-group">
@@ -1356,55 +1424,49 @@
           </div>
         </section>
 
-        <!-- Your profile and caseload -->
-        <section class="guide-section" aria-labelledby="heading-profile-caseload" style="padding: 0 56px;">
-          <span class="guide-section__anchor" id="profile-caseload"></span>
-          <div class="section-header">
-            <div class="section-number">6</div>
-            <h2 id="heading-profile-caseload">Your profile and caseload</h2>
+          <!-- continued from above section -->
+          <ol class="step-list" style="margin-top: var(--space-5);">
+            <li>
+              <div class="step-num">3</div>
+              <div class="step-content">
+                <strong>Complete your profile</strong>
+                <p>From the menu, navigate to your profile. Add your name and a photo. Decision Makers will see your profile when you are added to their Circle of Support. A clear photo and full name help build trust.</p>
+              </div>
+            </li>
+          </ol>
+
+          <!-- screen-profile image after step 3 -->
+          <div class="screen-shot">
+            <img src="guide-assets/screen-profile.png" srcset="guide-assets/screen-profile.png 1x, guide-assets/screen-profile@2x.png 2x" alt="Volition profile screen on iPhone" width="160" height="332">
           </div>
 
-          <div class="content-block">
-            <ol class="step-list">
-              <li>
-                <div class="step-num">3</div>
-                <div class="step-content">
-                  <strong>Complete your profile</strong>
-                  <p>From the menu, navigate to your profile. Add your name and a photo. Decision Makers will see your profile when you are added to their Circle of Support. A clear photo and full name help build trust.</p>
-                </div>
-              </li>
-            </ol>
+          <ol class="step-list">
+            <li>
+              <div class="step-num">4</div>
+              <div class="step-content">
+                <strong>Review your circle of support</strong>
+                <p>In Volition you will see the Decision Makers you have been assigned to support. By default you will have General View access.</p>
+              </div>
+            </li>
+            <li>
+              <div class="step-num">5</div>
+              <div class="step-content">
+                <strong>Complete your check-in</strong>
+                <p>From the Menu, tap 'Supporter check-in' and answer three questions about your experience as a supporter. Complete this at the start of your time with Volition to establish a baseline.</p>
+              </div>
+            </li>
+          </ol>
 
-            <!-- screen-profile image after step 3 -->
-            <div class="screen-shot">
-              <img src="guide-assets/screen-profile.png" alt="Volition profile screen on iPhone" width="160" height="332">
-            </div>
-
-            <ol class="step-list">
-              <li>
-                <div class="step-num">4</div>
-                <div class="step-content">
-                  <strong>Review your caseload</strong>
-                  <p>In the Vault you will see the Decision Makers you have been assigned to support. By default you will have General View access.</p>
-                </div>
-              </li>
-              <li>
-                <div class="step-num">5</div>
-                <div class="step-content">
-                  <strong>Complete your Supporter check-in</strong>
-                  <p>From the menu, tap "Supporter check-in." Answer three questions about your experience as a supporter. Complete this at the start of your time with Volition to establish a baseline.</p>
-                </div>
-              </li>
-            </ol>
-
-            <h3>Before your first visit</h3>
-            <ul class="guide-list guide-list--bold">
-              <li>Review the preferences of the person you're supporting</li>
+          <div class="highlight-box">
+            <p><strong>Before visiting a person you support:</strong></p>
+            <ul class="guide-list">
               <li>Check your permission level in their profile</li>
               <li>Start a Support Session before you arrive</li>
-              <li>Note anything you want to explore or ask about</li>
+              <li>Review the preferences of the person</li>
+              <li>Note things you want to explore or ask about</li>
             </ul>
           </div>
+        </div>
         </section>
 
         <div class="page-footer">
@@ -1431,51 +1493,43 @@
         <h2 class="page-heading"><span class="page-heading__num">3.</span> Using the basics</h2>
 
         <!-- Support view -->
-        <section class="guide-section" aria-labelledby="heading-support-view" style="padding: 88px 56px 0;">
-          <span class="guide-section__anchor" id="support-view"></span>
-          <div class="section-header">
-            <div class="section-number">7</div>
-            <h2 id="heading-support-view">Support view</h2>
-          </div>
+        <section class="guide-section" style="padding: 88px 56px 0;">
+
+          <p class="page-intro-subhead">Here is what you see when you log in.</p>
 
           <div class="content-block">
-            <p>Here is what you see when you log in.</p>
 
-            <div class="support-view-item">
-              <div class="support-view-item__icon" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <div class="section-heading-with-icon">
+              <h3>Your Circle of Support</h3>
+              <span class="section-heading-icon" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                   <circle cx="12" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/>
                   <circle cx="5" cy="9" r="2.5" stroke="currentColor" stroke-width="1.5"/>
                   <circle cx="19" cy="9" r="2.5" stroke="currentColor" stroke-width="1.5"/>
                   <path d="M2 19c0-2.76 2.24-5 5-5h10c2.76 0 5 2.24 5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
                 </svg>
-              </div>
-              <div>
-                <h3>Your Circle of Support</h3>
-                <p>The Decision Makers in your caseload. Click on a person's name to see their profile and explore their Volition.</p>
-              </div>
+              </span>
             </div>
+            <p>The Decision Makers in your caseload. Click on a person's name to see their profile and explore their Volition.</p>
 
             <!-- screen-circle image after Your Circle of Support -->
             <div class="screen-shot screen-shot--wide">
-              <img src="guide-assets/screen-circle.png" alt="Circle of Support shown across two iPhone screens" width="450" height="692">
+              <img src="guide-assets/screen-circle.png" srcset="guide-assets/screen-circle.png 1x, guide-assets/screen-circle@2x.png 2x" alt="Circle of Support shown across two iPhone screens" width="450" height="692">
             </div>
 
-            <div class="support-view-item">
-              <div class="support-view-item__icon" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <div class="section-heading-with-icon">
+              <h3>Menu</h3>
+              <span class="section-heading-icon" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                   <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
                 </svg>
-              </div>
-              <div>
-                <h3>Menu</h3>
-                <p>Your Personal Details, activity log, passkey setup, feedback, and Supporter check-in.</p>
-              </div>
+              </span>
             </div>
+            <p>Your Personal Details, activity log, passkey setup, feedback, and Supporter check-in.</p>
 
             <!-- screen-menu image in Menu section -->
             <div class="screen-shot">
-              <img src="guide-assets/screen-menu.png" alt="Volition menu screen on iPhone" width="160" height="332">
+              <img src="guide-assets/screen-menu.png" srcset="guide-assets/screen-menu.png 1x, guide-assets/screen-menu@2x.png 2x" alt="Volition menu screen on iPhone" width="160" height="332">
             </div>
           </div>
         </section>
