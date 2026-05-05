@@ -1523,8 +1523,6 @@
               <li>Note things you want to explore or ask about</li>
             </ul>
           </div>
-        </div>
-        </section>
 
         <div class="page-footer">
           <hr class="page-footer__divider">
@@ -2232,6 +2230,12 @@
       });
     });
 
+    // Declare mobile vars here so closeSidebar() can reference them
+    // before initFromHash() fires (avoids TDZ crash on mobile viewports)
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+
     window.addEventListener('popstate', initFromHash);
     initFromHash();
 
@@ -2273,9 +2277,6 @@
     // ============================================================
     // MOBILE MENU
     // ============================================================
-    const menuToggle = document.getElementById('menuToggle');
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('sidebarOverlay');
 
     function getSidebarFocusables() {
       return Array.from(sidebar.querySelectorAll(
