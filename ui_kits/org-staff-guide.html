@@ -21,7 +21,7 @@
     /* App shell */
     .app-shell {
       display: grid;
-      grid-template-columns: 320px 1fr;
+      grid-template-columns: 304px 1fr;
       min-height: 100vh;
     }
 
@@ -680,15 +680,12 @@
 
     /* Guide selector */
     .guide-selector {
-      height: 128px;
-      padding: 0;
       border-bottom: 1px solid var(--divider-default);
-      margin-bottom: 0;
       position: relative;
     }
 
     .guide-selector__btn {
-      padding: 24px 24px 0;
+      padding: 24px;
       display: block;
       width: 100%;
       background: none;
@@ -702,20 +699,17 @@
       line-height: var(--lh-xxl);
       font-weight: var(--font-weight-semibold);
       color: var(--text-dark);
-      height: 40px;
-      display: flex;
-      align-items: center;
+      display: block;
     }
 
     .guide-selector__sub {
       font-size: var(--fs-xl);
       line-height: var(--lh-xl);
-      color: var(--text-mid);
+      color: var(--text-dark);
       display: flex;
       align-items: center;
       gap: 4px;
-      margin-top: 8px;
-      height: 32px;
+      margin-top: 0;
     }
 
     .guide-selector__chevron {
@@ -811,15 +805,15 @@
     .guide-page.active { display: block; }
 
     /* Page layout wrappers */
-    .page-header { padding: 24px 56px 0; }
-    .page-header--inner { padding: 0 56px; }
-    .page-content { padding: 0 56px 0; }
+    .page-header { padding: 24px 80px 0; }
+    .page-header--inner { padding: 0 80px; }
+    .page-content { padding: 0 80px 0; }
 
     /* Page content sits on Sand 100 */
     .main-content { background: var(--sand-100); }
 
     /* Page 2 large intro callout */
-    .page-intro-callout { padding: 0 56px; }
+    .page-intro-callout { padding: 0 80px; }
     .page-intro-callout__quote {
       font-size: var(--fs-xl);
       line-height: var(--lh-xl);
@@ -873,13 +867,13 @@
     .page-divider {
       border: none;
       border-top: 1px solid var(--divider-default);
-      margin: 40px 56px;
+      margin: 40px 80px;
     }
     .page-divider--flush { margin: 0; }
 
     /* Page 1 intro header */
     .page-intro-header {
-      padding: 24px 56px 0;
+      padding: 24px 80px 0;
       margin-bottom: 0;
     }
 
@@ -906,7 +900,7 @@
       font-weight: var(--font-weight-semibold);
       color: var(--text-dark);
       margin: 40px 0 0;
-      padding: 0 56px;
+      padding: 0 80px;
     }
 
     /* Intro lede — plain lead paragraph */
@@ -964,13 +958,13 @@
       font-weight: var(--font-weight-semibold);
       color: var(--text-dark);
       margin-bottom: 0;
-      padding: 41px 56px 0;
+      padding: 41px 80px 0;
     }
     .page-heading__num { margin-right: var(--space-1); }
 
     /* Page footer — revised layout */
     .page-footer {
-      padding: 0 56px;
+      padding: 0 80px;
       margin-top: var(--space-5);
     }
 
@@ -1039,8 +1033,8 @@
     /* Page content padding wrappers — wraps guide-section content */
     .guide-page > .guide-section,
     .guide-page > .content-area {
-      padding-left: 56px;
-      padding-right: 56px;
+      padding-left: 80px;
+      padding-right: 80px;
     }
 
     /* ============================================================
@@ -1205,9 +1199,9 @@
       <!-- Guide selector -->
       <div class="guide-selector">
         <button class="guide-selector__btn" id="guideSelectorBtn" aria-haspopup="true" aria-expanded="false">
-          <div class="guide-selector__title">Volition guide</div>
+          <div class="guide-selector__title">Guide to Volition</div>
           <div class="guide-selector__sub">
-            For org support staff
+            for org support staff
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" class="guide-selector__chevron" aria-hidden="true">
               <path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -1264,13 +1258,13 @@
         <!-- Section heading within page -->
         <h2 class="page-section-heading">1. Introduction</h2>
 
-        <div style="padding: 24px 56px 0;">
+        <div style="padding: 24px 80px 0;">
           <p class="intro-lede">Volition is a digital preference app and tool for Supported Decision Making.</p>
           <img src="guide-assets/volguidestaff_intro_illustration.png" alt="Volition brand illustration" class="intro-illustration" width="1307" height="876">
         </div>
 
         <!-- Welcome detail -->
-        <section class="guide-section" aria-labelledby="heading-welcome" style="padding: 0 56px;">
+        <section class="guide-section" aria-labelledby="heading-welcome" style="padding: 0 80px;">
           <span class="guide-section__anchor" id="welcome-detail"></span>
           <div class="content-block">
             <h3>For Decision Makers</h3>
@@ -1290,7 +1284,7 @@
         </section>
 
         <!-- SDM -->
-        <section class="guide-section" aria-labelledby="heading-sdm" style="padding: 0 56px;">
+        <section class="guide-section" aria-labelledby="heading-sdm" style="padding: 0 80px;">
           <span class="guide-section__anchor" id="sdm"></span>
           <div class="section-header">
             <div class="section-number">3</div>
@@ -1319,7 +1313,7 @@
         </section>
 
         <!-- Volition users -->
-        <section class="guide-section" aria-labelledby="heading-whos-who" style="padding: 0 56px;">
+        <section class="guide-section" aria-labelledby="heading-whos-who" style="padding: 0 80px;">
           <span class="guide-section__anchor" id="whos-who"></span>
           <div class="section-header">
             <div class="section-number">4</div>
@@ -1379,8 +1373,6 @@
            ==================================================== -->
       <div class="guide-page" id="page-getting-started">
 
-        <hr class="page-divider page-divider--flush" style="margin: 24px 56px 0;">
-
         <h2 class="page-heading"><span class="page-heading__num">2.</span> Getting started</h2>
 
         <div class="page-intro-callout">
@@ -1389,7 +1381,7 @@
         </div>
 
         <!-- Getting started steps -->
-        <section class="guide-section" aria-labelledby="heading-getting-started" style="padding: 0 56px;">
+        <section class="guide-section" aria-labelledby="heading-getting-started" style="padding: 0 80px;">
           <span class="guide-section__anchor" id="getting-started"></span>
 
           <div class="content-block">
@@ -1527,12 +1519,10 @@
            ==================================================== -->
       <div class="guide-page" id="page-basics">
 
-        <hr class="page-divider page-divider--flush" style="margin: 24px 56px 0;">
-
         <h2 class="page-heading"><span class="page-heading__num">3.</span> Using the basics</h2>
 
         <!-- Support view -->
-        <section class="guide-section" style="padding: 88px 56px 0;">
+        <section class="guide-section" style="padding: 88px 80px 0;">
 
           <p class="page-intro-subhead">Here is what you see when you log in.</p>
 
@@ -1579,7 +1569,7 @@
         </section>
 
         <!-- The Vault -->
-        <section class="guide-section" aria-labelledby="heading-vault" style="padding: 0 56px;">
+        <section class="guide-section" aria-labelledby="heading-vault" style="padding: 0 80px;">
           <span class="guide-section__anchor" id="vault"></span>
           <div class="section-header">
             <div class="section-number">8</div>
@@ -1594,7 +1584,7 @@
         </section>
 
         <!-- The Volition App -->
-        <section class="guide-section" aria-labelledby="heading-app" style="padding: 0 56px;">
+        <section class="guide-section" aria-labelledby="heading-app" style="padding: 0 80px;">
           <span class="guide-section__anchor" id="app"></span>
           <div class="section-header">
             <div class="section-number">9</div>
@@ -1630,12 +1620,10 @@
            ==================================================== -->
       <div class="guide-page" id="page-sessions">
 
-        <hr class="page-divider page-divider--flush" style="margin: 24px 56px 0;">
-
         <h2 class="page-heading"><span class="page-heading__num">4.</span> Support sessions</h2>
 
         <!-- What is a support session? -->
-        <section class="guide-section" aria-labelledby="heading-sessions-intro" style="padding: 88px 56px 0;">
+        <section class="guide-section" aria-labelledby="heading-sessions-intro" style="padding: 88px 80px 0;">
           <span class="guide-section__anchor" id="sessions-intro"></span>
           <div class="section-header">
             <div class="section-number">12</div>
@@ -1654,7 +1642,7 @@
         </section>
 
         <!-- During a session -->
-        <section class="guide-section" aria-labelledby="heading-sessions-during" style="padding: 0 56px;">
+        <section class="guide-section" aria-labelledby="heading-sessions-during" style="padding: 0 80px;">
           <span class="guide-section__anchor" id="sessions-during"></span>
           <div class="section-header">
             <div class="section-number">13</div>
@@ -1682,7 +1670,7 @@
         </section>
 
         <!-- How to start a session -->
-        <section class="guide-section" aria-labelledby="heading-sessions-how" style="padding: 0 56px;">
+        <section class="guide-section" aria-labelledby="heading-sessions-how" style="padding: 0 80px;">
           <span class="guide-section__anchor" id="sessions-how"></span>
           <div class="section-header">
             <div class="section-number">14</div>
@@ -1753,12 +1741,10 @@
            ==================================================== -->
       <div class="guide-page" id="page-preferences">
 
-        <hr class="page-divider page-divider--flush" style="margin: 24px 56px 0;">
-
         <h2 class="page-heading"><span class="page-heading__num">5.</span> Respecting preferences</h2>
 
         <!-- Permissions: what you see -->
-        <section class="guide-section" aria-labelledby="heading-permissions-view" style="padding: 88px 56px 0;">
+        <section class="guide-section" aria-labelledby="heading-permissions-view" style="padding: 88px 80px 0;">
           <span class="guide-section__anchor" id="permissions-view"></span>
           <div class="section-header">
             <div class="section-number">10</div>
@@ -1784,7 +1770,7 @@
         </section>
 
         <!-- Permissions: what you do -->
-        <section class="guide-section" aria-labelledby="heading-permissions-do" style="padding: 0 56px;">
+        <section class="guide-section" aria-labelledby="heading-permissions-do" style="padding: 0 80px;">
           <span class="guide-section__anchor" id="permissions-do"></span>
           <div class="section-header">
             <div class="section-number">11</div>
@@ -1816,7 +1802,7 @@
         </section>
 
         <!-- Contributing -->
-        <section class="guide-section" aria-labelledby="heading-contributing" style="padding: 0 56px;">
+        <section class="guide-section" aria-labelledby="heading-contributing" style="padding: 0 80px;">
           <span class="guide-section__anchor" id="contributing"></span>
           <div class="section-header">
             <div class="section-number">15</div>
@@ -1841,7 +1827,7 @@
         </section>
 
         <!-- Editing -->
-        <section class="guide-section" aria-labelledby="heading-editing" style="padding: 0 56px;">
+        <section class="guide-section" aria-labelledby="heading-editing" style="padding: 0 80px;">
           <span class="guide-section__anchor" id="editing"></span>
           <div class="section-header">
             <div class="section-number">16</div>
@@ -1869,7 +1855,7 @@
         </section>
 
         <!-- Sharing -->
-        <section class="guide-section" aria-labelledby="heading-sharing" style="padding: 0 56px;">
+        <section class="guide-section" aria-labelledby="heading-sharing" style="padding: 0 80px;">
           <span class="guide-section__anchor" id="sharing"></span>
           <div class="section-header">
             <div class="section-number">17</div>
@@ -1922,12 +1908,10 @@
            ==================================================== -->
       <div class="guide-page" id="page-responsibilities">
 
-        <hr class="page-divider page-divider--flush" style="margin: 24px 56px 0;">
-
         <h2 class="page-heading"><span class="page-heading__num">6.</span> Your responsibilities</h2>
 
         <!-- Privacy -->
-        <section class="guide-section" aria-labelledby="heading-privacy" style="padding: 88px 56px 0;">
+        <section class="guide-section" aria-labelledby="heading-privacy" style="padding: 88px 80px 0;">
           <span class="guide-section__anchor" id="privacy"></span>
           <div class="section-header">
             <div class="section-number">18</div>
@@ -1951,7 +1935,7 @@
         </section>
 
         <!-- Activity Log -->
-        <section class="guide-section" aria-labelledby="heading-activity-log" style="padding: 0 56px;">
+        <section class="guide-section" aria-labelledby="heading-activity-log" style="padding: 0 80px;">
           <span class="guide-section__anchor" id="activity-log"></span>
           <div class="section-header">
             <div class="section-number">19</div>
@@ -1988,12 +1972,10 @@
            ==================================================== -->
       <div class="guide-page" id="page-next">
 
-        <hr class="page-divider page-divider--flush" style="margin: 24px 56px 0;">
-
         <h2 class="page-heading"><span class="page-heading__num">7.</span> What's next?</h2>
 
         <!-- Coming soon -->
-        <section class="guide-section" aria-labelledby="heading-coming-soon" style="padding: 88px 56px 0;">
+        <section class="guide-section" aria-labelledby="heading-coming-soon" style="padding: 88px 80px 0;">
           <span class="guide-section__anchor" id="coming-soon"></span>
           <div class="section-header">
             <div class="section-number">20</div>
@@ -2044,7 +2026,7 @@
         </section>
 
         <!-- Support and feedback -->
-        <section class="guide-section" aria-labelledby="heading-support-feedback" style="padding: 0 56px;">
+        <section class="guide-section" aria-labelledby="heading-support-feedback" style="padding: 0 80px;">
           <span class="guide-section__anchor" id="support-feedback"></span>
           <div class="section-header">
             <div class="section-number">21</div>
@@ -2078,7 +2060,7 @@
         </section>
 
         <!-- FAQs -->
-        <section class="guide-section" aria-labelledby="heading-faqs" style="padding: 0 56px;">
+        <section class="guide-section" aria-labelledby="heading-faqs" style="padding: 0 80px;">
           <span class="guide-section__anchor" id="faqs"></span>
           <div class="section-header">
             <div class="section-number">22</div>
