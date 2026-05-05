@@ -56,54 +56,6 @@
       color: var(--text-light);
     }
 
-    /* Intro banner */
-    .intro-banner {
-      background: var(--bg-800);
-      color: var(--text-inverted);
-      border-radius: var(--radius-xl);
-      padding: var(--space-7) var(--space-8);
-      margin-bottom: var(--space-8);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .intro-banner::before {
-      content: '';
-      position: absolute;
-      top: -40px;
-      right: -40px;
-      width: 200px;
-      height: 200px;
-      background: rgba(255,255,255,0.04);
-      border-radius: 50%;
-    }
-
-    .intro-banner__guide-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-1);
-      background: rgba(255,255,255,0.15);
-      border-radius: var(--radius-pill);
-      padding: var(--space-1) var(--space-3);
-      font-size: var(--fs-caption);
-      font-weight: var(--font-weight-medium);
-      color: rgba(255,255,255,0.85);
-      margin-bottom: var(--space-4);
-      letter-spacing: 0.04em;
-    }
-
-    .intro-banner h1 {
-      color: var(--text-inverted);
-      font-size: var(--fs-xxl);
-      margin-bottom: var(--space-3);
-    }
-
-    .intro-banner p {
-      color: rgba(255,255,255,0.8);
-      font-size: var(--fs-small);
-      line-height: var(--lh-small);
-    }
-
     /* Guide section — no card treatment */
     .guide-section {
       margin-bottom: var(--space-5);
@@ -279,18 +231,6 @@
     }
     .role-entry__link:hover { color: var(--button-base); }
 
-    .you-badge {
-      display: inline-block;
-      background: var(--button-base);
-      color: var(--text-inverted);
-      font-size: var(--fs-caption);
-      font-weight: var(--font-weight-semibold);
-      padding: 2px var(--space-2);
-      border-radius: var(--radius-pill);
-      margin-left: var(--space-2);
-      vertical-align: middle;
-    }
-
     /* Permission table */
     .perm-group {
       margin-bottom: var(--space-5);
@@ -394,12 +334,6 @@
 
     .guide-list li:last-child { margin-bottom: 0; }
 
-    .guide-list--bold li {
-      font-size: var(--fs-body);
-      font-weight: var(--font-weight-semibold);
-      color: var(--text-dark);
-    }
-
     /* Info callout group (Getting started icons) */
     .info-callout-group {
       display: flex;
@@ -439,41 +373,6 @@
       color: var(--text-mid);
       line-height: var(--lh-base);
       padding-top: 2px;
-    }
-
-    /* Support view items */
-    .support-view-item {
-      display: flex;
-      gap: var(--space-4);
-      align-items: flex-start;
-      padding: var(--space-4) 0;
-      border-top: 1px solid var(--divider-default);
-    }
-
-    .support-view-item:first-of-type {
-      border-top: none;
-      padding-top: 0;
-    }
-
-    .support-view-item__icon {
-      flex-shrink: 0;
-      width: 44px;
-      height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--bg-200);
-      border-radius: var(--radius-md);
-      color: var(--text-dark);
-    }
-
-    .support-view-item h3 {
-      margin-top: 0;
-      margin-bottom: var(--space-1);
-    }
-
-    .support-view-item p {
-      margin: 0;
     }
 
     /* Phase cards (before/during/after) */
@@ -593,11 +492,6 @@
       padding-top: var(--space-3);
     }
 
-    /* Divider between sections — hidden */
-    .section-divider {
-      display: none;
-    }
-
     /* Coming soon chips */
     .feature-list {
       display: flex;
@@ -646,7 +540,6 @@
       padding: 0 2px;
     }
 
-    /* Footer */
     /* Mobile header (hidden on desktop) */
     .mobile-header {
       display: none;
@@ -665,7 +558,7 @@
 
     /* Menu toggle — used in mobile header */
     .menu-toggle {
-      background: var(--bg-100);
+      background: var(--sand-100);
       border: 1px solid var(--divider-default);
       border-radius: var(--radius-sm);
       color: var(--text-dark);
@@ -747,8 +640,8 @@
       transition: background var(--dur-fast) var(--ease-standard);
     }
     .guide-selector__option:last-child { border-bottom: none; }
-    .guide-selector__option:hover { background: var(--bg-100); color: var(--text-dark); }
-    .guide-selector__option--active { color: var(--button-base); font-weight: var(--font-weight-semibold); background: var(--bg-100); }
+    .guide-selector__option:hover { background: var(--sand-100); color: var(--text-dark); }
+    .guide-selector__option--active { color: var(--button-base); font-weight: var(--font-weight-semibold); background: var(--sand-100); }
 
     /* Sidebar section list */
     .sidebar__sections {
@@ -772,7 +665,7 @@
       font-weight: var(--font-weight-regular);
       transition: background var(--dur-fast) var(--ease-standard), color var(--dur-fast) var(--ease-standard);
     }
-    .sidebar__section-link:hover { background: var(--bg-100); }
+    .sidebar__section-link:hover { background: var(--sand-100); }
     .sidebar__section-link.active {
       background: var(--button-base);
       color: var(--text-inverted);
@@ -798,7 +691,7 @@
       color: var(--text-mid);
       text-decoration: none;
     }
-    .sidebar__sub-link:hover { background: var(--bg-100); }
+    .sidebar__sub-link:hover { background: var(--sand-100); }
 
     /* Guide pages */
     .guide-page { display: none; }
@@ -869,8 +762,6 @@
       border-top: 1px solid var(--divider-default);
       margin: 40px 80px;
     }
-    .page-divider--flush { margin: 0; }
-
     /* Page 1 intro header */
     .page-intro-header {
       padding: 24px 80px 0;
@@ -1063,13 +954,9 @@
 
       .main-content { padding: var(--space-5) var(--space-4) var(--space-9); max-width: 100%; }
 
-      .intro-banner { padding: var(--space-5); border-radius: var(--radius-lg); }
-      .intro-banner h1 { font-size: var(--fs-xl); }
       .guide-title { font-size: var(--fs-xl); }
       .page-heading { font-size: var(--fs-xl); }
       .phase-grid { grid-template-columns: 1fr; }
-      .role-grid { grid-template-columns: 1fr 1fr; }
-
 
       .page-intro-header,
       .page-section-heading,
@@ -1118,7 +1005,6 @@
     }
 
     @media (max-width: 480px) {
-      .role-grid { grid-template-columns: 1fr; }
       .contact-grid { grid-template-columns: 1fr; }
     }
 
