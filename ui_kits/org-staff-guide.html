@@ -169,35 +169,30 @@
 
     .content-block p:last-child { margin-bottom: 0; }
 
-    /* Cards */
+    /* Highlight panels — panel-highlight bg, 16px radius, no border */
     .card {
       background: var(--panel-highlight);
-      border: 1px solid var(--divider-default);
-      border-radius: var(--radius-lg);
-      padding: var(--space-5);
+      border-radius: 16px;
+      padding: 20px 24px 24px;
       margin-bottom: var(--space-4);
     }
 
-    .card--highlight {
-      background: var(--bg-100);
-      border-color: var(--divider-default);
-    }
-
     .card__title {
-      font-size: var(--fs-small);
+      font-size: var(--fs-body-lg);
+      line-height: var(--lh-body-lg);
       font-weight: var(--font-weight-semibold);
       color: var(--text-dark);
       margin-bottom: var(--space-2);
-      display: flex;
-      align-items: center;
-      gap: var(--space-2);
     }
 
     .card p {
-      font-size: var(--fs-small);
-      color: var(--text-mid);
+      font-size: var(--fs-base);
+      line-height: var(--lh-base);
+      color: var(--text-dark);
       margin: 0;
     }
+
+    .card p + p { margin-top: var(--space-2); }
 
     /* Step list */
     .step-list {
@@ -250,41 +245,39 @@
       line-height: var(--lh-small);
     }
 
-    /* Role grid */
-    .role-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: var(--space-3);
-      margin-bottom: var(--space-4);
+    /* Role list — plain flex column, no cards */
+    .role-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
     }
 
-    .role-card {
-      background: var(--panel-highlight);
-      border: 1px solid var(--divider-default);
-      border-radius: var(--radius-md);
-      padding: var(--space-4);
-    }
-
-    .role-card__label {
-      font-size: var(--fs-small);
-      font-weight: var(--font-weight-semibold);
-      color: var(--text-light);
-      margin-bottom: var(--space-2);
-    }
-
-    .role-card__name {
-      font-size: var(--fs-small);
+    .role-entry__label {
+      font-size: var(--fs-body-lg);
+      line-height: var(--lh-body-lg);
       font-weight: var(--font-weight-semibold);
       color: var(--text-dark);
-      margin-bottom: var(--space-1);
+      margin: 0 0 var(--space-2);
     }
 
-    .role-card p {
-      font-size: var(--fs-caption);
-      color: var(--text-mid);
-      margin: 0;
-      line-height: 1.4;
+    .role-entry p {
+      font-size: var(--fs-base);
+      line-height: var(--lh-base);
+      color: var(--text-dark);
+      margin: 0 0 var(--space-2);
     }
+
+    .role-entry__link {
+      font-size: var(--fs-base);
+      line-height: var(--lh-base);
+      color: var(--text-dark);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .role-entry__link:hover { color: var(--button-base); }
 
     .you-badge {
       display: inline-block;
@@ -654,16 +647,6 @@
     }
 
     /* Footer */
-    .site-footer {
-      border-top: 1px solid var(--divider-default);
-      padding: var(--space-6) var(--space-8);
-      font-size: var(--fs-small);
-      color: var(--text-light);
-      display: flex;
-      align-items: center;
-      gap: var(--space-3);
-    }
-
     /* Mobile header (hidden on desktop) */
     .mobile-header {
       display: none;
@@ -987,8 +970,8 @@
 
     /* Page footer — revised layout */
     .page-footer {
-      margin-top: var(--space-10);
       padding: 0 56px;
+      margin-top: var(--space-5);
     }
 
     .page-footer__divider {
@@ -997,15 +980,18 @@
       margin: 0;
     }
 
+    /* Was this helpful — centered, between two dividers */
     .was-helpful {
       padding: 16px 0;
+      text-align: center;
     }
 
     .was-helpful__label {
       display: block;
       font-size: var(--fs-base);
+      line-height: var(--lh-base);
       color: var(--text-dark);
-      margin-bottom: 8px;
+      margin-bottom: var(--space-2);
     }
 
     .was-helpful__actions {
@@ -1018,34 +1004,37 @@
       background: none;
       border: none;
       padding: 0;
-      font-size: var(--fs-small);
-      color: var(--text-mid);
+      font-size: var(--fs-base);
+      line-height: var(--lh-base);
+      color: var(--text-dark);
       cursor: pointer;
       font-family: var(--font-family);
       text-decoration: underline;
       text-underline-offset: 2px;
       transition: color var(--dur-fast) var(--ease-standard);
     }
-    .was-helpful__btn:hover { color: var(--text-dark); }
-    .was-helpful__btn.selected { color: var(--button-base); font-weight: var(--font-weight-medium); }
+    .was-helpful__btn:hover { color: var(--button-base); }
+    .was-helpful__btn.selected { color: var(--button-base); font-weight: var(--font-weight-semibold); }
 
+    /* Next button — outline pill, no fill */
     .next-btn {
       display: inline-flex;
       align-items: center;
       gap: var(--space-2);
-      padding: var(--space-3) var(--space-5);
-      background: var(--button-base);
-      color: var(--text-inverted);
-      border: none;
+      padding: 12px 16px;
+      background: none;
+      color: var(--text-dark);
+      border: 2px solid var(--borders);
       border-radius: var(--radius-pill);
-      font-size: var(--fs-small);
+      font-size: var(--fs-body-lg);
+      line-height: var(--lh-body-lg);
       font-weight: var(--font-weight-semibold);
       font-family: var(--font-family);
       cursor: pointer;
-      margin-top: 24px;
+      margin-top: 16px;
       transition: opacity var(--dur-fast) var(--ease-standard);
     }
-    .next-btn:hover { opacity: 0.85; }
+    .next-btn:hover { opacity: 0.75; }
 
     /* Page content padding wrappers — wraps guide-section content */
     .guide-page > .guide-section,
@@ -1086,7 +1075,7 @@
       .page-heading { font-size: var(--fs-xl); }
       .phase-grid { grid-template-columns: 1fr; }
       .role-grid { grid-template-columns: 1fr 1fr; }
-      .site-footer { padding: var(--space-5) var(--space-4); }
+
 
       .page-intro-header,
       .page-section-heading,
@@ -1337,30 +1326,36 @@
             <h2 id="heading-whos-who">Volition users</h2>
           </div>
 
-          <div class="role-grid">
-            <div class="role-card">
-              <div class="role-card__label">Decision Makers</div>
+          <div class="role-list">
+            <div class="role-entry">
+              <p class="role-entry__label">Decision Makers</p>
               <p>The people whose preferences the app is built around. They own their data and control who sees it.</p>
+              <a class="role-entry__link" href="#">Decision Makers' guide to Volition →</a>
             </div>
-            <div class="role-card">
-              <div class="role-card__label">Supporters</div>
+            <div class="role-entry">
+              <p class="role-entry__label">Supporters</p>
               <p>Family, friends, or personal carers the Decision Maker has chosen to invite. Not employed by your organisation.</p>
+              <a class="role-entry__link" href="#">Supporters' guide to Volition →</a>
             </div>
-            <div class="role-card">
-              <div class="role-card__label">Guest users</div>
-              <p>People who view preferences via a share link or QR code. No account needed. Access expires after seven days.</p>
+            <div class="role-entry">
+              <p class="role-entry__label">Guest supporters</p>
+              <p>People invited to view certain preferences via a share link or QR code. No account needed, and access expires after seven days.</p>
+              <a class="role-entry__link" href="#">Guest supporters' guide to Volition →</a>
             </div>
-            <div class="role-card" style="border-color: var(--divider-default); background: var(--bg-100);">
-              <div class="role-card__label">Staff Supporters <span class="you-badge">you</span></div>
+            <div class="role-entry">
+              <p class="role-entry__label">Org staff supporters (this is you)</p>
               <p>Support workers and similar roles, with access to the preferences the Decision Maker has chosen to share with the organisation.</p>
+              <a class="role-entry__link" href="#">Org staff supporters' guide to Volition →</a>
             </div>
-            <div class="role-card">
-              <div class="role-card__label">Managers</div>
-              <p>Team leaders or coordinators who manage staff access within the organisation's Vault account.</p>
+            <div class="role-entry">
+              <p class="role-entry__label">Org managers</p>
+              <p>Team leaders or coordinators who manage staff access within the organisation's Volition account.</p>
+              <a class="role-entry__link" href="#">Org managers' guide to Volition →</a>
             </div>
-            <div class="role-card">
-              <div class="role-card__label">Account Owners</div>
-              <p>Responsible for the Volition account overall.</p>
+            <div class="role-entry">
+              <p class="role-entry__label">Org account owners</p>
+              <p>Responsible for the organisation's Volition account.</p>
+              <a class="role-entry__link" href="#">Org account owners' guide to Volition →</a>
             </div>
           </div>
         </section>
@@ -2139,13 +2134,6 @@
     </main>
   </div><!-- /app-shell -->
 
-  <footer class="site-footer">
-    <span>Volition pilot programme</span>
-    <span style="color: var(--divider-default)">·</span>
-    <span>Organisation staff supporter guide</span>
-    <span style="color: var(--divider-default)">·</span>
-    <a href="mailto:info@volition.org.nz">info@volition.org.nz</a>
-  </footer>
 
   <script>
     // ============================================================
