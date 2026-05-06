@@ -87,7 +87,7 @@
       display: none;
     }
 
-    .section-header h2 {
+    .section-header h3 {
       font-size: var(--fs-xxl);
       line-height: var(--lh-xxl);
       font-weight: var(--font-weight-semibold);
@@ -299,6 +299,13 @@
       color: var(--button-base);
     }
 
+    .perm-badge__default-tag {
+      margin-left: 4px;
+      opacity: 0.7;
+      font-size: var(--fs-caption);
+      font-weight: var(--font-weight-regular);
+    }
+
     .perm-desc {
       font-size: var(--fs-small);
       color: var(--text-mid);
@@ -309,7 +316,6 @@
     /* Highlight box */
     .highlight-box {
       background: var(--panel-highlight);
-      border-left: none;
       border-radius: 16px;
       padding: 20px 24px 24px;
       margin: 0;
@@ -349,6 +355,7 @@
       margin: 0;
       line-height: var(--lh-small);
     }
+    .caution-box p + p { margin-top: var(--space-2); }
 
     /* Bullet list */
     .guide-list {
@@ -424,7 +431,7 @@
       font-size: var(--fs-small);
       color: var(--text-mid);
       margin: 0;
-      line-height: 1.5;
+      line-height: var(--lh-small);
     }
 
     /* Contact cards */
@@ -497,7 +504,7 @@
       width: 20px;
       height: 20px;
       min-width: 20px;
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%234E4285' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='m5 7.5 5 5 5-5'/%3E%3C/svg%3E") center/contain no-repeat;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%233A3161' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='m5 7.5 5 5 5-5'/%3E%3C/svg%3E") center/contain no-repeat;
       transition: transform var(--dur-fast) var(--ease-standard);
       flex-shrink: 0;
     }
@@ -674,7 +681,6 @@
       margin: 0;
       display: flex;
       flex-direction: column;
-      gap: 0;
     }
 
     .sidebar__section-link {
@@ -702,7 +708,6 @@
       background: var(--button-base);
       color: var(--text-inverted);
       font-weight: var(--font-weight-medium);
-      border-radius: 0;
     }
     .sidebar__section-link.active:hover { background: var(--bg-800); color: var(--text-inverted); opacity: 1; }
 
@@ -965,13 +970,6 @@
     .main-content:focus,
     .main-content:focus-visible { outline: none; box-shadow: none; }
 
-    /* Page content padding wrappers — wraps guide-section content */
-    .guide-page > .guide-section,
-    .guide-page > .content-area {
-      padding-left: 80px;
-      padding-right: 80px;
-    }
-
     /* ============================================================
        RESPONSIVE
        ============================================================ */
@@ -1003,7 +1001,12 @@
 
       .guide-title { font-size: var(--fs-xl); }
       .page-heading { font-size: var(--fs-xl); }
-      .phase-grid { grid-template-columns: 1fr; }
+
+      /* Permission badge + description wrap on narrow screens */
+      .perm-item { flex-wrap: wrap; }
+
+      /* Phase cards: 2-column at tablet, 1-column handled at 480px */
+      .phase-grid { grid-template-columns: repeat(2, 1fr); }
 
       /* Wide screenshot (circle of support) fits mobile width */
       .screen-shot--wide img { max-width: 100%; }
@@ -1030,6 +1033,7 @@
 
     @media (max-width: 480px) {
       .contact-grid { grid-template-columns: 1fr; }
+      .phase-grid { grid-template-columns: 1fr; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1085,7 +1089,7 @@
   <a class="skip-link" href="#mainContent">Skip to main content</a>
 
   <!-- Mobile header (hidden on desktop) -->
-  <header class="mobile-header" id="mobileHeader" role="banner">
+  <header class="mobile-header" id="mobileHeader">
     <a href="#" class="mobile-header__brand" aria-label="Volition home">
       <img src="../volition-design-system/assets/logo-wordmark-v2.svg"
            alt="Volition" class="mobile-header__logo">
@@ -1109,13 +1113,13 @@
       <!-- Guide selector -->
       <div class="guide-selector">
         <button class="guide-selector__btn" id="guideSelectorBtn" aria-haspopup="true" aria-expanded="false">
-          <div class="guide-selector__title">Guide to Volition</div>
-          <div class="guide-selector__sub">
+          <span class="guide-selector__title">Guide to Volition</span>
+          <span class="guide-selector__sub">
             for org support staff
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="guide-selector__chevron" aria-hidden="true">
               <path d="M18 9L12.2827 14.8794C12.2455 14.9177 12.2015 14.9479 12.153 14.9686C12.1045 14.9894 12.0525 15 12 15C11.9475 15 11.8955 14.9894 11.847 14.9686C11.7985 14.9479 11.7545 14.9177 11.7173 14.8794L6 9" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-          </div>
+          </span>
         </button>
         <ul class="guide-selector__dropdown" id="guideSelectorDropdown" role="listbox" hidden>
           <li><a class="guide-selector__option guide-selector__option--active" href="#" role="option" aria-selected="true">For org support staff</a></li>
@@ -1472,7 +1476,7 @@
           <span class="guide-section__anchor" id="vault"></span>
           <div class="section-header">
             <div class="section-number">8</div>
-            <h2 id="heading-vault">The Vault</h2>
+            <h3 id="heading-vault">The Vault</h3>
           </div>
 
           <div class="content-block">
@@ -1487,7 +1491,7 @@
           <span class="guide-section__anchor" id="app"></span>
           <div class="section-header">
             <div class="section-number">9</div>
-            <h2 id="heading-app">The Volition app</h2>
+            <h3 id="heading-app">The Volition app</h3>
           </div>
 
           <div class="content-block">
@@ -1529,7 +1533,7 @@
           <span class="guide-section__anchor" id="sessions-intro"></span>
           <div class="section-header">
             <div class="section-number">12</div>
-            <h2 id="heading-sessions-intro">What is a support session?</h2>
+            <h3 id="heading-sessions-intro">What is a support session?</h3>
           </div>
 
           <div class="content-block">
@@ -1548,7 +1552,7 @@
           <span class="guide-section__anchor" id="sessions-during"></span>
           <div class="section-header">
             <div class="section-number">13</div>
-            <h2 id="heading-sessions-during">During a session</h2>
+            <h3 id="heading-sessions-during">During a session</h3>
           </div>
 
           <div class="phase-grid">
@@ -1576,7 +1580,7 @@
           <span class="guide-section__anchor" id="sessions-how"></span>
           <div class="section-header">
             <div class="section-number">14</div>
-            <h2 id="heading-sessions-how">How to start a session</h2>
+            <h3 id="heading-sessions-how">How to start a session</h3>
           </div>
 
           <div class="content-block">
@@ -1653,7 +1657,7 @@
           <span class="guide-section__anchor" id="permissions-view"></span>
           <div class="section-header">
             <div class="section-number">10</div>
-            <h2 id="heading-permissions-view">Permissions — what you can see</h2>
+            <h3 id="heading-permissions-view">Permissions — what you can see</h3>
           </div>
 
           <div class="content-block">
@@ -1663,7 +1667,7 @@
             <div class="perm-group">
               <div class="perm-group__label">Visibility — what you see</div>
               <div class="perm-item">
-                <span class="perm-badge perm-badge--default">General records <small style="margin-left:4px;opacity:0.7">default</small></span>
+                <span class="perm-badge perm-badge--default">General records <span class="perm-badge__default-tag">default</span></span>
                 <p class="perm-desc">You can see the Decision Maker's general preferences. You cannot see preferences they have marked as private.</p>
               </div>
               <div class="perm-item">
@@ -1679,14 +1683,14 @@
           <span class="guide-section__anchor" id="permissions-do"></span>
           <div class="section-header">
             <div class="section-number">11</div>
-            <h2 id="heading-permissions-do">Permissions — what you can do</h2>
+            <h3 id="heading-permissions-do">Permissions — what you can do</h3>
           </div>
 
           <div class="content-block">
             <div class="perm-group">
               <div class="perm-group__label">Role — what you can do</div>
               <div class="perm-item">
-                <span class="perm-badge perm-badge--default">Viewer <small style="margin-left:4px;opacity:0.7">default</small></span>
+                <span class="perm-badge perm-badge--default">Viewer <span class="perm-badge__default-tag">default</span></span>
                 <p class="perm-desc">You can only see records.</p>
               </div>
               <div class="perm-item">
@@ -1711,7 +1715,7 @@
           <span class="guide-section__anchor" id="contributing"></span>
           <div class="section-header">
             <div class="section-number">15</div>
-            <h2 id="heading-contributing">Contributing notes and media</h2>
+            <h3 id="heading-contributing">Contributing notes and media</h3>
           </div>
 
           <div class="content-block">
@@ -1736,7 +1740,7 @@
           <span class="guide-section__anchor" id="editing"></span>
           <div class="section-header">
             <div class="section-number">16</div>
-            <h2 id="heading-editing">Editing preferences</h2>
+            <h3 id="heading-editing">Editing preferences</h3>
           </div>
 
           <div class="content-block">
@@ -1768,7 +1772,7 @@
           <span class="guide-section__anchor" id="sharing"></span>
           <div class="section-header">
             <div class="section-number">17</div>
-            <h2 id="heading-sharing">Sharing information outside the Circle</h2>
+            <h3 id="heading-sharing">Sharing information outside the Circle</h3>
           </div>
 
           <div class="content-block">
@@ -1827,7 +1831,7 @@
           <span class="guide-section__anchor" id="privacy"></span>
           <div class="section-header">
             <div class="section-number">18</div>
-            <h2 id="heading-privacy">Privacy and your responsibilities</h2>
+            <h3 id="heading-privacy">Privacy and your responsibilities</h3>
           </div>
 
           <div class="content-block">
@@ -1851,7 +1855,7 @@
           <span class="guide-section__anchor" id="activity-log"></span>
           <div class="section-header">
             <div class="section-number">19</div>
-            <h2 id="heading-activity-log">The Activity Log</h2>
+            <h3 id="heading-activity-log">The Activity Log</h3>
           </div>
 
           <div class="content-block">
@@ -1860,7 +1864,7 @@
 
             <div class="caution-box">
               <p><strong>Decision Makers can see your activity.</strong> They can see your name in their Activity Log whenever you view or interact with their profile or preferences. They can also see your profile — your name and photo — in their Circle of Support.</p>
-              <p style="margin-top: var(--space-2)">If you would not want the person to know you accessed their information, ask yourself whether you should be accessing it.</p>
+              <p>If you would not want the person to know you accessed their information, ask yourself whether you should be accessing it.</p>
             </div>
           </div>
         </section>
@@ -1894,7 +1898,7 @@
           <span class="guide-section__anchor" id="coming-soon"></span>
           <div class="section-header">
             <div class="section-number">20</div>
-            <h2 id="heading-coming-soon">Features coming soon</h2>
+            <h3 id="heading-coming-soon">Features coming soon</h3>
           </div>
 
           <div class="content-block">
@@ -1946,7 +1950,7 @@
           <span class="guide-section__anchor" id="support-feedback"></span>
           <div class="section-header">
             <div class="section-number">21</div>
-            <h2 id="heading-support-feedback">Support and feedback</h2>
+            <h3 id="heading-support-feedback">Support and feedback</h3>
           </div>
 
           <div class="content-block">
@@ -1981,7 +1985,7 @@
           <span class="guide-section__anchor" id="faqs"></span>
           <div class="section-header">
             <div class="section-number">22</div>
-            <h2 id="heading-faqs">Frequently asked questions</h2>
+            <h3 id="heading-faqs">Frequently asked questions</h3>
           </div>
 
           <div class="faq-list">
