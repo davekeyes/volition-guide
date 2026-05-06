@@ -59,14 +59,18 @@
       color: var(--text-light);
     }
 
-    /* Guide section — no card treatment */
+    /* Guide section — flex column, 24px between sub-blocks */
     .guide-section {
-      margin-bottom: var(--space-5);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);  /* 24px */
+      margin-bottom: 0;
+      position: relative;
     }
 
     .guide-section__anchor {
       display: block;
-      position: relative;
+      position: absolute;
       top: -80px;
       visibility: hidden;
     }
@@ -75,7 +79,6 @@
       display: flex;
       align-items: center;
       gap: var(--space-3);
-      margin-bottom: var(--space-4);
       padding-bottom: var(--space-3);
       border-bottom: 1px solid var(--divider-default);
     }
@@ -93,8 +96,13 @@
     }
 
     /* Content blocks */
-    .content-block {
-      margin-bottom: var(--space-6);
+    .content-block > * {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    .content-block > * + * {
+      margin-top: var(--space-5);  /* 24px between sub-blocks */
     }
 
     .content-block h3 {
@@ -102,12 +110,17 @@
       font-weight: var(--font-weight-semibold);
       line-height: var(--lh-body-lg);
       color: var(--text-dark);
-      margin-top: var(--space-5);
-      margin-bottom: var(--space-5);
+      margin: 0;
     }
-    .content-block :first-child.h3,
-    .content-block > h3:first-child {
-      margin-top: 0;
+
+    .content-block h3 + p,
+    .content-block h3 + ul,
+    .content-block h3 + ol {
+      margin-top: var(--space-2);  /* 8px after h3 */
+    }
+
+    .content-block p + p {
+      margin-top: var(--space-2);  /* 8px between consecutive paragraphs */
     }
 
     .content-block p,
@@ -118,18 +131,16 @@
       color: var(--text-dark);
     }
 
-    .content-block p {
-      margin-bottom: var(--space-2);
+    .content-block .section-heading-with-icon + p {
+      margin-top: var(--space-2);  /* 8px after icon heading */
     }
-
-    .content-block p:last-child { margin-bottom: 0; }
 
     /* Highlight panels — panel-highlight bg, 16px radius, no border */
     .card {
       background: var(--panel-highlight);
       border-radius: 16px;
       padding: 20px 24px 24px;
-      margin-bottom: var(--space-4);
+      margin: 0;
     }
 
     .card__title {
@@ -153,7 +164,7 @@
     .step-list {
       list-style: none;
       padding: 0;
-      margin: 0 0 var(--space-4);
+      margin: 0;
       display: flex;
       flex-direction: column;
       gap: var(--space-3);
@@ -236,7 +247,7 @@
 
     /* Permission table */
     .perm-group {
-      margin-bottom: var(--space-5);
+      margin-bottom: 0;
     }
 
     .perm-group__label {
@@ -292,7 +303,7 @@
       border-left: none;
       border-radius: 16px;
       padding: 20px 24px 24px;
-      margin: var(--space-4) 0;
+      margin: 0;
     }
 
     .highlight-box p,
@@ -312,7 +323,7 @@
       border-left: 4px solid var(--error-default);
       border-radius: 0 var(--radius-md) var(--radius-md) 0;
       padding: var(--space-4) var(--space-5);
-      margin: var(--space-4) 0;
+      margin: 0;
     }
 
     .caution-box p {
@@ -325,7 +336,7 @@
     /* Bullet list */
     .guide-list {
       padding-left: var(--space-5);
-      margin: 0 0 var(--space-4);
+      margin: 0;
     }
 
     .guide-list li {
@@ -342,7 +353,7 @@
       display: flex;
       flex-direction: column;
       gap: var(--space-1);
-      margin-top: var(--space-4);
+      margin-top: 0;
       padding: var(--space-2) var(--space-4);
       background: var(--sand-100);
       border-radius: var(--radius-md);
@@ -444,7 +455,7 @@
       display: flex;
       flex-direction: column;
       gap: var(--space-1);
-      margin-bottom: var(--space-4);
+      margin-bottom: 0;
     }
 
     .faq-item {
@@ -500,7 +511,7 @@
       display: flex;
       flex-direction: column;
       gap: var(--space-3);
-      margin-bottom: var(--space-4);
+      margin-bottom: 0;
     }
 
     .feature-item {
@@ -702,16 +713,19 @@
     .guide-page { display: none; }
     .guide-page.active { display: block; }
 
-    /* Page layout wrappers */
-    .page-header { padding: 24px 80px 0; }
-    .page-header--inner { padding: 0 80px; }
-    .page-content { padding: 0 80px 0; }
+    /* Page body — flex column, 40px gap between major blocks */
+    .page-body {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-7);  /* 40px */
+      padding: 24px 80px 80px;
+    }
 
     /* Page content inherits Sand 100 from body */
     .main-content { background: transparent; }
 
     /* Page 2 large intro callout */
-    .page-intro-callout { padding: 0 80px; }
+    .page-intro-callout { padding: 0; }
     .page-intro-callout__quote {
       font-size: var(--fs-xl);
       line-height: var(--lh-xl);
@@ -723,7 +737,7 @@
       font-size: var(--fs-base);
       line-height: var(--lh-base);
       color: var(--text-dark);
-      margin: 0 0 var(--space-7);
+      margin: 0;
     }
 
     /* Page 3 intro heading */
@@ -732,7 +746,7 @@
       line-height: var(--lh-xl);
       font-weight: var(--font-weight-semibold);
       color: var(--text-dark);
-      margin: 0 0 var(--space-5);
+      margin: 0;
     }
 
     /* Circle of support heading with inline icon */
@@ -740,7 +754,7 @@
       display: flex;
       align-items: center;
       gap: var(--space-4);
-      margin-bottom: var(--space-3);
+      margin-bottom: 0;
     }
     .section-heading-with-icon h3 {
       margin: 0;
@@ -765,13 +779,11 @@
     .page-divider {
       border: none;
       border-top: 1px solid var(--divider-default);
-      margin: 40px 80px;
+      margin: 0;  /* page-body gap handles spacing */
     }
+
     /* Page 1 intro header */
-    .page-intro-header {
-      padding: 24px 80px 0;
-      margin-bottom: 0;
-    }
+    .page-intro-header { /* padding handled by page-body */ }
 
     .guide-title {
       font-size: 56px;
@@ -789,14 +801,14 @@
       margin: 0;
     }
 
-    /* Section heading within page 1 (h2, "1. Introduction") */
+    /* Section heading within a guide-section */
     .page-section-heading {
       font-size: var(--fs-hero);
       line-height: var(--lh-hero);
       font-weight: var(--font-weight-semibold);
       color: var(--text-dark);
-      margin: 40px 0 0;
-      padding: 0 80px;
+      margin: 0;
+      padding: 0;
     }
 
     /* Intro lede — plain lead paragraph */
@@ -805,24 +817,23 @@
       line-height: var(--lh-xl);
       font-weight: var(--font-weight-semibold);
       color: var(--text-dark);
-      margin-bottom: var(--space-5);
+      margin: 0;
       padding: 0;
     }
 
-    /* Intro illustration — full width below lede */
+    /* Intro illustration — full width */
     .intro-illustration {
       display: block;
       width: 100%;
       height: auto;
-      margin-top: var(--space-5);
-      margin-bottom: var(--space-5);
+      margin: 0;
     }
 
     /* App screenshots */
     .screen-shot {
       display: flex;
       justify-content: center;
-      margin: 32px 0;
+      margin: 0;
     }
     .screen-shot img {
       max-width: 160px;
@@ -837,7 +848,7 @@
       display: flex;
       gap: var(--space-4);
       justify-content: center;
-      margin: 32px 0;
+      margin: 0;
     }
     .screen-pair img {
       width: 160px;
@@ -853,15 +864,15 @@
       line-height: var(--lh-hero);
       font-weight: var(--font-weight-semibold);
       color: var(--text-dark);
-      margin-bottom: 0;
-      padding: 41px 80px 0;
+      margin: 0;
+      padding: 0;  /* page-body handles padding */
     }
     .page-heading__num { margin-right: var(--space-1); }
 
-    /* Page footer — revised layout */
+    /* Page footer */
     .page-footer {
-      padding: 0 80px;
-      margin-top: var(--space-5);
+      padding: 0;
+      margin: 0;  /* page-body gap handles spacing */
     }
 
     .page-footer__divider {
@@ -957,34 +968,14 @@
       }
       .sidebar-overlay.visible { display: block; }
 
-      .main-content { padding: var(--space-5) var(--space-4) var(--space-9); max-width: 100%; }
+      .main-content { max-width: 100%; }
+
+      /* Reduce page-body padding on mobile */
+      .page-body { padding: var(--space-5) var(--space-4) var(--space-9); }
 
       .guide-title { font-size: var(--fs-xl); }
       .page-heading { font-size: var(--fs-xl); }
       .phase-grid { grid-template-columns: 1fr; }
-
-      .page-intro-header,
-      .page-section-heading,
-      .page-heading,
-      .page-footer,
-      .page-divider {
-        padding-left: var(--space-4);
-        padding-right: var(--space-4);
-      }
-      .page-divider { margin-left: var(--space-4); margin-right: var(--space-4); }
-
-      /* Override inline padding styles on sections */
-      .guide-page > .guide-section,
-      .guide-page > .content-area {
-        padding-left: var(--space-4) !important;
-        padding-right: var(--space-4) !important;
-      }
-
-      /* Page-intro-callout has its own padding rule */
-      .page-intro-callout {
-        padding-left: var(--space-4);
-        padding-right: var(--space-4);
-      }
 
       /* Wide screenshot (circle of support) fits mobile width */
       .screen-shot--wide img { max-width: 100%; }
@@ -1134,124 +1125,120 @@
            PAGE 1: Introduction
            ==================================================== -->
       <div class="guide-page active" id="page-intro">
+        <div class="page-body">
 
-        <div class="page-intro-header">
-          <h1 class="guide-title">Guide to Volition</h1>
-          <p class="guide-subtitle">For organisation support staff</p>
-        </div>
-
-        <hr class="page-divider">
-
-        <!-- Section heading within page -->
-        <h2 class="page-section-heading">1. Introduction</h2>
-
-        <div style="padding: 24px 80px 0;">
-          <p class="intro-lede">Volition is a digital preference app and tool for Supported Decision Making.</p>
-          <img src="guide-assets/volguidestaff_intro_illustration.png" alt="Volition brand illustration" class="intro-illustration" width="1307" height="876">
-        </div>
-
-        <!-- Welcome detail -->
-        <section class="guide-section" aria-labelledby="heading-welcome" style="padding: 0 80px;">
-          <span class="guide-section__anchor" id="welcome-detail"></span>
-          <div class="content-block">
-            <h3>For Decision Makers</h3>
-            <p>Decision Makers — people with care and support needs — use Volition to record their preferences: what they like, what they need, and how they want to be supported.</p>
-            <p>It gives them a way to record and share their preferences on their own terms.</p>
-
-            <h3>For support staff</h3>
-            <p>As a staff supporter, Volition gives you quick, reliable access to what matters to the people you support — before, during, and after every interaction.</p>
-            <p>You have access to a Decision Maker's preference information before you walk in the door. You arrive prepared, and the person does not have to repeat themselves.</p>
-            <p>This is about better, more person-directed support.</p>
-            <p><strong>Your role is vital.</strong></p>
-
-            <div class="highlight-box">
-              <p><strong>Pilot programme</strong> — Your organisation has partnered with Volition to run a pilot programme. This guide is for staff who will use Volition as part of their work.</p>
-            </div>
-          </div>
-        </section>
-
-        <!-- SDM -->
-        <section class="guide-section" aria-labelledby="heading-sdm" style="padding: 0 80px;">
-          <span class="guide-section__anchor" id="sdm"></span>
-          <div class="section-header">
-            <div class="section-number">3</div>
-            <h2 id="heading-sdm">Supported Decision Making</h2>
+          <!-- Title block -->
+          <div class="page-intro-header">
+            <h1 class="guide-title">Guide to Volition</h1>
+            <p class="guide-subtitle">For organisation support staff</p>
           </div>
 
-          <div class="content-block">
-            <p>Supported Decision Making is an approach that keeps the person at the centre of their own life. It means supporting someone to make their own decisions — not making decisions for them.</p>
-            <p>These decisions should be grounded in what is important to the person. This is sometimes called their "will and preference."</p>
+          <hr class="page-divider">
 
-            <h3>Your role as a staff supporter</h3>
-            <p>Your role is to acknowledge, interpret, and respond to the person's expression of will and preference. Preferences may be communicated with words or behaviours.</p>
-            <p>This will often involve helping the person understand their options, the consequences, and act on their choices. Their voice comes first.</p>
+          <!-- 1. Introduction -->
+          <section class="guide-section" aria-labelledby="heading-intro">
+            <span class="guide-section__anchor" id="welcome-detail"></span>
+            <h2 id="heading-intro" class="page-section-heading">1. Introduction</h2>
+            <p class="intro-lede">Volition is a digital preference app and tool for Supported Decision Making.</p>
+            <img src="guide-assets/volguidestaff_intro_illustration.png" alt="Volition brand illustration" class="intro-illustration" width="1307" height="876">
+            <div class="content-block">
+              <h3>For Decision Makers</h3>
+              <p>Decision Makers — people with care and support needs — use Volition to record their preferences: what they like, what they need, and how they want to be supported.</p>
+              <p>It gives them a way to record and share their preferences on their own terms.</p>
 
-            <div class="card card--highlight">
-              <div class="card__title">Supported Decision Making is a human right</div>
-              <p>Recognised under the United Nations Convention on the Rights of Persons with Disabilities (UNCRPD), which New Zealand has ratified.</p>
-              <p style="margin-top: var(--space-3)">The UNCRPD says that:</p>
-              <ul class="guide-list" style="margin-bottom:0">
-                <li>Everyone has a right to make their own decisions</li>
-                <li>Everyone has a right to access support to make their own decisions</li>
-                <li>Everyone has a right to experience the outcomes of their choices</li>
-              </ul>
+              <h3>For support staff</h3>
+              <p>As a staff supporter, Volition gives you quick, reliable access to what matters to the people you support — before, during, and after every interaction.</p>
+              <p>You have access to a Decision Maker's preference information before you walk in the door. You arrive prepared, and the person does not have to repeat themselves.</p>
+              <p>This is about better, more person-directed support.</p>
+              <p><strong>Your role is vital.</strong></p>
+
+              <div class="highlight-box">
+                <p><strong>Pilot programme</strong> — Your organisation has partnered with Volition to run a pilot programme. This guide is for staff who will use Volition as part of their work.</p>
+              </div>
             </div>
+          </section>
+
+          <hr class="page-divider">
+
+          <!-- Supported Decision Making -->
+          <section class="guide-section" aria-labelledby="heading-sdm">
+            <span class="guide-section__anchor" id="sdm"></span>
+            <h2 id="heading-sdm" class="page-section-heading">Supported Decision Making</h2>
+            <div class="content-block">
+              <p>Supported Decision Making is an approach that keeps the person at the centre of their own life. It means supporting someone to make their own decisions — not making decisions for them.</p>
+              <p>These decisions should be grounded in what is important to the person. This is sometimes called their "will and preference."</p>
+
+              <h3>Your role as a staff supporter</h3>
+              <p>Your role is to acknowledge, interpret, and respond to the person's expression of will and preference. Preferences may be communicated with words or behaviours.</p>
+              <p>This will often involve helping the person understand their options, the consequences, and act on their choices. Their voice comes first.</p>
+
+              <div class="card card--highlight">
+                <div class="card__title">Supported Decision Making is a human right</div>
+                <p>Recognised under the United Nations Convention on the Rights of Persons with Disabilities (UNCRPD), which New Zealand has ratified.</p>
+                <p>The UNCRPD says that:</p>
+                <ul class="guide-list">
+                  <li>Everyone has a right to make their own decisions</li>
+                  <li>Everyone has a right to access support to make their own decisions</li>
+                  <li>Everyone has a right to experience the outcomes of their choices</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <hr class="page-divider">
+
+          <!-- Volition users -->
+          <section class="guide-section" aria-labelledby="heading-whos-who">
+            <span class="guide-section__anchor" id="whos-who"></span>
+            <h2 id="heading-whos-who" class="page-section-heading">Volition users</h2>
+            <div class="role-list">
+              <div class="role-entry">
+                <p class="role-entry__label">Decision Makers</p>
+                <p>The people whose preferences the app is built around. They own their data and control who sees it.</p>
+                <a class="role-entry__link" href="#">Decision Makers' guide to Volition →</a>
+              </div>
+              <div class="role-entry">
+                <p class="role-entry__label">Supporters</p>
+                <p>Family, friends, or personal carers the Decision Maker has chosen to invite. Not employed by your organisation.</p>
+                <a class="role-entry__link" href="#">Supporters' guide to Volition →</a>
+              </div>
+              <div class="role-entry">
+                <p class="role-entry__label">Guest supporters</p>
+                <p>People invited to view certain preferences via a share link or QR code. No account needed, and access expires after seven days.</p>
+                <a class="role-entry__link" href="#">Guest supporters' guide to Volition →</a>
+              </div>
+              <div class="role-entry">
+                <p class="role-entry__label">Org staff supporters (this is you)</p>
+                <p>Support workers and similar roles, with access to the preferences the Decision Maker has chosen to share with the organisation.</p>
+                <a class="role-entry__link" href="#">Org staff supporters' guide to Volition →</a>
+              </div>
+              <div class="role-entry">
+                <p class="role-entry__label">Org managers</p>
+                <p>Team leaders or coordinators who manage staff access within the organisation's Volition account.</p>
+                <a class="role-entry__link" href="#">Org managers' guide to Volition →</a>
+              </div>
+              <div class="role-entry">
+                <p class="role-entry__label">Org account owners</p>
+                <p>Responsible for the organisation's Volition account.</p>
+                <a class="role-entry__link" href="#">Org account owners' guide to Volition →</a>
+              </div>
+            </div>
+          </section>
+
+          <!-- Footer -->
+          <div class="page-footer">
+            <hr class="page-footer__divider">
+            <div class="was-helpful">
+              <span class="was-helpful__label">Was this helpful?</span>
+              <div class="was-helpful__actions">
+                <button class="was-helpful__btn" type="button">Yes, thanks</button>
+                <button class="was-helpful__btn" type="button">Not really</button>
+              </div>
+            </div>
+            <hr class="page-footer__divider">
           </div>
-        </section>
-
-        <!-- Volition users -->
-        <section class="guide-section" aria-labelledby="heading-whos-who" style="padding: 0 80px;">
-          <span class="guide-section__anchor" id="whos-who"></span>
-          <div class="section-header">
-            <div class="section-number">4</div>
-            <h2 id="heading-whos-who">Volition users</h2>
-          </div>
-
-          <div class="role-list">
-            <div class="role-entry">
-              <p class="role-entry__label">Decision Makers</p>
-              <p>The people whose preferences the app is built around. They own their data and control who sees it.</p>
-              <a class="role-entry__link" href="#">Decision Makers' guide to Volition →</a>
-            </div>
-            <div class="role-entry">
-              <p class="role-entry__label">Supporters</p>
-              <p>Family, friends, or personal carers the Decision Maker has chosen to invite. Not employed by your organisation.</p>
-              <a class="role-entry__link" href="#">Supporters' guide to Volition →</a>
-            </div>
-            <div class="role-entry">
-              <p class="role-entry__label">Guest supporters</p>
-              <p>People invited to view certain preferences via a share link or QR code. No account needed, and access expires after seven days.</p>
-              <a class="role-entry__link" href="#">Guest supporters' guide to Volition →</a>
-            </div>
-            <div class="role-entry">
-              <p class="role-entry__label">Org staff supporters (this is you)</p>
-              <p>Support workers and similar roles, with access to the preferences the Decision Maker has chosen to share with the organisation.</p>
-              <a class="role-entry__link" href="#">Org staff supporters' guide to Volition →</a>
-            </div>
-            <div class="role-entry">
-              <p class="role-entry__label">Org managers</p>
-              <p>Team leaders or coordinators who manage staff access within the organisation's Volition account.</p>
-              <a class="role-entry__link" href="#">Org managers' guide to Volition →</a>
-            </div>
-            <div class="role-entry">
-              <p class="role-entry__label">Org account owners</p>
-              <p>Responsible for the organisation's Volition account.</p>
-              <a class="role-entry__link" href="#">Org account owners' guide to Volition →</a>
-            </div>
-          </div>
-        </section>
-
-        <div class="page-footer">
-          <hr class="page-footer__divider">
-          <div class="was-helpful">
-            <span class="was-helpful__label">Was this helpful?</span>
-            <div class="was-helpful__actions">
-              <button class="was-helpful__btn" type="button">Yes, thanks</button>
-              <button class="was-helpful__btn" type="button">Not really</button>
-            </div>
-          </div>
-          <hr class="page-footer__divider">
           <button class="next-btn" type="button" data-next="getting-started">Next: Getting started →</button>
+
         </div>
       </div><!-- /page-intro -->
 
@@ -1259,6 +1246,7 @@
            PAGE 2: Getting started
            ==================================================== -->
       <div class="guide-page" id="page-getting-started">
+        <div class="page-body">
 
         <h2 class="page-heading"><span class="page-heading__num">2.</span> Getting started</h2>
 
@@ -1268,7 +1256,7 @@
         </div>
 
         <!-- Getting started steps -->
-        <section class="guide-section" aria-labelledby="heading-getting-started" style="padding: 0 80px;">
+        <section class="guide-section" aria-labelledby="heading-getting-started">
           <span class="guide-section__anchor" id="getting-started"></span>
 
           <div class="content-block">
@@ -1341,51 +1329,49 @@
                 <p>You will remain logged in on that device for a year, unless you log yourself out sooner.</p>
               </div>
             </div>
+            <ol class="step-list">
+              <li>
+                <div class="step-num">3</div>
+                <div class="step-content">
+                  <strong>Complete your profile</strong>
+                  <p>From the menu, navigate to your profile. Add your name and a photo. Decision Makers will see your profile when you are added to their Circle of Support. A clear photo and full name help build trust.</p>
+                </div>
+              </li>
+            </ol>
+
+            <!-- screen-profile image after step 3 -->
+            <div class="screen-shot">
+              <img src="guide-assets/Profile.png" alt="Personal details screen on iPhone" width="479" height="995">
+            </div>
+
+            <ol class="step-list">
+              <li>
+                <div class="step-num">4</div>
+                <div class="step-content">
+                  <strong>Review your circle of support</strong>
+                  <p>In Volition you will see the Decision Makers you have been assigned to support. By default you will have General View access.</p>
+                </div>
+              </li>
+              <li>
+                <div class="step-num">5</div>
+                <div class="step-content">
+                  <strong>Complete your check-in</strong>
+                  <p>From the Menu, tap 'Supporter check-in' and answer three questions about your experience as a supporter. Complete this at the start of your time with Volition to establish a baseline.</p>
+                </div>
+              </li>
+            </ol>
+
+            <div class="highlight-box">
+              <p><strong>Before visiting a person you support:</strong></p>
+              <ul class="guide-list">
+                <li>Check your permission level in their profile</li>
+                <li>Start a Support Session before you arrive</li>
+                <li>Review the preferences of the person</li>
+                <li>Note things you want to explore or ask about</li>
+              </ul>
+            </div>
           </div>
         </section>
-
-          <!-- continued from above section -->
-          <ol class="step-list" style="margin-top: var(--space-5);">
-            <li>
-              <div class="step-num">3</div>
-              <div class="step-content">
-                <strong>Complete your profile</strong>
-                <p>From the menu, navigate to your profile. Add your name and a photo. Decision Makers will see your profile when you are added to their Circle of Support. A clear photo and full name help build trust.</p>
-              </div>
-            </li>
-          </ol>
-
-          <!-- screen-profile image after step 3 -->
-          <div class="screen-shot">
-            <img src="guide-assets/Profile.png" alt="Personal details screen on iPhone" width="479" height="995">
-          </div>
-
-          <ol class="step-list">
-            <li>
-              <div class="step-num">4</div>
-              <div class="step-content">
-                <strong>Review your circle of support</strong>
-                <p>In Volition you will see the Decision Makers you have been assigned to support. By default you will have General View access.</p>
-              </div>
-            </li>
-            <li>
-              <div class="step-num">5</div>
-              <div class="step-content">
-                <strong>Complete your check-in</strong>
-                <p>From the Menu, tap 'Supporter check-in' and answer three questions about your experience as a supporter. Complete this at the start of your time with Volition to establish a baseline.</p>
-              </div>
-            </li>
-          </ol>
-
-          <div class="highlight-box">
-            <p><strong>Before visiting a person you support:</strong></p>
-            <ul class="guide-list">
-              <li>Check your permission level in their profile</li>
-              <li>Start a Support Session before you arrive</li>
-              <li>Review the preferences of the person</li>
-              <li>Note things you want to explore or ask about</li>
-            </ul>
-          </div>
 
         <div class="page-footer">
           <hr class="page-footer__divider">
@@ -1397,7 +1383,9 @@
             </div>
           </div>
           <hr class="page-footer__divider">
-          <button class="next-btn" type="button" data-next="basics">Next: Using the basics →</button>
+        </div>
+        <button class="next-btn" type="button" data-next="basics">Next: Using the basics →</button>
+
         </div>
       </div><!-- /page-getting-started -->
 
@@ -1405,11 +1393,12 @@
            PAGE 3: Using the basics
            ==================================================== -->
       <div class="guide-page" id="page-basics">
+        <div class="page-body">
 
         <h2 class="page-heading"><span class="page-heading__num">3.</span> Using the basics</h2>
 
         <!-- Support view -->
-        <section class="guide-section" style="padding: 88px 80px 0;">
+        <section class="guide-section">
 
           <p class="page-intro-subhead">Here is what you see when you log in.</p>
 
@@ -1456,7 +1445,7 @@
         </section>
 
         <!-- The Vault -->
-        <section class="guide-section" aria-labelledby="heading-vault" style="padding: 0 80px;">
+        <section class="guide-section" aria-labelledby="heading-vault">
           <span class="guide-section__anchor" id="vault"></span>
           <div class="section-header">
             <div class="section-number">8</div>
@@ -1471,7 +1460,7 @@
         </section>
 
         <!-- The Volition App -->
-        <section class="guide-section" aria-labelledby="heading-app" style="padding: 0 80px;">
+        <section class="guide-section" aria-labelledby="heading-app">
           <span class="guide-section__anchor" id="app"></span>
           <div class="section-header">
             <div class="section-number">9</div>
@@ -1498,7 +1487,9 @@
             </div>
           </div>
           <hr class="page-footer__divider">
-          <button class="next-btn" type="button" data-next="sessions">Next: Support sessions →</button>
+        </div>
+        <button class="next-btn" type="button" data-next="sessions">Next: Support sessions →</button>
+
         </div>
       </div><!-- /page-basics -->
 
@@ -1506,11 +1497,12 @@
            PAGE 4: Support sessions
            ==================================================== -->
       <div class="guide-page" id="page-sessions">
+        <div class="page-body">
 
         <h2 class="page-heading"><span class="page-heading__num">4.</span> Support sessions</h2>
 
         <!-- What is a support session? -->
-        <section class="guide-section" aria-labelledby="heading-sessions-intro" style="padding: 88px 80px 0;">
+        <section class="guide-section" aria-labelledby="heading-sessions-intro">
           <span class="guide-section__anchor" id="sessions-intro"></span>
           <div class="section-header">
             <div class="section-number">12</div>
@@ -1529,7 +1521,7 @@
         </section>
 
         <!-- During a session -->
-        <section class="guide-section" aria-labelledby="heading-sessions-during" style="padding: 0 80px;">
+        <section class="guide-section" aria-labelledby="heading-sessions-during">
           <span class="guide-section__anchor" id="sessions-during"></span>
           <div class="section-header">
             <div class="section-number">13</div>
@@ -1557,7 +1549,7 @@
         </section>
 
         <!-- How to start a session -->
-        <section class="guide-section" aria-labelledby="heading-sessions-how" style="padding: 0 80px;">
+        <section class="guide-section" aria-labelledby="heading-sessions-how">
           <span class="guide-section__anchor" id="sessions-how"></span>
           <div class="section-header">
             <div class="section-number">14</div>
@@ -1619,7 +1611,9 @@
             </div>
           </div>
           <hr class="page-footer__divider">
-          <button class="next-btn" type="button" data-next="preferences">Next: Respecting preferences →</button>
+        </div>
+        <button class="next-btn" type="button" data-next="preferences">Next: Respecting preferences →</button>
+
         </div>
       </div><!-- /page-sessions -->
 
@@ -1627,11 +1621,12 @@
            PAGE 5: Respecting preferences
            ==================================================== -->
       <div class="guide-page" id="page-preferences">
+        <div class="page-body">
 
         <h2 class="page-heading"><span class="page-heading__num">5.</span> Respecting preferences</h2>
 
         <!-- Permissions: what you see -->
-        <section class="guide-section" aria-labelledby="heading-permissions-view" style="padding: 88px 80px 0;">
+        <section class="guide-section" aria-labelledby="heading-permissions-view">
           <span class="guide-section__anchor" id="permissions-view"></span>
           <div class="section-header">
             <div class="section-number">10</div>
@@ -1657,7 +1652,7 @@
         </section>
 
         <!-- Permissions: what you do -->
-        <section class="guide-section" aria-labelledby="heading-permissions-do" style="padding: 0 80px;">
+        <section class="guide-section" aria-labelledby="heading-permissions-do">
           <span class="guide-section__anchor" id="permissions-do"></span>
           <div class="section-header">
             <div class="section-number">11</div>
@@ -1689,7 +1684,7 @@
         </section>
 
         <!-- Contributing -->
-        <section class="guide-section" aria-labelledby="heading-contributing" style="padding: 0 80px;">
+        <section class="guide-section" aria-labelledby="heading-contributing">
           <span class="guide-section__anchor" id="contributing"></span>
           <div class="section-header">
             <div class="section-number">15</div>
@@ -1697,7 +1692,7 @@
           </div>
 
           <div class="content-block">
-            <div class="card" style="margin-bottom: var(--space-4)">
+            <div class="card">
               <div class="card__title">
                 <span class="perm-badge perm-badge--elevated">Contributors<span class="sr-only"> (elevated permission required)</span></span>
               </div>
@@ -1714,7 +1709,7 @@
         </section>
 
         <!-- Editing -->
-        <section class="guide-section" aria-labelledby="heading-editing" style="padding: 0 80px;">
+        <section class="guide-section" aria-labelledby="heading-editing">
           <span class="guide-section__anchor" id="editing"></span>
           <div class="section-header">
             <div class="section-number">16</div>
@@ -1722,7 +1717,7 @@
           </div>
 
           <div class="content-block">
-            <div class="card" style="margin-bottom: var(--space-4)">
+            <div class="card">
               <div class="card__title">
                 <span class="perm-badge perm-badge--elevated">Editors<span class="sr-only"> (elevated permission required)</span></span>
               </div>
@@ -1742,7 +1737,7 @@
         </section>
 
         <!-- Sharing -->
-        <section class="guide-section" aria-labelledby="heading-sharing" style="padding: 0 80px;">
+        <section class="guide-section" aria-labelledby="heading-sharing">
           <span class="guide-section__anchor" id="sharing"></span>
           <div class="section-header">
             <div class="section-number">17</div>
@@ -1786,7 +1781,9 @@
             </div>
           </div>
           <hr class="page-footer__divider">
-          <button class="next-btn" type="button" data-next="responsibilities">Next: Your responsibilities →</button>
+        </div>
+        <button class="next-btn" type="button" data-next="responsibilities">Next: Your responsibilities →</button>
+
         </div>
       </div><!-- /page-preferences -->
 
@@ -1794,11 +1791,12 @@
            PAGE 6: Your responsibilities
            ==================================================== -->
       <div class="guide-page" id="page-responsibilities">
+        <div class="page-body">
 
         <h2 class="page-heading"><span class="page-heading__num">6.</span> Your responsibilities</h2>
 
         <!-- Privacy -->
-        <section class="guide-section" aria-labelledby="heading-privacy" style="padding: 88px 80px 0;">
+        <section class="guide-section" aria-labelledby="heading-privacy">
           <span class="guide-section__anchor" id="privacy"></span>
           <div class="section-header">
             <div class="section-number">18</div>
@@ -1822,7 +1820,7 @@
         </section>
 
         <!-- Activity Log -->
-        <section class="guide-section" aria-labelledby="heading-activity-log" style="padding: 0 80px;">
+        <section class="guide-section" aria-labelledby="heading-activity-log">
           <span class="guide-section__anchor" id="activity-log"></span>
           <div class="section-header">
             <div class="section-number">19</div>
@@ -1850,7 +1848,9 @@
             </div>
           </div>
           <hr class="page-footer__divider">
-          <button class="next-btn" type="button" data-next="next">Next: What's next? →</button>
+        </div>
+        <button class="next-btn" type="button" data-next="next">Next: What's next? →</button>
+
         </div>
       </div><!-- /page-responsibilities -->
 
@@ -1858,11 +1858,12 @@
            PAGE 7: What's next?
            ==================================================== -->
       <div class="guide-page" id="page-next">
+        <div class="page-body">
 
         <h2 class="page-heading"><span class="page-heading__num">7.</span> What's next?</h2>
 
         <!-- Coming soon -->
-        <section class="guide-section" aria-labelledby="heading-coming-soon" style="padding: 88px 80px 0;">
+        <section class="guide-section" aria-labelledby="heading-coming-soon">
           <span class="guide-section__anchor" id="coming-soon"></span>
           <div class="section-header">
             <div class="section-number">20</div>
@@ -1913,7 +1914,7 @@
         </section>
 
         <!-- Support and feedback -->
-        <section class="guide-section" aria-labelledby="heading-support-feedback" style="padding: 0 80px;">
+        <section class="guide-section" aria-labelledby="heading-support-feedback">
           <span class="guide-section__anchor" id="support-feedback"></span>
           <div class="section-header">
             <div class="section-number">21</div>
@@ -1921,7 +1922,7 @@
           </div>
 
           <div class="content-block">
-            <div class="card card--highlight" style="margin-bottom: var(--space-5)">
+            <div class="card card--highlight">
               <div class="card__title">Give us your feedback</div>
               <p>Your experience using Volition in a real support context is invaluable. If something is not working, is confusing, or could be better — we want to know. Send feedback via email or log it through the menu in the Vault.</p>
             </div>
@@ -1947,7 +1948,7 @@
         </section>
 
         <!-- FAQs -->
-        <section class="guide-section" aria-labelledby="heading-faqs" style="padding: 0 80px;">
+        <section class="guide-section" aria-labelledby="heading-faqs">
           <span class="guide-section__anchor" id="faqs"></span>
           <div class="section-header">
             <div class="section-number">22</div>
@@ -1997,6 +1998,8 @@
             </div>
           </div>
           <hr class="page-footer__divider">
+        </div>
+
         </div>
       </div><!-- /page-next -->
 
