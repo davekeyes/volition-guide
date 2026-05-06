@@ -631,7 +631,7 @@
 
     .guide-selector__chevron {
       flex-shrink: 0;
-      color: var(--text-light);
+      color: var(--text-dark);
       transition: transform var(--dur-fast) var(--ease-standard);
     }
 
@@ -680,6 +680,7 @@
     .sidebar__section-link {
       display: flex;
       align-items: center;
+      gap: var(--space-2);
       height: 60px;
       padding: 0 24px;
       font-size: var(--fs-body-lg);
@@ -688,6 +689,14 @@
       text-decoration: none;
       font-weight: var(--font-weight-regular);
       transition: background var(--dur-fast) var(--ease-standard), color var(--dur-fast) var(--ease-standard);
+    }
+    .sidebar__nav-num {
+      flex-shrink: 0;
+      width: 22px;
+      text-align: right;
+    }
+    .sidebar__nav-label {
+      flex: 1;
     }
     .sidebar__section-link:hover { background: var(--panel-highlight); color: var(--text-dark); }
     .sidebar__section-link.active {
@@ -1121,14 +1130,14 @@
       <!-- 7 numbered sections with sub-items for intro -->
       <ol class="sidebar__sections">
         <li>
-          <a class="sidebar__section-link active" href="#" data-page="intro">1. Introduction</a>
+          <a class="sidebar__section-link active" href="#" data-page="intro"><span class="sidebar__nav-num">1.</span><span class="sidebar__nav-label">Introduction</span></a>
         </li>
-        <li><a class="sidebar__section-link" href="#" data-page="getting-started">2. Getting started</a></li>
-        <li><a class="sidebar__section-link" href="#" data-page="basics">3. Using the basics</a></li>
-        <li><a class="sidebar__section-link" href="#" data-page="sessions">4. Support sessions</a></li>
-        <li><a class="sidebar__section-link" href="#" data-page="preferences">5. Respecting preferences</a></li>
-        <li><a class="sidebar__section-link" href="#" data-page="responsibilities">6. Your responsibilities</a></li>
-        <li><a class="sidebar__section-link" href="#" data-page="next">7. What's next?</a></li>
+        <li><a class="sidebar__section-link" href="#" data-page="getting-started"><span class="sidebar__nav-num">2.</span><span class="sidebar__nav-label">Getting started</span></a></li>
+        <li><a class="sidebar__section-link" href="#" data-page="basics"><span class="sidebar__nav-num">3.</span><span class="sidebar__nav-label">Using the basics</span></a></li>
+        <li><a class="sidebar__section-link" href="#" data-page="sessions"><span class="sidebar__nav-num">4.</span><span class="sidebar__nav-label">Support sessions</span></a></li>
+        <li><a class="sidebar__section-link" href="#" data-page="preferences"><span class="sidebar__nav-num">5.</span><span class="sidebar__nav-label">Respecting preferences</span></a></li>
+        <li><a class="sidebar__section-link" href="#" data-page="responsibilities"><span class="sidebar__nav-num">6.</span><span class="sidebar__nav-label">Your responsibilities</span></a></li>
+        <li><a class="sidebar__section-link" href="#" data-page="next"><span class="sidebar__nav-num">7.</span><span class="sidebar__nav-label">What's next?</span></a></li>
       </ol>
 
     </nav>
