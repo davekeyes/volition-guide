@@ -170,48 +170,50 @@
       margin: 0;
       display: flex;
       flex-direction: column;
-      gap: var(--space-3);
+      gap: var(--space-5);
     }
 
     .step-list li {
       display: flex;
+      flex-direction: column;
       gap: var(--space-2);
+    }
+
+    .step-header {
+      display: flex;
       align-items: center;
+      gap: var(--space-2);
     }
 
     .step-num {
       display: flex;
       align-items: center;
       justify-content: center;
-      min-width: 36px;
-      height: 36px;
+      min-width: 40px;
+      height: 40px;
       background: var(--button-base);
       color: var(--text-inverted);
       border-radius: var(--radius-pill);
       font-size: var(--fs-body-lg);
-      line-height: var(--lh-body-lg);
+      line-height: 1;
       font-weight: var(--font-weight-semibold);
       flex-shrink: 0;
     }
 
-    .step-content {
-      flex: 1;
-    }
-
-    .step-content strong {
-      display: block;
+    .step-title {
       font-size: var(--fs-body-lg);
       line-height: var(--lh-body-lg);
       font-weight: var(--font-weight-semibold);
       color: var(--text-dark);
-      margin-bottom: var(--space-2);
+      margin: 0;
     }
 
-    .step-content p {
-      font-size: var(--fs-small);
-      color: var(--text-mid);
+    .step-body {
+      font-size: var(--fs-base);
+      line-height: var(--lh-base);
+      color: var(--text-dark);
       margin: 0;
-      line-height: var(--lh-small);
+      padding-left: calc(40px + var(--space-2));
     }
 
     /* Role list — plain flex column, no cards */
@@ -934,6 +936,7 @@
     .next-btn {
       display: inline-flex;
       align-items: center;
+      align-self: flex-start;
       gap: var(--space-2);
       padding: 12px 16px;
       background: none;
@@ -1163,7 +1166,7 @@
               <div class="sub-section">
                 <h3>For Decision Makers</h3>
                 <p>People with care and support needs — Decision Makers — use Volition to record their preferences: what they like, what they need, and how they want to be supported.</p>
-                <p>A way to record and share their preferences and voice, on their own terms.</p>
+                <p>Volition offers a way to record and share their preferences and voice, on their own terms.</p>
               </div>
 
               <div class="sub-section">
@@ -1215,6 +1218,7 @@
           <section class="guide-section" aria-labelledby="heading-whos-who">
             <span class="guide-section__anchor" id="whos-who"></span>
             <h2 id="heading-whos-who" class="page-section-heading">Volition users</h2>
+            <p class="intro-lede">People with care and support needs — Decision Makers — may have a variety of people providing different support.</p>
             <div class="role-list">
               <div class="role-entry">
                 <h3 class="role-entry__label">Decision Makers</h3>
@@ -1287,18 +1291,18 @@
 
             <ol class="step-list">
               <li>
-                <div class="step-num">1</div>
-                <div class="step-content">
-                  <strong>Accept your invitation</strong>
-                  <p>Open the invitation email and click the link to go to your Volition registration page.</p>
+                <div class="step-header">
+                  <div class="step-num">1</div>
+                  <strong class="step-title">Accept your invitation</strong>
                 </div>
+                <p class="step-body">Open the invitation email and click the link to go to your Volition registration page.</p>
               </li>
               <li>
-                <div class="step-num">2</div>
-                <div class="step-content">
-                  <strong>Register your account</strong>
-                  <p>Enter your details, use your work email address, and agree to the terms of use.</p>
+                <div class="step-header">
+                  <div class="step-num">2</div>
+                  <strong class="step-title">Register your account</strong>
                 </div>
+                <p class="step-body">Enter your details, use your work email address, and agree to the terms of use.</p>
               </li>
             </ol>
 
@@ -1355,11 +1359,11 @@
             </div>
             <ol class="step-list">
               <li>
-                <div class="step-num">3</div>
-                <div class="step-content">
-                  <strong>Complete your profile</strong>
-                  <p>From the menu, navigate to your profile. Add your name and a photo. Decision Makers will see your profile when you are added to their Circle of Support. A clear photo and full name help build trust.</p>
+                <div class="step-header">
+                  <div class="step-num">3</div>
+                  <strong class="step-title">Complete your profile</strong>
                 </div>
+                <p class="step-body">From the menu, navigate to your profile. Add your name and a photo. Decision Makers will see your profile when you are added to their Circle of Support. A clear photo and full name help build trust.</p>
               </li>
             </ol>
 
@@ -1370,18 +1374,18 @@
 
             <ol class="step-list">
               <li>
-                <div class="step-num">4</div>
-                <div class="step-content">
-                  <strong>Review your circle of support</strong>
-                  <p>In Volition you will see the Decision Makers you have been assigned to support. By default you will have General View access.</p>
+                <div class="step-header">
+                  <div class="step-num">4</div>
+                  <strong class="step-title">Review your circle of support</strong>
                 </div>
+                <p class="step-body">In Volition you will see the Decision Makers you have been assigned to support. By default you will have General View access.</p>
               </li>
               <li>
-                <div class="step-num">5</div>
-                <div class="step-content">
-                  <strong>Complete your check-in</strong>
-                  <p>From the Menu, tap 'Supporter check-in' and answer three questions about your experience as a supporter. Complete this at the start of your time with Volition to establish a baseline.</p>
+                <div class="step-header">
+                  <div class="step-num">5</div>
+                  <strong class="step-title">Complete your check-in</strong>
                 </div>
+                <p class="step-body">From the Menu, tap 'Supporter check-in' and answer three questions about your experience as a supporter. Complete this at the start of your time with Volition to establish a baseline.</p>
               </li>
             </ol>
 
@@ -1583,38 +1587,38 @@
           <div class="content-block">
             <ol class="step-list">
               <li>
-                <div class="step-num">1</div>
-                <div class="step-content">
-                  <strong>Open the Vault and find the Decision Maker's profile</strong>
+                <div class="step-header">
+                  <div class="step-num">1</div>
+                  <strong class="step-title">Open the Vault and find the Decision Maker's profile</strong>
                 </div>
               </li>
               <li>
-                <div class="step-num">2</div>
-                <div class="step-content">
-                  <strong>Tap "Explore their Volition"</strong>
-                  <p>Tap "Options" if needed, then tap "Explore their Volition."</p>
+                <div class="step-header">
+                  <div class="step-num">2</div>
+                  <strong class="step-title">Tap "Explore their Volition"</strong>
                 </div>
+                <p class="step-body">Tap "Options" if needed, then tap "Explore their Volition."</p>
               </li>
               <li>
-                <div class="step-num">3</div>
-                <div class="step-content">
-                  <strong>Confirm the session has started</strong>
-                  <p>A purple screen confirms the support session has started.</p>
+                <div class="step-header">
+                  <div class="step-num">3</div>
+                  <strong class="step-title">Confirm the session has started</strong>
                 </div>
+                <p class="step-body">A purple screen confirms the support session has started.</p>
               </li>
               <li>
-                <div class="step-num">4</div>
-                <div class="step-content">
-                  <strong>Explore their preferences</strong>
-                  <p>Browse and view the preferences they have shared with you.</p>
+                <div class="step-header">
+                  <div class="step-num">4</div>
+                  <strong class="step-title">Explore their preferences</strong>
                 </div>
+                <p class="step-body">Browse and view the preferences they have shared with you.</p>
               </li>
               <li>
-                <div class="step-num">5</div>
-                <div class="step-content">
-                  <strong>Close the session when you're done</strong>
-                  <p>Tap × in the top right to end the session.</p>
+                <div class="step-header">
+                  <div class="step-num">5</div>
+                  <strong class="step-title">Close the session when you're done</strong>
                 </div>
+                <p class="step-body">Tap × in the top right to end the session.</p>
               </li>
             </ol>
 
@@ -1777,23 +1781,23 @@
 
             <ol class="step-list">
               <li>
-                <div class="step-num">1</div>
-                <div class="step-content">
-                  <strong>Open the preference or group of preferences to share</strong>
+                <div class="step-header">
+                  <div class="step-num">1</div>
+                  <strong class="step-title">Open the preference or group of preferences to share</strong>
                 </div>
               </li>
               <li>
-                <div class="step-num">2</div>
-                <div class="step-content">
-                  <strong>Tap "Share this preference"</strong>
+                <div class="step-header">
+                  <div class="step-num">2</div>
+                  <strong class="step-title">Tap "Share this preference"</strong>
                 </div>
               </li>
               <li>
-                <div class="step-num">3</div>
-                <div class="step-content">
-                  <strong>Choose "Link" or "QR code"</strong>
-                  <p>The recipient can view the preference without a Volition account. Access expires after 7 days.</p>
+                <div class="step-header">
+                  <div class="step-num">3</div>
+                  <strong class="step-title">Choose "Link" or "QR code"</strong>
                 </div>
+                <p class="step-body">The recipient can view the preference without a Volition account. Access expires after 7 days.</p>
               </li>
             </ol>
           </div>
