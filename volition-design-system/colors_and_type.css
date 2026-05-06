@@ -257,7 +257,7 @@
 
   /* Body */
   --fs-body-lg: 20px;   --lh-body-lg: 28px;   --sp-body-lg: 16px; /* Body large */
-  --fs-base:    18px;   --lh-base:    24px;   --sp-base:    8px;  /* Body base */
+  --fs-base:    18px;   --lh-base:    28px;   --sp-base:    8px;  /* Body base */
   --fs-small:   16px;   --lh-small:   24px;   --sp-small:   8px;  /* Body small */
 
   /* Legacy / caption */
