@@ -95,17 +95,22 @@
       margin: 0;
     }
 
-    /* Content blocks */
-    .content-block > * {
-      margin-top: 0;
-      margin-bottom: 0;
+    /* Content blocks — 24px between sub-blocks */
+    .content-block {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);
     }
 
-    .content-block > * + * {
-      margin-top: var(--space-5);  /* 24px between sub-blocks */
+    /* Sub-sections — heading + related content with 8px gap */
+    .sub-section {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
     }
 
-    .content-block h3 {
+    .content-block h3,
+    .sub-section h3 {
       font-size: var(--fs-body-lg);
       font-weight: var(--font-weight-semibold);
       line-height: var(--lh-body-lg);
@@ -113,26 +118,16 @@
       margin: 0;
     }
 
-    .content-block h3 + p,
-    .content-block h3 + ul,
-    .content-block h3 + ol {
-      margin-top: var(--space-2);  /* 8px after h3 */
-    }
-
-    .content-block p + p {
-      margin-top: var(--space-2);  /* 8px between consecutive paragraphs */
-    }
-
     .content-block p,
     .content-block ul,
-    .content-block ol {
+    .content-block ol,
+    .sub-section p,
+    .sub-section ul,
+    .sub-section ol {
       font-size: var(--fs-base);
       line-height: var(--lh-base);
       color: var(--text-dark);
-    }
-
-    .content-block .section-heading-with-icon + p {
-      margin-top: var(--space-2);  /* 8px after icon heading */
+      margin: 0;
     }
 
     /* Highlight panels — panel-highlight bg, 16px radius, no border */
@@ -1114,7 +1109,7 @@
     </nav>
 
     <!-- Main content -->
-    <main class="main-content" id="mainContent">
+    <main class="main-content" id="mainContent" tabindex="-1">
 
       <!-- No results message -->
       <div class="no-results" id="noResults" aria-live="polite">
@@ -1142,15 +1137,19 @@
             <p class="intro-lede">Volition is a digital preference app and tool for Supported Decision Making.</p>
             <img src="guide-assets/volguidestaff_intro_illustration.png" alt="Volition brand illustration" class="intro-illustration" width="1307" height="876">
             <div class="content-block">
-              <h3>For Decision Makers</h3>
-              <p>Decision Makers — people with care and support needs — use Volition to record their preferences: what they like, what they need, and how they want to be supported.</p>
-              <p>It gives them a way to record and share their preferences on their own terms.</p>
+              <div class="sub-section">
+                <h3>For Decision Makers</h3>
+                <p>Decision Makers — people with care and support needs — use Volition to record their preferences: what they like, what they need, and how they want to be supported.</p>
+                <p>It gives them a way to record and share their preferences on their own terms.</p>
+              </div>
 
-              <h3>For support staff</h3>
-              <p>As a staff supporter, Volition gives you quick, reliable access to what matters to the people you support — before, during, and after every interaction.</p>
-              <p>You have access to a Decision Maker's preference information before you walk in the door. You arrive prepared, and the person does not have to repeat themselves.</p>
-              <p>This is about better, more person-directed support.</p>
-              <p><strong>Your role is vital.</strong></p>
+              <div class="sub-section">
+                <h3>For support staff</h3>
+                <p>As a staff supporter, Volition gives you quick, reliable access to what matters to the people you support — before, during, and after every interaction.</p>
+                <p>You have access to a Decision Maker's preference information before you walk in the door. You arrive prepared, and the person does not have to repeat themselves.</p>
+                <p>This is about better, more person-directed support.</p>
+                <p><strong>Your role is vital.</strong></p>
+              </div>
 
               <div class="highlight-box">
                 <p><strong>Pilot programme</strong> — Your organisation has partnered with Volition to run a pilot programme. This guide is for staff who will use Volition as part of their work.</p>
@@ -1165,12 +1164,16 @@
             <span class="guide-section__anchor" id="sdm"></span>
             <h2 id="heading-sdm" class="page-section-heading">Supported Decision Making</h2>
             <div class="content-block">
-              <p>Supported Decision Making is an approach that keeps the person at the centre of their own life. It means supporting someone to make their own decisions — not making decisions for them.</p>
-              <p>These decisions should be grounded in what is important to the person. This is sometimes called their "will and preference."</p>
+              <div class="sub-section">
+                <p>Supported Decision Making is an approach that keeps the person at the centre of their own life. It means supporting someone to make their own decisions — not making decisions for them.</p>
+                <p>These decisions should be grounded in what is important to the person. This is sometimes called their "will and preference."</p>
+              </div>
 
-              <h3>Your role as a staff supporter</h3>
-              <p>Your role is to acknowledge, interpret, and respond to the person's expression of will and preference. Preferences may be communicated with words or behaviours.</p>
-              <p>This will often involve helping the person understand their options, the consequences, and act on their choices. Their voice comes first.</p>
+              <div class="sub-section">
+                <h3>Your role as a staff supporter</h3>
+                <p>Your role is to acknowledge, interpret, and respond to the person's expression of will and preference. Preferences may be communicated with words or behaviours.</p>
+                <p>This will often involve helping the person understand their options, the consequences, and act on their choices. Their voice comes first.</p>
+              </div>
 
               <div class="card card--highlight">
                 <div class="card__title">Supported Decision Making is a human right</div>
@@ -1195,32 +1198,32 @@
               <div class="role-entry">
                 <p class="role-entry__label">Decision Makers</p>
                 <p>The people whose preferences the app is built around. They own their data and control who sees it.</p>
-                <a class="role-entry__link" href="#">Decision Makers' guide to Volition →</a>
+                <a class="role-entry__link" href="#">Decision Makers' guide to Volition <span aria-hidden="true">→</span></a>
               </div>
               <div class="role-entry">
                 <p class="role-entry__label">Supporters</p>
                 <p>Family, friends, or personal carers the Decision Maker has chosen to invite. Not employed by your organisation.</p>
-                <a class="role-entry__link" href="#">Supporters' guide to Volition →</a>
+                <a class="role-entry__link" href="#">Supporters' guide to Volition <span aria-hidden="true">→</span></a>
               </div>
               <div class="role-entry">
                 <p class="role-entry__label">Guest supporters</p>
                 <p>People invited to view certain preferences via a share link or QR code. No account needed, and access expires after seven days.</p>
-                <a class="role-entry__link" href="#">Guest supporters' guide to Volition →</a>
+                <a class="role-entry__link" href="#">Guest supporters' guide to Volition <span aria-hidden="true">→</span></a>
               </div>
               <div class="role-entry">
                 <p class="role-entry__label">Org staff supporters (this is you)</p>
                 <p>Support workers and similar roles, with access to the preferences the Decision Maker has chosen to share with the organisation.</p>
-                <a class="role-entry__link" href="#">Org staff supporters' guide to Volition →</a>
+                <a class="role-entry__link" href="#">Org staff supporters' guide to Volition <span aria-hidden="true">→</span></a>
               </div>
               <div class="role-entry">
                 <p class="role-entry__label">Org managers</p>
                 <p>Team leaders or coordinators who manage staff access within the organisation's Volition account.</p>
-                <a class="role-entry__link" href="#">Org managers' guide to Volition →</a>
+                <a class="role-entry__link" href="#">Org managers' guide to Volition <span aria-hidden="true">→</span></a>
               </div>
               <div class="role-entry">
                 <p class="role-entry__label">Org account owners</p>
                 <p>Responsible for the organisation's Volition account.</p>
-                <a class="role-entry__link" href="#">Org account owners' guide to Volition →</a>
+                <a class="role-entry__link" href="#">Org account owners' guide to Volition <span aria-hidden="true">→</span></a>
               </div>
             </div>
           </section>
@@ -1237,7 +1240,7 @@
             </div>
             <hr class="page-footer__divider">
           </div>
-          <button class="next-btn" type="button" data-next="getting-started">Next: Getting started →</button>
+          <button class="next-btn" type="button" data-next="getting-started">Next: Getting started <span aria-hidden="true">→</span></button>
 
         </div>
       </div><!-- /page-intro -->
@@ -1384,7 +1387,7 @@
           </div>
           <hr class="page-footer__divider">
         </div>
-        <button class="next-btn" type="button" data-next="basics">Next: Using the basics →</button>
+        <button class="next-btn" type="button" data-next="basics">Next: Using the basics <span aria-hidden="true">→</span></button>
 
         </div>
       </div><!-- /page-getting-started -->
@@ -1488,7 +1491,7 @@
           </div>
           <hr class="page-footer__divider">
         </div>
-        <button class="next-btn" type="button" data-next="sessions">Next: Support sessions →</button>
+        <button class="next-btn" type="button" data-next="sessions">Next: Support sessions <span aria-hidden="true">→</span></button>
 
         </div>
       </div><!-- /page-basics -->
@@ -1612,7 +1615,7 @@
           </div>
           <hr class="page-footer__divider">
         </div>
-        <button class="next-btn" type="button" data-next="preferences">Next: Respecting preferences →</button>
+        <button class="next-btn" type="button" data-next="preferences">Next: Respecting preferences <span aria-hidden="true">→</span></button>
 
         </div>
       </div><!-- /page-sessions -->
@@ -1724,11 +1727,15 @@
               <p>As an Editor you can also create, update, and modify preference records on behalf of a Decision Maker.</p>
             </div>
 
-            <h3>Creating a new preference</h3>
-            <p>Tap "Create a Preference" from the home screen or library. Work through the steps together. Let them lead — your role is to help, not to decide.</p>
+            <div class="sub-section">
+              <h3>Creating a new preference</h3>
+              <p>Tap "Create a Preference" from the home screen or library. Work through the steps together. Let them lead — your role is to help, not to decide.</p>
+            </div>
 
-            <h3>Updating a preference</h3>
-            <p>Tap the preference, tap "Edit," make the change together, then tap "Save." Do not edit without their direction.</p>
+            <div class="sub-section">
+              <h3>Updating a preference</h3>
+              <p>Tap the preference, tap "Edit," make the change together, then tap "Save." Do not edit without their direction.</p>
+            </div>
 
             <div class="caution-box">
               <p><strong>Made a mistake?</strong> Tell the Decision Maker. Work with them to correct it. Don't try to quietly revert without their knowledge. If you're unsure what to do, speak to your Manager.</p>
@@ -1782,7 +1789,7 @@
           </div>
           <hr class="page-footer__divider">
         </div>
-        <button class="next-btn" type="button" data-next="responsibilities">Next: Your responsibilities →</button>
+        <button class="next-btn" type="button" data-next="responsibilities">Next: Your responsibilities <span aria-hidden="true">→</span></button>
 
         </div>
       </div><!-- /page-preferences -->
@@ -1849,7 +1856,7 @@
           </div>
           <hr class="page-footer__divider">
         </div>
-        <button class="next-btn" type="button" data-next="next">Next: What's next? →</button>
+        <button class="next-btn" type="button" data-next="next">Next: What's next? <span aria-hidden="true">→</span></button>
 
         </div>
       </div><!-- /page-responsibilities -->
@@ -1871,9 +1878,9 @@
           </div>
 
           <div class="content-block">
-            <p>Volition is growing. You will be notified when new features are released. Your feedback helps shape what comes next.</p>
-
-            <div class="feature-list">
+            <div class="sub-section">
+              <p>Volition is growing. You will be notified when new features are released. Your feedback helps shape what comes next.</p>
+              <div class="feature-list">
               <div class="feature-item">
                 <div class="feature-dot"></div>
                 <div>
@@ -1910,6 +1917,7 @@
                 </div>
               </div>
             </div>
+            </div><!-- /sub-section -->
           </div>
         </section>
 
@@ -1927,9 +1935,9 @@
               <p>Your experience using Volition in a real support context is invaluable. If something is not working, is confusing, or could be better — we want to know. Send feedback via email or log it through the menu in the Vault.</p>
             </div>
 
-            <h3>How to get support</h3>
-
-            <div class="contact-grid">
+            <div class="sub-section">
+              <h3>How to get support</h3>
+              <div class="contact-grid">
               <div class="contact-card">
                 <div class="contact-card__heading">Technical issues or app questions</div>
                 <p>Email: <a href="mailto:info@volition.org.nz">info@volition.org.nz</a></p>
@@ -1943,7 +1951,8 @@
                 <div class="contact-card__heading">Supported Decision Making</div>
                 <p>Talk to your team leader, or visit <a href="https://supportmydecisions.nz" target="_blank" rel="noopener">supportmydecisions.nz</a> for general information and resources.</p>
               </div>
-            </div>
+            </div><!-- /contact-grid -->
+            </div><!-- /sub-section -->
           </div>
         </section>
 
@@ -2014,6 +2023,17 @@
     const pages = document.querySelectorAll('.guide-page');
     const sectionLinks = document.querySelectorAll('.sidebar__section-link');
 
+    // Page titles for document.title updates
+    const pageTitles = {
+      'intro':            '1. Introduction',
+      'getting-started':  '2. Getting started',
+      'basics':           '3. Using the basics',
+      'sessions':         '4. Support sessions',
+      'preferences':      '5. Respecting preferences',
+      'responsibilities': '6. Your responsibilities',
+      'next':             '7. What\'s next?'
+    };
+
     function showPage(pageId) {
       // Hide all pages
       pages.forEach(p => {
@@ -2037,11 +2057,16 @@
       document.querySelectorAll('.sidebar__sub-items').forEach(el => el.classList.remove('visible'));
       const subItems = document.querySelector('[data-page="' + pageId + '"] + .sidebar__sub-items');
       if (subItems) subItems.classList.add('visible');
+      // Update document title
+      const pageLabel = pageTitles[pageId] || pageId;
+      document.title = pageLabel + ' — Volition guide for org support staff';
       // Update hash
       history.pushState(null, '', '#' + pageId);
-      // Scroll to top of content
-      document.getElementById('mainContent').scrollTo({ top: 0 });
+      // Scroll to top of content and move focus for keyboard/screen reader users
+      const mainContent = document.getElementById('mainContent');
+      mainContent.scrollTo({ top: 0 });
       window.scrollTo({ top: 0 });
+      mainContent.focus({ preventScroll: true });
       // Close sidebar on mobile
       if (window.innerWidth <= 768) closeSidebar();
     }
