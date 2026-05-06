@@ -773,7 +773,9 @@
 
     .page-divider {
       border: none;
-      border-top: 1px solid var(--divider-default);
+      height: 1px;
+      background: var(--divider-default);
+      border-radius: var(--radius-pill);
       margin: 0;  /* page-body gap handles spacing */
     }
 
@@ -872,7 +874,9 @@
 
     .page-footer__divider {
       border: none;
-      border-top: 1px solid var(--divider-default);
+      height: 1px;
+      background: var(--divider-default);
+      border-radius: var(--radius-pill);
       margin: 0;
     }
 
@@ -931,6 +935,10 @@
       transition: opacity var(--dur-fast) var(--ease-standard);
     }
     .next-btn:hover { opacity: 0.75; }
+
+    /* Suppress focus ring on main — it receives programmatic focus for
+       screen readers only, keyboard users never tab to it directly */
+    .main-content:focus { outline: none; }
 
     /* Page content padding wrappers — wraps guide-section content */
     .guide-page > .guide-section,
