@@ -26,16 +26,14 @@
        FIXED:
          .no-results and .phase-card__heading changed from --text-light to --text-mid (7.42:1).
 
-       OPEN QUESTION — UI component borders (WCAG 1.4.11, non-text contrast, 3:1 required):
-         --divider-default (#B6ACE3) on --sand-100 (#F0EEE9): 1.81:1
-         --divider-dark (#9387CC) on --sand-100: 2.75:1
-         Both fail 3:1 for interactive element borders (guide selector, was-helpful buttons, next button).
-         Exception may apply if component is identifiable by other means (text label, shape).
-         To fully pass 1.4.11: use --text-light (#7567B8 = 4.13:1) or darker as border colour.
-         Dave — design decision needed on whether to tighten interactive borders.
+       FIXED — UI component borders (WCAG 1.4.11, non-text contrast, 3:1 required):
+         Interactive element borders (.menu-toggle, .faq-item, .next-btn) changed to
+         --button-mid (#7567B8 = lavender-500, 4.13:1 on sand-100). Passes 3:1. ✓
 
-       NOT CHECKED (decorative / non-text):
-         --lavender-400 (#9387CC) — used for borders only, not text. No contrast requirement.
+       DECORATIVE (exempt from 1.4.11 — visual separators, non-interactive containers):
+         --divider-default (#B6ACE3, 1.81:1): sidebar border-right, section-header, perm-group,
+         perm-item, phase-card, contact-card, faq-answer, guide-selector dropdown & options.
+         These are not the sole visual indicator of an interactive component.
        ============================================================ */
 
     /* ============================================================
@@ -418,7 +416,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: var(--space-2);
-      margin-top: var(--space-3);
+      margin-top: 0;
     }
     .store-badges img { display: block; }
 
@@ -493,7 +491,7 @@
 
     .faq-item {
       background: var(--panel-highlight);
-      border: 1px solid var(--divider-default);
+      border: 1px solid var(--button-mid);
       border-radius: var(--radius-md);
       overflow: hidden;
     }
@@ -607,7 +605,7 @@
     /* Menu toggle — used in mobile header */
     .menu-toggle {
       background: var(--sand-100);
-      border: 1px solid var(--divider-default);
+      border: 1px solid var(--button-mid);
       border-radius: var(--radius-sm);
       color: var(--text-dark);
       padding: var(--space-2);
@@ -666,7 +664,7 @@
 
     .guide-selector__dropdown {
       position: absolute;
-      top: calc(100% - 32px);
+      top: 100%;
       left: var(--space-4);
       right: var(--space-4);
       background: var(--panel-highlight);
@@ -999,9 +997,9 @@
       align-self: flex-start;
       gap: var(--space-2);
       padding: 12px 16px;
-      background: none;
+      background: var(--panel-highlight);
       color: var(--text-dark);
-      border: 2px solid var(--borders);
+      border: 2px solid var(--button-mid);
       border-radius: var(--radius-pill);
       font-size: var(--fs-body-lg);
       line-height: var(--lh-body-lg);
@@ -1396,9 +1394,10 @@
               </li>
             </ol>
 
-            <!-- screen-login image after step 2 -->
-            <div class="screen-shot">
+            <!-- screen pair after steps 1–2: registration form + confirmation -->
+            <div class="screen-pair">
               <img src="guide-assets/Log%20in.png" alt="Join Volition registration screen on iPhone" width="479" height="995">
+              <img src="guide-assets/registration_confirmation.png" alt="Registration confirmation — you are now staff with your organisation" width="479" height="995">
             </div>
 
             <div class="info-callout-group">
