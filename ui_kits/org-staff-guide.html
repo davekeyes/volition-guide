@@ -10,6 +10,33 @@
   <link rel="stylesheet" href="../volition-design-system/colors_and_type.css">
   <style>
     /* ============================================================
+       WCAG AA CONTRAST AUDIT — Supporter theme (data-theme="supporter")
+       Checked: 2026-05-08. Hex values from colors_and_type.css.
+       Pass threshold: 4.5:1 normal text, 3:1 large text (24px+ regular, 18.67px+ bold).
+
+       PASS:
+         #3A3161 (--text-dark / lavender-800) on #F0EEE9 (--sand-100):  10.11:1
+         #43396F (--button-base / lavender-700) on #F0EEE9 (--sand-100): 8.82:1
+         #4E4285 (--text-mid / lavender-600) on #F0EEE9 (--sand-100):    7.42:1
+         #4E4285 (--text-mid) on #FAF9F7 (--panel-highlight):            8.17:1
+         #FAF9F7 (--text-inverted) on #43396F (--button-base):           9.72:1  (sidebar active, step-num)
+         #6F1900 (--rose-800) on #F5E6E6 (--rose-100 / caution-box bg): 9.56:1
+         #7567B8 (--text-light / lavender-500) on #FAF9F7 (panel-highlight): 4.55:1 (just passes)
+
+       REVIEW NEEDED — FAILS 4.5:1:
+         #7567B8 (--text-light / lavender-500) on #F0EEE9 (--sand-100): 4.13:1
+           Used in:
+             .no-results { color: var(--text-light) }
+             .phase-card__heading { color: var(--text-light); font-size:16px semibold }
+           Both are normal text at 16px. Neither qualifies as large text.
+           These pairs need a darker colour (e.g. lavender-600 #4E4285 = 7.42:1) to pass AA.
+           Dave — please decide whether to update these two token uses.
+
+       NOT CHECKED (decorative / non-text):
+         --lavender-400 (#9387CC) — used for borders only, not text. No contrast requirement.
+       ============================================================ */
+
+    /* ============================================================
        LAYOUT
        ============================================================ */
     *, *::before, *::after { box-sizing: border-box; }
@@ -19,6 +46,35 @@
       color: var(--text-dark);
       margin: 0;
       min-height: 100vh;
+    }
+
+    /* ---- Base element defaults ---- */
+    /* These set the baseline so descendant selectors don't need to repeat them. */
+    p {
+      font-size: var(--fs-base);
+      line-height: var(--lh-base);
+      color: var(--text-dark);
+      margin: 0;
+    }
+
+    li {
+      font-size: var(--fs-base);
+      line-height: var(--lh-base);
+      color: var(--text-dark);
+      margin: 0;
+    }
+
+    ul, ol {
+      margin: 0;
+      padding: 0;
+    }
+
+    h3 {
+      font-size: var(--fs-body-lg);
+      line-height: var(--lh-body-lg);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-dark);
+      margin: 0;
     }
 
     /* App shell */
@@ -110,27 +166,6 @@
       gap: var(--space-2);
     }
 
-    .content-block h3,
-    .sub-section h3 {
-      font-size: var(--fs-body-lg);
-      font-weight: var(--font-weight-semibold);
-      line-height: var(--lh-body-lg);
-      color: var(--text-dark);
-      margin: 0;
-    }
-
-    .content-block p,
-    .content-block ul,
-    .content-block ol,
-    .sub-section p,
-    .sub-section ul,
-    .sub-section ol {
-      font-size: var(--fs-base);
-      line-height: var(--lh-base);
-      color: var(--text-dark);
-      margin: 0;
-    }
-
     /* Highlight panels — panel-highlight bg, 16px radius, no border */
     .card {
       background: var(--panel-highlight);
@@ -147,22 +182,7 @@
       margin-bottom: var(--space-2);
     }
 
-    .card p {
-      font-size: var(--fs-base);
-      line-height: var(--lh-base);
-      color: var(--text-dark);
-      margin: 0;
-    }
-
     .card p + p { margin-top: var(--space-2); }
-
-    /* List items inside cards match the card's paragraph style.
-       Specificity (0,2,1) beats .guide-list li (0,1,1) */
-    .card .guide-list li {
-      font-size: var(--fs-base);
-      line-height: var(--lh-base);
-      color: var(--text-dark);
-    }
 
     /* Step list */
     .step-list {
@@ -234,9 +254,6 @@
     }
 
     .role-entry p {
-      font-size: var(--fs-base);
-      line-height: var(--lh-base);
-      color: var(--text-dark);
       margin: 0 0 var(--space-2);
     }
 
@@ -330,14 +347,6 @@
       margin: 0 0 var(--space-2);
       padding: 0;
     }
-    .highlight-box p,
-    .highlight-box ul,
-    .highlight-box li {
-      font-size: var(--fs-base);
-      line-height: var(--lh-base);
-      color: var(--text-dark);
-      margin: 0;
-    }
     .highlight-box p + p { margin-top: var(--space-2); }
     .highlight-box ul { padding-left: var(--space-5); margin-top: var(--space-2); }
 
@@ -365,9 +374,6 @@
     }
 
     .guide-list li {
-      font-size: var(--fs-base);
-      color: var(--text-dark);
-      line-height: var(--lh-base);
       margin-bottom: var(--space-2);
     }
 
@@ -405,12 +411,6 @@
       flex-direction: column;
       gap: var(--space-3);
       min-width: 0;
-    }
-    .info-callout p {
-      margin: 0;
-      font-size: var(--fs-base);
-      color: var(--text-dark);
-      line-height: var(--lh-base);
     }
     .store-badges {
       display: flex;
@@ -1021,6 +1021,20 @@
     .sidebar button:focus-visible {
       outline: 2px solid var(--focus);
       outline-offset: -2px;
+    }
+
+    /* Main content focus rings — outset, safe here as there is no overflow:hidden */
+    .main-content a:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+
+    /* Global button focus (outside sidebar — sidebar handled above) */
+    button:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+      border-radius: var(--radius-xs);
     }
 
     /* ============================================================
