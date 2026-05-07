@@ -971,6 +971,13 @@
     .main-content:focus,
     .main-content:focus-visible { outline: none; box-shadow: none; }
 
+    /* Sidebar focus rings — drawn inward so overflow-y: auto cannot clip them */
+    .sidebar a:focus-visible,
+    .sidebar button:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: -2px;
+    }
+
     /* ============================================================
        RESPONSIVE
        ============================================================ */
