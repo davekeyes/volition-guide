@@ -399,6 +399,13 @@
       color: var(--text-dark);
     }
 
+    .info-callout__content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      min-width: 0;
+    }
     .info-callout p {
       margin: 0;
       font-size: var(--fs-base);
@@ -892,6 +899,36 @@
       flex-shrink: 0;
     }
 
+    /* Three phones side by side with labels */
+    .screen-trio {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      align-items: flex-start;
+      margin: 0;
+    }
+    .screen-trio__item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-2);
+      flex: 1;
+      min-width: 0;
+    }
+    .screen-trio__label {
+      font-size: var(--fs-small);
+      line-height: var(--lh-small);
+      color: var(--text-mid);
+      text-align: center;
+      margin: 0;
+    }
+    .screen-trio img {
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+      box-shadow: var(--elev-3);
+    }
+
     /* Page heading (pages 2–7) */
     .page-heading {
       font-size: var(--fs-hero);
@@ -1366,14 +1403,16 @@
                     <path d="M5.8125 17.2705H18.1875" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </div>
-                <p>Use the Volition app, or go to <strong>volition.tools</strong> on any web browser, using your work email.</p>
-                <div class="store-badges">
-                  <a href="https://apps.apple.com" target="_blank" rel="noopener">
-                    <img src="guide-assets/badge-app-store.png" alt="Download on the App Store" width="135" height="45">
-                  </a>
-                  <a href="https://play.google.com" target="_blank" rel="noopener">
-                    <img src="guide-assets/badge-google-play.png" alt="Get it on Google Play" width="135" height="45">
-                  </a>
+                <div class="info-callout__content">
+                  <p>Use the Volition app, or go to <strong>volition.tools</strong> on any web browser, using your work email.</p>
+                  <div class="store-badges">
+                    <a href="https://apps.apple.com" target="_blank" rel="noopener">
+                      <img src="guide-assets/badge-app-store.png" alt="Download on the App Store" width="135" height="45">
+                    </a>
+                    <a href="https://play.google.com" target="_blank" rel="noopener">
+                      <img src="guide-assets/badge-google-play.png" alt="Get it on Google Play" width="135" height="45">
+                    </a>
+                  </div>
                 </div>
               </div>
               <div class="info-callout">
@@ -1401,12 +1440,19 @@
             </ol>
 
             <!-- Circle of support screens after step 3 -->
-            <div class="screen-pair">
-              <img src="guide-assets/circle_empty.png" alt="Circle of support with no one assigned yet" width="479" height="995">
-              <img src="guide-assets/circle_supporting3.png" alt="Circle of support showing multiple Decision Makers" width="479" height="995">
-            </div>
-            <div class="screen-shot">
-              <img src="guide-assets/circle_one_dm.png" alt="Support circle showing Jennifer Carington on iPhone" width="479" height="995">
+            <div class="screen-trio">
+              <div class="screen-trio__item">
+                <p class="screen-trio__label">No one assigned</p>
+                <img src="guide-assets/circle_empty.png" alt="Circle of support with no one assigned yet" width="479" height="995">
+              </div>
+              <div class="screen-trio__item">
+                <p class="screen-trio__label">One to support</p>
+                <img src="guide-assets/circle_one_dm.png" alt="Support circle showing one Decision Maker, Jennifer Carington" width="479" height="995">
+              </div>
+              <div class="screen-trio__item">
+                <p class="screen-trio__label">Many to support</p>
+                <img src="guide-assets/circle_supporting3.png" alt="Circle of support showing multiple Decision Makers" width="479" height="995">
+              </div>
             </div>
 
             <ol class="step-list">
