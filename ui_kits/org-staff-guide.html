@@ -1001,10 +1001,11 @@
       }
       .sidebar-overlay.visible { display: block; }
 
-      .main-content { max-width: 100%; }
+      /* 24px side margins on the content column */
+      .main-content { max-width: 100%; padding-left: var(--space-5); padding-right: var(--space-5); box-sizing: border-box; }
 
-      /* Reduce page-body padding on mobile — 24px side margins minimum */
-      .page-body { padding: var(--space-5) var(--space-5) var(--space-9); }
+      /* page-body keeps vertical rhythm; sides handled by main-content */
+      .page-body { padding: var(--space-5) 0 var(--space-9); }
 
       .guide-title { font-size: var(--fs-xl); }
       .page-heading { font-size: var(--fs-xl); }
