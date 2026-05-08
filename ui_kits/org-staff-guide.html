@@ -57,12 +57,19 @@
       margin: 0;
     }
 
+    /* Paragraph spacing — only applies between consecutive text elements,
+       not to first/last children in flex containers where gap handles spacing */
+    p + p { margin-top: var(--sp-base); }       /* 8px between paragraphs */
+    h3 + p { margin-top: var(--sp-base); }       /* 8px body copy after heading */
+
     li {
       font-size: var(--fs-base);
       line-height: var(--lh-base);
       color: var(--text-dark);
       margin: 0;
     }
+
+    li + li { margin-top: var(--sp-base); }      /* 8px between prose list items */
 
     ul, ol {
       margin: 0;
