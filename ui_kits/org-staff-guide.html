@@ -237,6 +237,12 @@
       padding: 0;
     }
 
+    /* Extra breathing room between step body text and any following image/callout */
+    .step-list li .screen-pair,
+    .step-list li .screen-shot,
+    .step-list li .screen-trio,
+    .step-list li .info-callout-group { margin-top: var(--space-4); }
+
     .step-body {
       font-size: var(--fs-base);
       line-height: var(--lh-base);
@@ -1398,107 +1404,95 @@
                   <h3 class="step-title">Register your account</h3>
                 </div>
                 <p class="step-body">Enter your name, work email and phone number, and if you agree to the terms of use, you can continue on.</p>
-              </li>
-            </ol>
-
-            <!-- screen pair after step 2: registration form + confirmation -->
-            <div class="screen-pair" style="gap: 48px;">
-              <img src="guide-assets/registration.png" alt="Join Volition registration screen on iPhone" width="479" height="995">
-              <img src="guide-assets/registration_confirmation.png" alt="Registration confirmation — you are now connected with your organisation" width="479" height="995">
-            </div>
-
-            <div class="info-callout-group">
-              <div class="info-callout">
-                <div class="info-callout__icon" aria-hidden="true">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3.06247 4.59621V11.5757C3.06249 13.7818 3.73101 15.9361 4.97992 17.7547C6.22882 19.5731 7.99947 20.9706 10.0585 21.7626L11.0127 22.1293C11.6482 22.3737 12.3517 22.3737 12.9872 22.1293L13.9415 21.7626C16.0005 20.9706 17.7711 19.5731 19.02 17.7547C20.269 15.9361 20.9375 13.7818 20.9375 11.5757V4.59621C20.9392 4.33357 20.8651 4.07601 20.7239 3.85452C20.5827 3.63303 20.3806 3.45703 20.1418 3.34771C17.575 2.22735 14.8005 1.66165 12 1.68762C9.19942 1.66165 6.42495 2.22735 3.85814 3.34771C3.61933 3.45703 3.41718 3.63303 3.27603 3.85452C3.13488 4.07601 3.06072 4.33357 3.06247 4.59621Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M12 15V11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M10.5 9.5C10.5 9.89782 10.658 10.2794 10.9393 10.5607C11.2206 10.842 11.6022 11 12 11C12.3978 11 12.7794 10.842 13.0607 10.5607C13.342 10.2794 13.5 9.89782 13.5 9.5C13.5 9.10218 13.342 8.72064 13.0607 8.43934C12.7794 8.15804 12.3978 8 12 8C11.6022 8 11.2206 8.15804 10.9393 8.43934C10.658 8.72064 10.5 9.10218 10.5 9.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
+                <div class="screen-pair" style="gap: 48px;">
+                  <img src="guide-assets/registration.png" alt="Join Volition registration screen on iPhone" width="479" height="995">
+                  <img src="guide-assets/registration_confirmation.png" alt="Registration confirmation — you are now connected with your organisation" width="479" height="995">
                 </div>
-                <p>You do not need a password. Volition uses email login links and passkeys to stay secure.</p>
-              </div>
-              <div class="info-callout">
-                <div class="info-callout__icon" aria-hidden="true">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M15.4375 1.6875H8.5625C7.04372 1.6875 5.8125 2.91872 5.8125 4.4375V19.5625C5.8125 21.0813 7.04372 22.3125 8.5625 22.3125H15.4375C16.9563 22.3125 18.1875 21.0813 18.1875 19.5625V4.4375C18.1875 2.91872 16.9563 1.6875 15.4375 1.6875Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M5.8125 17.2705H18.1875" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </div>
-                <div class="info-callout__content">
-                  <p>Use the Volition app, or go to <strong>volition.tools</strong> on any web browser, using your work email.</p>
-                  <div class="store-badges">
-                    <a href="https://apps.apple.com/nz/app/volition/id6753151778" target="_blank" rel="noopener">
-                      <img src="guide-assets/badge-app-store.png" alt="Download on the App Store" width="135" height="45">
-                    </a>
-                    <a href="https://play.google.com/store/search?q=volition&c=apps" target="_blank" rel="noopener">
-                      <img src="guide-assets/badge-google-play.png" alt="Get it on Google Play" width="135" height="45">
-                    </a>
+                <div class="info-callout-group">
+                  <div class="info-callout">
+                    <div class="info-callout__icon" aria-hidden="true">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3.06247 4.59621V11.5757C3.06249 13.7818 3.73101 15.9361 4.97992 17.7547C6.22882 19.5731 7.99947 20.9706 10.0585 21.7626L11.0127 22.1293C11.6482 22.3737 12.3517 22.3737 12.9872 22.1293L13.9415 21.7626C16.0005 20.9706 17.7711 19.5731 19.02 17.7547C20.269 15.9361 20.9375 13.7818 20.9375 11.5757V4.59621C20.9392 4.33357 20.8651 4.07601 20.7239 3.85452C20.5827 3.63303 20.3806 3.45703 20.1418 3.34771C17.575 2.22735 14.8005 1.66165 12 1.68762C9.19942 1.66165 6.42495 2.22735 3.85814 3.34771C3.61933 3.45703 3.41718 3.63303 3.27603 3.85452C3.13488 4.07601 3.06072 4.33357 3.06247 4.59621Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 15V11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M10.5 9.5C10.5 9.89782 10.658 10.2794 10.9393 10.5607C11.2206 10.842 11.6022 11 12 11C12.3978 11 12.7794 10.842 13.0607 10.5607C13.342 10.2794 13.5 9.89782 13.5 9.5C13.5 9.10218 13.342 8.72064 13.0607 8.43934C12.7794 8.15804 12.3978 8 12 8C11.6022 8 11.2206 8.15804 10.9393 8.43934C10.658 8.72064 10.5 9.10218 10.5 9.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </div>
+                    <p>You do not need a password. Volition uses email login links and passkeys to stay secure.</p>
+                  </div>
+                  <div class="info-callout">
+                    <div class="info-callout__icon" aria-hidden="true">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.4375 1.6875H8.5625C7.04372 1.6875 5.8125 2.91872 5.8125 4.4375V19.5625C5.8125 21.0813 7.04372 22.3125 8.5625 22.3125H15.4375C16.9563 22.3125 18.1875 21.0813 18.1875 19.5625V4.4375C18.1875 2.91872 16.9563 1.6875 15.4375 1.6875Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M5.8125 17.2705H18.1875" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </div>
+                    <div class="info-callout__content">
+                      <p>Use the Volition app, or go to <strong>volition.tools</strong> on any web browser, using your work email.</p>
+                      <div class="store-badges">
+                        <a href="https://apps.apple.com/nz/app/volition/id6753151778" target="_blank" rel="noopener">
+                          <img src="guide-assets/badge-app-store.png" alt="Download on the App Store" width="135" height="45">
+                        </a>
+                        <a href="https://play.google.com/store/search?q=volition&c=apps" target="_blank" rel="noopener">
+                          <img src="guide-assets/badge-google-play.png" alt="Get it on Google Play" width="135" height="45">
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="info-callout">
+                    <div class="info-callout__icon" aria-hidden="true">
+                      <svg width="24" height="24" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 17.0625C12 18.5212 12.5795 19.9201 13.6109 20.9516C14.6424 21.983 16.0413 22.5625 17.5 22.5625C18.9587 22.5625 20.3576 21.983 21.3891 20.9516C22.4205 19.9201 23 18.5212 23 17.0625C23 15.6038 22.4205 14.2049 21.3891 13.1734C20.3576 12.142 18.9587 11.5625 17.5 11.5625C16.0413 11.5625 14.6424 12.142 13.6109 13.1734C12.5795 14.2049 12 15.6038 12 17.0625Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M19.931 17.0625H17.5V14.6324" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M8.5 17.5H2.5C2.10218 17.5 1.72064 17.342 1.43934 17.0607C1.15804 16.7794 1 16.3978 1 16V4.01501C1 3.61719 1.15804 3.23566 1.43934 2.95435C1.72064 2.67305 2.10218 2.51501 2.5 2.51501H16C16.3978 2.51501 16.7794 2.67305 17.0607 2.95435C17.342 3.23566 17.5 3.61719 17.5 4.01501V8.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M1 7H17.5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M5.493 4V1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12.993 4V1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </div>
+                    <p>You will remain logged in on that device for a year, unless you log yourself out sooner.</p>
                   </div>
                 </div>
-              </div>
-              <div class="info-callout">
-                <div class="info-callout__icon" aria-hidden="true">
-                  <svg width="24" height="24" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 17.0625C12 18.5212 12.5795 19.9201 13.6109 20.9516C14.6424 21.983 16.0413 22.5625 17.5 22.5625C18.9587 22.5625 20.3576 21.983 21.3891 20.9516C22.4205 19.9201 23 18.5212 23 17.0625C23 15.6038 22.4205 14.2049 21.3891 13.1734C20.3576 12.142 18.9587 11.5625 17.5 11.5625C16.0413 11.5625 14.6424 12.142 13.6109 13.1734C12.5795 14.2049 12 15.6038 12 17.0625Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M19.931 17.0625H17.5V14.6324" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M8.5 17.5H2.5C2.10218 17.5 1.72064 17.342 1.43934 17.0607C1.15804 16.7794 1 16.3978 1 16V4.01501C1 3.61719 1.15804 3.23566 1.43934 2.95435C1.72064 2.67305 2.10218 2.51501 2.5 2.51501H16C16.3978 2.51501 16.7794 2.67305 17.0607 2.95435C17.342 3.23566 17.5 3.61719 17.5 4.01501V8.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M1 7H17.5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-                    <path d="M5.493 4V1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M12.993 4V1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </div>
-                <p>You will remain logged in on that device for a year, unless you log yourself out sooner.</p>
-              </div>
-            </div>
-            <ol class="step-list">
+              </li>
               <li>
                 <div class="step-header">
                   <div class="step-num">3</div>
                   <h3 class="step-title">Review your circle of support</h3>
                 </div>
                 <p class="step-body">You are in! On the support circle page you will see the Decision Maker(s) you have been assigned to support. You can view their Volition library of preferences, their personal profile, and contact details. By default you have view access to all of their general preferences.</p>
+                <div class="screen-trio">
+                  <div class="screen-trio__item">
+                    <p class="screen-trio__label">No one assigned</p>
+                    <img src="guide-assets/circle_empty.png" alt="Circle of support with no one assigned yet" width="479" height="995">
+                  </div>
+                  <div class="screen-trio__item">
+                    <p class="screen-trio__label">One to support</p>
+                    <img src="guide-assets/circle_one_dm.png" alt="Support circle showing one Decision Maker, Jennifer Carington" width="479" height="995">
+                  </div>
+                  <div class="screen-trio__item">
+                    <p class="screen-trio__label">Many to support</p>
+                    <img src="guide-assets/circle_supporting3.png" alt="Circle of support showing multiple Decision Makers" width="479" height="995">
+                  </div>
+                </div>
               </li>
-            </ol>
-
-            <!-- Circle of support screens after step 3 -->
-            <div class="screen-trio">
-              <div class="screen-trio__item">
-                <p class="screen-trio__label">No one assigned</p>
-                <img src="guide-assets/circle_empty.png" alt="Circle of support with no one assigned yet" width="479" height="995">
-              </div>
-              <div class="screen-trio__item">
-                <p class="screen-trio__label">One to support</p>
-                <img src="guide-assets/circle_one_dm.png" alt="Support circle showing one Decision Maker, Jennifer Carington" width="479" height="995">
-              </div>
-              <div class="screen-trio__item">
-                <p class="screen-trio__label">Many to support</p>
-                <img src="guide-assets/circle_supporting3.png" alt="Circle of support showing multiple Decision Makers" width="479" height="995">
-              </div>
-            </div>
-
-            <ol class="step-list">
               <li>
                 <div class="step-header">
                   <div class="step-num">4</div>
                   <h3 class="step-title">Complete your profile</h3>
                 </div>
                 <p class="step-body">From the Menu, navigate to your Personal details page. As Decision Makers will see your profile when you are added to their Circle of Support, a clear photo and full name helps build trust. Select 'Edit' to add your details.</p>
+                <div class="screen-shot">
+                  <img src="guide-assets/Profile.png" alt="Personal details screen on iPhone" width="479" height="995">
+                </div>
               </li>
-            </ol>
-
-            <!-- profile screen after step 4 -->
-            <div class="screen-shot">
-              <img src="guide-assets/Profile.png" alt="Personal details screen on iPhone" width="479" height="995">
-            </div>
-
-            <ol class="step-list">
               <li>
                 <div class="step-header">
                   <div class="step-num">5</div>
                   <h3 class="step-title">Complete your check-in</h3>
                 </div>
                 <p class="step-body">From the Menu again, tap 'Supporter check-in' and answer three questions about your experience as a supporter. Complete this at the start of your time with Volition to establish a baseline.</p>
+                <div class="screen-shot">
+                  <img src="guide-assets/statement.png" alt="Supporter check-in statement screen on iPhone" width="479" height="995">
+                </div>
               </li>
             </ol>
 
