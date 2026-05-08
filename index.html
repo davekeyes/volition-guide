@@ -1,2 +1,2421 @@
 <!DOCTYPE html>
-<html><head><meta http-equiv="refresh" content="0; url=ui_kits/org-staff-guide.html"></head><body></body></html>
+<html lang="en" data-theme="supporter">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Volition — Organisation staff supporter guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="../volition-design-system/colors_and_type.css">
+  <style>
+    /* ============================================================
+       WCAG AA CONTRAST AUDIT — Supporter theme (data-theme="supporter")
+       Checked: 2026-05-08. Hex values from colors_and_type.css.
+       Pass threshold: 4.5:1 normal text, 3:1 large text (24px+ regular, 18.67px+ bold).
+
+       PASS:
+         #3A3161 (--text-dark / lavender-800) on #F0EEE9 (--sand-100):  10.11:1
+         #43396F (--button-base / lavender-700) on #F0EEE9 (--sand-100): 8.82:1
+         #4E4285 (--text-mid / lavender-600) on #F0EEE9 (--sand-100):    7.42:1
+         #4E4285 (--text-mid) on #FAF9F7 (--panel-highlight):            8.17:1
+         #FAF9F7 (--text-inverted) on #43396F (--button-base):           9.72:1  (sidebar active, step-num)
+         #6F1900 (--rose-800) on #F5E6E6 (--rose-100 / caution-box bg): 9.56:1
+         #7567B8 (--text-light / lavender-500) on #FAF9F7 (panel-highlight): 4.55:1 (just passes)
+
+       FIXED:
+         .no-results and .phase-card__heading changed from --text-light to --text-mid (7.42:1).
+
+       FIXED — UI component borders (WCAG 1.4.11, non-text contrast, 3:1 required):
+         Interactive element borders (.menu-toggle, .faq-item, .next-btn) changed to
+         --button-mid (#7567B8 = lavender-500, 4.13:1 on sand-100). Passes 3:1. ✓
+
+       DECORATIVE (exempt from 1.4.11 — visual separators, non-interactive containers):
+         --divider-default (#B6ACE3, 1.81:1): sidebar border-right, section-header, perm-group,
+         perm-item, phase-card, contact-card, faq-answer, guide-selector dropdown & options.
+         These are not the sole visual indicator of an interactive component.
+       ============================================================ */
+
+    /* ============================================================
+       LAYOUT
+       ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      background: var(--sand-100);
+      color: var(--text-dark);
+      margin: 0;
+      min-height: 100vh;
+    }
+
+    /* ---- Base element defaults ---- */
+    /* These set the baseline so descendant selectors don't need to repeat them. */
+    p {
+      font-size: var(--fs-base);
+      line-height: var(--lh-base);
+      color: var(--text-dark);
+      margin: 0;
+    }
+
+    /* Paragraph spacing — only applies between consecutive text elements,
+       not to first/last children in flex containers where gap handles spacing */
+    p + p { margin-top: var(--sp-base); }       /* 8px between paragraphs */
+    h3 + p { margin-top: var(--sp-base); }       /* 8px body copy after heading */
+
+    li {
+      font-size: var(--fs-base);
+      line-height: var(--lh-base);
+      color: var(--text-dark);
+      margin: 0;
+    }
+
+    li + li { margin-top: var(--sp-base); }      /* 8px between prose list items */
+
+    ul, ol {
+      margin: 0;
+      padding: 0;
+    }
+
+    h3 {
+      font-size: var(--fs-body-lg);
+      line-height: var(--lh-body-lg);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-dark);
+      margin: 0;
+    }
+
+    /* App shell */
+    .app-shell {
+      display: grid;
+      grid-template-columns: 304px 1fr;
+      min-height: 100vh;
+    }
+
+    /* ============================================================
+       SIDEBAR NAV
+       ============================================================ */
+    .sidebar {
+      background: var(--sand-100);
+      border-right: 1px solid var(--divider-default);
+      padding: 0 0 var(--space-8);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: var(--divider-default) transparent;
+    }
+
+    /* ============================================================
+       MAIN CONTENT
+       ============================================================ */
+    .main-content {
+      padding: 0;
+      min-width: 0;
+      max-width: 610px;
+    }
+
+    /* No-results message */
+    .no-results {
+      display: none;
+      padding: var(--space-8) var(--space-5);
+      text-align: center;
+      color: var(--text-mid);
+    }
+
+    /* Guide section — flex column, 24px between sub-blocks */
+    .guide-section {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);  /* 24px */
+      margin-bottom: 0;
+      position: relative;
+    }
+
+    .guide-section__anchor {
+      display: block;
+      position: absolute;
+      top: -80px;
+      visibility: hidden;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding-bottom: var(--space-3);
+      border-bottom: 1px solid var(--divider-default);
+    }
+
+    .section-number {
+      display: none;
+    }
+
+    .section-header h2 {
+      font-size: var(--fs-xxl);
+      line-height: var(--lh-xxl);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-dark);
+      margin: 0;
+    }
+
+    /* Content blocks — 24px between sub-blocks */
+    .content-block {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);
+    }
+
+    /* Sub-sections — heading + related content with 8px gap */
+    .sub-section {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+
+    /* Highlight panels — panel-highlight bg, 16px radius, no border */
+    .card {
+      background: var(--panel-highlight);
+      border-radius: 16px;
+      padding: 20px 24px 24px;
+      margin: 0;
+    }
+
+    .card__title {
+      font-size: var(--fs-body-lg);
+      line-height: var(--lh-body-lg);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-dark);
+      margin-bottom: var(--space-2);
+    }
+
+    .card p + p { margin-top: var(--space-2); }
+
+    /* Step list */
+    .step-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-7);
+    }
+
+    .step-list li {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .step-num {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 40px;
+      height: 40px;
+      background: var(--button-base);
+      color: var(--text-inverted);
+      border-radius: var(--radius-pill);
+      font-size: var(--fs-body-lg);
+      line-height: 1;
+      font-weight: var(--font-weight-semibold);
+      flex-shrink: 0;
+    }
+
+    .step-title {
+      font-size: var(--fs-body-lg);
+      line-height: var(--lh-body-lg);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-dark);
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Extra breathing room between step body text and any following image/callout */
+    .step-list li .screen-pair,
+    .step-list li .screen-shot,
+    .step-list li .screen-trio,
+    .step-list li .info-callout-group { margin-top: var(--space-4); }
+
+    .step-body {
+      font-size: var(--fs-base);
+      line-height: var(--lh-base);
+      color: var(--text-dark);
+      margin: 0;
+    }
+
+    /* Role list — plain flex column, no cards */
+    .role-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+    }
+
+    .role-entry__label {
+      font-size: var(--fs-body-lg);
+      line-height: var(--lh-body-lg);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-dark);
+      margin: 0 0 var(--space-2);
+      padding: 0;
+    }
+
+    .role-entry p {
+      margin: 0 0 var(--space-2);
+    }
+
+    .role-entry__link {
+      font-size: var(--fs-base);
+      line-height: var(--lh-base);
+      color: var(--text-dark);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .role-entry__link__text {
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .role-entry__link:hover { color: var(--button-base); }
+
+    /* Permission table */
+    .perm-group {
+      margin-bottom: 0;
+    }
+
+    .perm-group__label {
+      font-size: var(--fs-small);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-mid);
+      margin-bottom: var(--space-3);
+      padding-bottom: var(--space-2);
+      border-bottom: 1px solid var(--divider-default);
+    }
+
+    .perm-item {
+      display: flex;
+      gap: var(--space-4);
+      padding: var(--space-3) 0;
+      border-bottom: 1px solid var(--divider-default);
+      align-items: flex-start;
+    }
+
+    .perm-item:last-child { border-bottom: none; }
+
+    .perm-badge {
+      display: inline-flex;
+      align-items: center;
+      min-width: 120px;
+      padding: var(--space-1) var(--space-3);
+      border-radius: var(--radius-pill);
+      font-size: var(--fs-caption);
+      font-weight: var(--font-weight-semibold);
+      white-space: nowrap;
+    }
+
+    .perm-badge--default {
+      background: var(--bg-200);
+      color: var(--button-base);
+    }
+
+    .perm-badge--elevated {
+      background: var(--bg-200);
+      color: var(--button-base);
+    }
+
+    .perm-badge__default-tag {
+      margin-left: 4px;
+      opacity: 0.7;
+      font-size: var(--fs-caption);
+      font-weight: var(--font-weight-regular);
+    }
+
+    .perm-desc {
+      font-size: var(--fs-small);
+      color: var(--text-mid);
+      flex: 1;
+      line-height: var(--lh-small);
+    }
+
+    /* Highlight box */
+    .highlight-box {
+      background: var(--panel-highlight);
+      border-radius: 16px;
+      padding: 20px 24px 24px;
+      margin: 0;
+    }
+
+    .highlight-box h3 {
+      font-size: var(--fs-body-lg);
+      line-height: var(--lh-body-lg);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-dark);
+      margin: 0 0 var(--space-2);
+      padding: 0;
+    }
+    .highlight-box p + p { margin-top: var(--space-2); }
+    .highlight-box ul { padding-left: var(--space-5); margin-top: var(--space-2); }
+
+    /* Warning box */
+    .caution-box {
+      background: var(--status-danger-bg);
+      border-left: 4px solid var(--error-default);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: var(--space-4) var(--space-5);
+      margin: 0;
+    }
+
+    .caution-box p {
+      font-size: var(--fs-small);
+      color: var(--rose-800);
+      margin: 0;
+      line-height: var(--lh-small);
+    }
+    .caution-box p + p { margin-top: var(--space-2); }
+
+    /* Bullet list */
+    .guide-list {
+      padding-left: var(--space-5);
+      margin: 0;
+    }
+
+    .guide-list li {
+      margin-bottom: var(--space-2);
+    }
+
+    .guide-list li:last-child { margin-bottom: 0; }
+
+    /* Info callout group (Getting started icons) */
+    .info-callout-group {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 20px 24px 24px;
+      background: var(--panel-highlight);
+      border-radius: 16px;
+    }
+
+    .info-callout {
+      display: flex;
+      gap: var(--space-3);
+      align-items: flex-start;
+    }
+
+    .info-callout__icon {
+      flex-shrink: 0;
+      width: 24px;
+      height: var(--lh-base); /* 28px — matches text line-height so icon top-aligns with first line */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-dark);
+    }
+
+    .info-callout__content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      min-width: 0;
+    }
+    .store-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      margin-top: 0;
+    }
+    .store-badges img { display: block; }
+
+    /* Phase cards (before/during/after) */
+    .phase-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-3);
+      margin-bottom: var(--space-4);
+    }
+
+    .phase-card {
+      background: var(--panel-highlight);
+      border: 1px solid var(--divider-default);
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+    }
+
+    .phase-card__heading {
+      font-size: var(--fs-small);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-mid);
+      margin-bottom: var(--space-3);
+    }
+
+    .phase-card p {
+      font-size: var(--fs-small);
+      color: var(--text-mid);
+      margin: 0;
+      line-height: var(--lh-small);
+    }
+
+    /* Contact cards */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: var(--space-3);
+      margin-bottom: var(--space-4);
+    }
+
+    .contact-card {
+      background: var(--panel-highlight);
+      border: 1px solid var(--divider-default);
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+    }
+
+    .contact-card__heading {
+      font-size: var(--fs-small);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-dark);
+      margin-bottom: var(--space-2);
+    }
+
+    .contact-card p {
+      font-size: var(--fs-small);
+      color: var(--text-mid);
+      margin: 0 0 var(--space-1);
+    }
+
+    .contact-card a {
+      color: var(--button-base);
+    }
+
+    /* FAQ */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+      margin-bottom: 0;
+    }
+
+    .faq-item {
+      background: var(--panel-highlight);
+      border: 1px solid var(--button-mid);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+      padding: var(--space-4) var(--space-5);
+      font-size: var(--fs-small);
+      font-weight: var(--font-weight-medium);
+      color: var(--text-dark);
+      cursor: pointer;
+      list-style: none;
+      min-height: var(--touch-min);
+      user-select: none;
+    }
+
+    .faq-question::-webkit-details-marker { display: none; }
+
+    .faq-question::after {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 20px;
+      min-width: 20px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%233A3161' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='m5 7.5 5 5 5-5'/%3E%3C/svg%3E") center/contain no-repeat;
+      transition: transform var(--dur-fast) var(--ease-standard);
+      flex-shrink: 0;
+    }
+
+    details[open] .faq-question::after {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding: 0 var(--space-5) var(--space-4);
+      font-size: var(--fs-small);
+      color: var(--text-mid);
+      line-height: var(--lh-small);
+      border-top: 1px solid var(--divider-default);
+      padding-top: var(--space-3);
+    }
+
+    /* Coming soon chips */
+    .feature-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      margin-bottom: 0;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+      background: var(--panel-highlight);
+      border: 1px solid var(--divider-default);
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+    }
+
+    .feature-dot {
+      width: 8px;
+      height: 8px;
+      min-width: 8px;
+      background: var(--divider-default);
+      border-radius: 50%;
+      margin-top: 6px;
+    }
+
+    .feature-name {
+      font-size: var(--fs-small);
+      font-weight: var(--font-weight-medium);
+      color: var(--text-dark);
+    }
+
+    .feature-desc {
+      font-size: var(--fs-small);
+      color: var(--text-mid);
+      margin: 0;
+      line-height: var(--lh-small);
+    }
+
+    /* Search highlight */
+    mark {
+      background: var(--bg-200);
+      color: var(--text-dark);
+      border-radius: 2px;
+      padding: 0 2px;
+    }
+
+    /* Mobile header (hidden on desktop) */
+    .mobile-header {
+      display: none;
+      background: var(--sand-100);
+      padding: var(--space-3) var(--space-5);
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: box-shadow var(--dur-fast) var(--ease-standard);
+    }
+    .mobile-header--scrolled { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+
+    .mobile-header__brand { display: flex; align-items: center; text-decoration: none; color: var(--bg-800); }
+    .mobile-header__logo { height: 24px; width: auto; }
+
+    /* Menu toggle — used in mobile header */
+    .menu-toggle {
+      background: var(--sand-100);
+      border: 1px solid var(--button-mid);
+      border-radius: var(--radius-sm);
+      color: var(--text-dark);
+      padding: var(--space-2);
+      cursor: pointer;
+      min-width: 44px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Guide selector */
+    .guide-selector {
+      position: relative;
+    }
+
+    .guide-selector__btn {
+      padding: 24px;
+      display: block;
+      width: 100%;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      font-family: var(--font-family);
+    }
+
+    .guide-selector__title {
+      font-size: var(--fs-xxl);
+      line-height: var(--lh-xxl);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-dark);
+      display: block;
+    }
+
+    .guide-selector__sub {
+      font-size: var(--fs-xl);
+      line-height: var(--lh-xl);
+      font-weight: var(--font-weight-regular);
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 0;
+    }
+
+    .guide-selector__chevron {
+      flex-shrink: 0;
+      color: var(--text-dark);
+      transition: transform var(--dur-fast) var(--ease-standard);
+    }
+
+    .guide-selector__btn[aria-expanded="true"] .guide-selector__chevron {
+      transform: rotate(180deg);
+    }
+
+    .guide-selector__dropdown {
+      position: absolute;
+      top: 100%;
+      left: var(--space-4);
+      right: var(--space-4);
+      background: var(--panel-highlight);
+      border: 1px solid var(--divider-default);
+      border-radius: var(--radius-md);
+      box-shadow: var(--elev-3);
+      z-index: 300;
+      overflow: hidden;
+    }
+
+    .guide-selector__dropdown[hidden] { display: none; }
+
+    .guide-selector__option {
+      display: block;
+      padding: var(--space-3) var(--space-4);
+      font-size: var(--fs-small);
+      color: var(--text-mid);
+      text-decoration: none;
+      border-bottom: 1px solid var(--divider-default);
+      transition: background var(--dur-fast) var(--ease-standard);
+    }
+    .guide-selector__option:last-child { border-bottom: none; }
+    .guide-selector__option:hover { background: var(--sand-100); color: var(--text-dark); }
+    .guide-selector__option--active { color: var(--button-base); font-weight: var(--font-weight-semibold); background: var(--sand-100); }
+
+    /* Sidebar section list */
+    .sidebar__sections {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar__section-link {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      height: 60px;
+      padding: 0 24px;
+      font-size: var(--fs-body-lg);
+      line-height: var(--lh-body-lg);
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: var(--font-weight-regular);
+      transition: background var(--dur-fast) var(--ease-standard), color var(--dur-fast) var(--ease-standard);
+    }
+    .sidebar__nav-num {
+      flex-shrink: 0;
+      width: 22px;
+    }
+    .sidebar__nav-label {
+      flex: 1;
+    }
+    .sidebar__section-link:hover { background: var(--panel-highlight); color: var(--text-dark); }
+    .sidebar__section-link.active {
+      background: var(--button-base);
+      color: var(--text-inverted);
+      font-weight: var(--font-weight-medium);
+    }
+    .sidebar__section-link.active:hover { background: var(--bg-800); color: var(--text-inverted); opacity: 1; }
+
+    /* Sidebar sub-items */
+    .sidebar__sub-items {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: none;
+    }
+    .sidebar__sub-items.visible { display: block; }
+    .sidebar__sub-link {
+      display: flex;
+      align-items: center;
+      height: 44px;
+      padding: 0 24px 0 48px;
+      font-size: var(--fs-body-lg);
+      color: var(--text-mid);
+      text-decoration: none;
+    }
+    .sidebar__sub-link:hover { background: var(--panel-highlight); }
+
+    /* Guide pages */
+    .guide-page { display: none; }
+    .guide-page.active { display: block; }
+
+    /* Page body — flex column, 40px gap between major blocks */
+    .page-body {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-7);  /* 40px */
+      padding: 24px 80px 80px;
+    }
+
+    /* Page content inherits Sand 100 from body */
+    .main-content { background: transparent; }
+
+    /* Page 2 large intro callout */
+    .page-intro-callout { padding: 0; }
+    .page-intro-callout__quote {
+      font-size: var(--fs-xl);
+      line-height: var(--lh-xl);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-dark);
+      margin: 0 0 var(--space-3);
+    }
+    .page-intro-callout__body {
+      font-size: var(--fs-base);
+      line-height: var(--lh-base);
+      color: var(--text-dark);
+      margin: 0;
+    }
+
+    /* Page 3 intro heading */
+    .page-intro-subhead {
+      font-size: var(--fs-xl);
+      line-height: var(--lh-xl);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-dark);
+      margin: 0;
+    }
+
+    /* Circle of support heading with inline icon */
+    .section-heading-with-icon {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      margin-bottom: 0;
+    }
+    .section-heading-with-icon h2 {
+      margin: 0;
+      font-size: var(--fs-body-lg);
+      font-weight: var(--font-weight-semibold);
+      line-height: var(--lh-body-lg);
+      color: var(--text-dark);
+    }
+    .section-heading-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      flex-shrink: 0;
+      background: var(--panel-highlight);
+      border-radius: 50%;
+      padding: 16px;
+      color: var(--text-dark);
+    }
+
+    .page-divider {
+      border: none;
+      height: 1px;
+      background: var(--divider-default);
+      border-radius: var(--radius-pill);
+      margin: 0;  /* page-body gap handles spacing */
+    }
+
+    /* Page 1 intro header */
+    .page-intro-header { /* padding handled by page-body */ }
+
+    .guide-title {
+      font-size: 56px;
+      line-height: 56px;
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-dark);
+      margin-bottom: var(--space-3);
+    }
+
+    .guide-subtitle {
+      font-size: var(--fs-xxl);
+      line-height: var(--lh-xxl);
+      font-weight: var(--font-weight-regular);
+      color: var(--text-dark);
+      margin: 0;
+    }
+
+    /* Section heading within a guide-section */
+    .page-section-heading {
+      font-size: var(--fs-hero);
+      line-height: var(--lh-hero);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-dark);
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Intro lede — plain lead paragraph */
+    .intro-lede,
+    .sub-section .intro-lede,
+    .content-block .intro-lede {
+      font-size: var(--fs-xl);
+      line-height: var(--lh-xl);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-dark);
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Intro illustration — full width */
+    .intro-illustration {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin: 0;
+    }
+
+    /* App screenshots */
+    .screen-shot {
+      display: flex;
+      justify-content: center;
+      margin: 0;
+    }
+    .screen-shot img {
+      max-width: 160px;
+      height: auto;
+      border-radius: 16px;
+      box-shadow: var(--elev-3);
+    }
+    .screen-shot--wide img { max-width: 450px; }
+
+    /* Two phones side by side */
+    .screen-pair {
+      display: flex;
+      gap: var(--space-4);
+      justify-content: center;
+      margin: 0;
+    }
+    .screen-pair img {
+      width: 160px;
+      height: auto;
+      border-radius: 24px;
+      box-shadow: var(--elev-3);
+      flex-shrink: 0;
+    }
+
+    /* Three phones side by side with labels */
+    .screen-trio {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      align-items: flex-start;
+      margin: 0;
+    }
+    .screen-trio__item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-2);
+      flex: 1;
+      min-width: 0;
+    }
+    .screen-trio .screen-trio__label {
+      font-size: 15px;
+      line-height: 1.2;
+      color: var(--text-mid);
+      text-align: center;
+      margin: 0;
+    }
+    .screen-trio img {
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+      box-shadow: var(--elev-3);
+    }
+
+    /* Sub-section heading — "The basics", "Getting set up" etc. */
+    .sub-section-heading {
+      font-size: var(--fs-xxl);
+      line-height: var(--lh-xxl);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-dark);
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Nav screen pair — two phones with icon pill + label above each */
+    .nav-screen-pair {
+      display: flex;
+      gap: 48px;
+      justify-content: center;
+      align-items: flex-start;
+      margin: 0;
+    }
+
+    .nav-screen-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .nav-screen-item__pill {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--panel-highlight);
+      padding: 12px 20px;
+      border-radius: 96px;
+      color: var(--text-dark);
+    }
+
+    .nav-screen-item__label {
+      font-size: var(--fs-body-lg);
+      line-height: var(--lh-body-lg);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-dark);
+      margin: 0;
+    }
+
+    .nav-screen-item img {
+      width: 100%;
+      height: auto;
+      border-radius: 24px;
+      box-shadow: var(--elev-3);
+    }
+
+    /* Page heading (pages 2–7) */
+    .page-heading {
+      font-size: var(--fs-hero);
+      line-height: var(--lh-hero);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-dark);
+      margin: 0;
+      padding: 0;  /* page-body handles padding */
+    }
+    .page-heading__num { margin-right: var(--space-1); }
+
+    /* Page footer */
+    .page-footer {
+      padding: 0;
+      margin: 0;  /* page-body gap handles spacing */
+    }
+
+    .page-footer__divider {
+      border: none;
+      height: 1px;
+      background: var(--divider-default);
+      border-radius: var(--radius-pill);
+      margin: 0;
+    }
+
+    /* Was this helpful — centered, between two dividers */
+    .was-helpful {
+      padding: 16px 0;
+      text-align: center;
+    }
+
+    .was-helpful__label {
+      display: block;
+      font-size: var(--fs-base);
+      line-height: var(--lh-base);
+      color: var(--text-dark);
+      margin-bottom: var(--space-2);
+    }
+
+    .was-helpful__actions {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+    }
+
+    .was-helpful__btn {
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: var(--fs-base);
+      line-height: var(--lh-base);
+      color: var(--text-dark);
+      cursor: pointer;
+      font-family: var(--font-family);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      transition: color var(--dur-fast) var(--ease-standard);
+    }
+    .was-helpful__btn:hover { color: var(--button-base); }
+    .was-helpful__btn.selected { color: var(--button-base); font-weight: var(--font-weight-semibold); }
+
+    /* Next button — outline pill, no fill */
+    .next-btn {
+      display: inline-flex;
+      align-items: center;
+      align-self: flex-start;
+      gap: var(--space-2);
+      padding: 12px 16px;
+      background: var(--panel-highlight);
+      color: var(--text-dark);
+      border: 2px solid var(--button-mid);
+      border-radius: var(--radius-pill);
+      font-size: var(--fs-body-lg);
+      line-height: var(--lh-body-lg);
+      font-weight: var(--font-weight-semibold);
+      font-family: var(--font-family);
+      cursor: pointer;
+      margin-top: 16px;
+      transition: opacity var(--dur-fast) var(--ease-standard);
+    }
+    .next-btn:hover { opacity: 0.75; }
+
+    /* Suppress focus ring on main — it receives programmatic focus for
+       screen readers only, keyboard users never tab to it directly */
+    .main-content:focus,
+    .main-content:focus-visible { outline: none; box-shadow: none; }
+
+    /* Sidebar focus rings — drawn inward so overflow-y: auto cannot clip them */
+    .sidebar a:focus-visible,
+    .sidebar button:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: -2px;
+    }
+
+    /* Main content focus rings — outset, safe here as there is no overflow:hidden */
+    .main-content a:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+
+    /* Global button focus (outside sidebar — sidebar handled above) */
+    button:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+      border-radius: var(--radius-xs);
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 768px) {
+      .mobile-header { display: flex; }
+
+      .app-shell { grid-template-columns: 1fr; }
+
+      .sidebar {
+        position: fixed; top: 0; left: 0; bottom: 0;
+        width: min(320px, 85vw); z-index: 200;
+        transform: translateX(-100%);
+        transition: transform var(--dur-base) var(--ease-entrance);
+        padding-top: var(--space-7); height: 100%;
+      }
+      .sidebar.open { transform: translateX(0); box-shadow: var(--elev-4); }
+
+      .sidebar-overlay {
+        display: none; position: fixed; inset: 0;
+        background: rgba(0,35,43,0.4); z-index: 199;
+      }
+      .sidebar-overlay.visible { display: block; }
+
+      /* 24px side margins on the content column */
+      .main-content { max-width: 100%; padding-left: var(--space-5); padding-right: var(--space-5); box-sizing: border-box; }
+
+      /* page-body keeps vertical rhythm; sides handled by main-content */
+      .page-body { padding: var(--space-5) 0 var(--space-9); }
+
+      .guide-title { font-size: var(--fs-hero); line-height: var(--lh-hero); }
+      .page-heading { font-size: var(--fs-xxl); line-height: var(--lh-xxl); }
+
+      /* Permission badge + description wrap on narrow screens */
+      .perm-item { flex-wrap: wrap; }
+
+      /* Phase cards: 2-column at tablet, 1-column handled at 480px */
+      .phase-grid { grid-template-columns: repeat(2, 1fr); }
+
+      /* Wide screenshot (circle of support) fits mobile width */
+      .screen-shot--wide img { max-width: 100%; }
+
+      /* Screen pair tightens gap on narrow screens */
+      .screen-pair { gap: var(--space-2); }
+      .screen-pair img { width: 140px; }
+
+      /* Next button — full width, easier to tap */
+      .next-btn {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        box-sizing: border-box;
+      }
+
+      /* Was-helpful — centre-align */
+      .was-helpful { text-align: center; }
+      .was-helpful__label { text-align: left; }
+
+      /* Section-heading-with-icon — keep readable at narrow width */
+      .section-heading-with-icon { flex-wrap: wrap; }
+    }
+
+    @media (max-width: 480px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      .phase-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        transition-duration: 0ms !important;
+        animation-duration: 0ms !important;
+      }
+    }
+
+    /* ============================================================
+       SKIP LINK
+       ============================================================ */
+    .skip-link {
+      position: absolute;
+      top: var(--space-3);
+      left: var(--space-3);
+      z-index: 9999;
+      padding: var(--space-2) var(--space-4);
+      background: var(--panel-highlight);
+      color: var(--button-base);
+      font-size: var(--fs-small);
+      font-weight: var(--font-weight-semibold);
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      box-shadow: var(--elev-3);
+      transform: translateY(calc(-100% - var(--space-6)));
+      transition: transform var(--dur-fast) var(--ease-entrance);
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+      outline: none;
+      box-shadow: var(--focus-ring), var(--elev-3);
+    }
+
+    /* Visually hidden utility */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Skip link -->
+  <a class="skip-link" href="#mainContent">Skip to main content</a>
+
+  <!-- Mobile header (hidden on desktop) -->
+  <header class="mobile-header" id="mobileHeader">
+    <a href="#" class="mobile-header__brand" aria-label="Volition home">
+      <svg class="mobile-header__logo" xmlns="http://www.w3.org/2000/svg" width="104.663" height="23" viewBox="0 0 104.663 23" fill="none" aria-hidden="true">
+        <path d="M 78.603 5.842 C 73.614 5.842 69.928 9.807 69.928 14.448 C 69.928 19.09 73.592 22.967 78.603 22.967 C 83.615 22.967 87.278 19.068 87.278 14.448 C 87.278 9.829 83.592 5.842 78.603 5.842 Z M 78.603 19.937 C 75.446 19.937 73.142 17.5 73.142 14.476 C 73.142 11.451 75.62 8.872 78.603 8.872 C 81.587 8.872 84.064 11.396 84.064 14.476 C 84.064 17.555 81.738 19.937 78.603 19.937 Z" fill="currentColor" fill-rule="nonzero"/>
+        <path d="M 38.851 0.434 L 38.851 22.599 L 41.993 22.599 L 41.993 0.434 L 38.851 0.434 Z" fill="currentColor" fill-rule="nonzero"/>
+        <path d="M 16.832 0.901 L 10.138 15.919 L 3.558 0.901 L 0 0.901 L 9.514 22.599 L 10.752 22.599 L 20.389 0.901 L 16.832 0.901 Z" fill="currentColor" fill-rule="nonzero"/>
+        <path d="M 27.221 5.875 C 22.232 5.875 18.546 9.84 18.546 14.482 C 18.546 19.123 22.209 23 27.221 23 C 32.233 23 35.896 19.101 35.896 14.482 C 35.896 9.862 32.21 5.875 27.221 5.875 Z M 27.221 19.97 C 24.063 19.97 21.76 17.534 21.76 14.509 C 21.76 11.484 24.237 8.905 27.221 8.905 C 30.204 8.905 32.682 11.429 32.682 14.509 C 32.682 17.589 30.356 19.97 27.221 19.97 Z" fill="currentColor" fill-rule="nonzero"/>
+        <path d="M 58.32 6.289 L 58.32 0.634 L 55.168 0.634 L 55.168 6.289 L 52.421 6.289 L 52.421 9.147 L 55.168 9.147 L 55.168 22.599 L 58.32 22.599 L 58.32 9.147 L 61.066 9.147 L 61.066 6.289 L 58.32 6.289 Z" fill="currentColor" fill-rule="nonzero"/>
+        <path d="M 102.911 7.817 C 101.762 6.502 100.145 5.875 98.308 5.875 C 96.297 5.875 94.556 6.629 93.069 8.048 L 93.069 6.271 L 89.909 6.271 L 89.909 22.599 L 93.069 22.599 L 93.069 15.651 C 93.069 13.269 93.249 11.949 94.297 10.623 C 95.249 9.407 96.461 8.785 97.931 8.785 C 99.294 8.785 100.128 9.22 100.658 9.974 C 101.221 10.771 101.503 12.015 101.503 13.764 L 101.503 22.599 L 104.663 22.599 L 104.663 13.506 C 104.663 11.03 104.049 9.115 102.911 7.812 L 102.911 7.817 Z" fill="currentColor" fill-rule="nonzero"/>
+        <path d="M 46.422 22.599 L 49.564 22.599 L 49.564 6.276 L 46.422 6.276 L 46.422 22.599 Z" fill="currentColor" fill-rule="nonzero"/>
+        <path d="M 50.247 2.189 C 50.247 0.964 49.204 0 47.979 0 C 46.754 0 45.739 0.937 45.739 2.189 C 45.739 3.442 46.726 4.406 47.979 4.406 C 49.232 4.406 50.247 3.398 50.247 2.189 Z" fill="currentColor" fill-rule="nonzero"/>
+        <path d="M 67.74 2.189 C 67.74 0.964 66.705 0 65.489 0 C 64.274 0 63.266 0.937 63.266 2.189 C 63.266 3.442 64.246 4.406 65.489 4.406 C 66.733 4.406 67.74 3.398 67.74 2.189 Z" fill="currentColor" fill-rule="nonzero"/>
+        <path d="M 67.091 6.276 L 63.915 6.276 L 63.915 22.599 L 67.091 22.599 L 67.091 6.276 Z" fill="currentColor" fill-rule="nonzero"/>
+      </svg>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="sidebar">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </header>
+
+  <!-- Sidebar overlay (mobile) -->
+  <div class="sidebar-overlay" id="sidebarOverlay" aria-hidden="true"></div>
+
+  <!-- App shell -->
+  <div class="app-shell">
+
+    <!-- Sidebar navigation -->
+    <nav class="sidebar" id="sidebar" aria-label="Guide navigation">
+
+      <!-- Guide selector -->
+      <div class="guide-selector">
+        <button class="guide-selector__btn" id="guideSelectorBtn" aria-haspopup="true" aria-expanded="false">
+          <span class="guide-selector__title">Guide to Volition</span>
+          <span class="guide-selector__sub">
+            for org support staff
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" class="guide-selector__chevron" aria-hidden="true">
+              <path d="M18 9L12.2827 14.8794C12.2455 14.9177 12.2015 14.9479 12.153 14.9686C12.1045 14.9894 12.0525 15 12 15C11.9475 15 11.8955 14.9894 11.847 14.9686C11.7985 14.9479 11.7545 14.9177 11.7173 14.8794L6 9" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </button>
+        <ul class="guide-selector__dropdown" id="guideSelectorDropdown" role="listbox" hidden>
+          <li><a class="guide-selector__option guide-selector__option--active" href="#" role="option" aria-selected="true">For org support staff</a></li>
+          <li><a class="guide-selector__option" href="#" role="option">For Decision Makers</a></li>
+          <li><a class="guide-selector__option" href="#" role="option">For Supporters</a></li>
+          <li><a class="guide-selector__option" href="#" role="option">For Guest users</a></li>
+          <li><a class="guide-selector__option" href="#" role="option">For Managers</a></li>
+        </ul>
+      </div>
+
+      <!-- 7 numbered sections with sub-items for intro -->
+      <ol class="sidebar__sections">
+        <li>
+          <a class="sidebar__section-link active" href="#" data-page="intro"><span class="sidebar__nav-num">1.</span><span class="sidebar__nav-label">Introduction</span></a>
+        </li>
+        <li><a class="sidebar__section-link" href="#" data-page="getting-started"><span class="sidebar__nav-num">2.</span><span class="sidebar__nav-label">Getting started</span></a></li>
+        <li><a class="sidebar__section-link" href="#" data-page="basics"><span class="sidebar__nav-num">3.</span><span class="sidebar__nav-label">Using the basics</span></a></li>
+        <li><a class="sidebar__section-link" href="#" data-page="sessions"><span class="sidebar__nav-num">4.</span><span class="sidebar__nav-label">Support sessions</span></a></li>
+        <li><a class="sidebar__section-link" href="#" data-page="preferences"><span class="sidebar__nav-num">5.</span><span class="sidebar__nav-label">Respecting preferences</span></a></li>
+        <li><a class="sidebar__section-link" href="#" data-page="responsibilities"><span class="sidebar__nav-num">6.</span><span class="sidebar__nav-label">Your responsibilities</span></a></li>
+        <li><a class="sidebar__section-link" href="#" data-page="next"><span class="sidebar__nav-num">7.</span><span class="sidebar__nav-label">What's next?</span></a></li>
+      </ol>
+
+    </nav>
+
+    <!-- Main content -->
+    <main class="main-content" id="mainContent" tabindex="-1">
+
+      <!-- No results message -->
+      <div class="no-results" id="noResults" aria-live="polite">
+        No results found. Try a different search term.
+      </div>
+
+      <!-- ====================================================
+           PAGE 1: Introduction
+           ==================================================== -->
+      <div class="guide-page active" id="page-intro">
+        <div class="page-body">
+
+          <!-- Title block -->
+          <div class="page-intro-header">
+            <h1 class="guide-title">Guide to Volition</h1>
+            <p class="guide-subtitle">For organisation support staff</p>
+          </div>
+
+          <hr class="page-divider">
+
+          <!-- 1. Introduction -->
+          <section class="guide-section" aria-labelledby="heading-intro">
+            <span class="guide-section__anchor" id="welcome-detail"></span>
+            <h2 id="heading-intro" class="page-section-heading">1. Introduction</h2>
+            <p class="intro-lede">Volition is a digital preference app and tool for Supported Decision Making.</p>
+            <img src="guide-assets/volguidestaff_intro_illustration.png" alt="Volition brand illustration" class="intro-illustration" width="1307" height="876">
+            <div class="content-block">
+              <div class="sub-section">
+                <h3>For Decision Makers</h3>
+                <p>People with care and support needs — Decision Makers — use Volition to record their preferences: what they like, what they need, and how they want to be supported.</p>
+                <p>Volition offers a way to record and share their preferences and voice, on their own terms.</p>
+              </div>
+
+              <div class="sub-section">
+                <h3>For support staff</h3>
+                <p>Volition provides support staff with quick, reliable access to what matters to the people you support — before, during and after every interaction. You arrive prepared.</p>
+                <p>This is about more person-directed support, and your role in that is vital.</p>
+              </div>
+
+              <div class="highlight-box">
+                <p>Your organisation has partnered with Volition.<br>This guide is for organisation support staff who will use Volition as part of their support work.</p>
+              </div>
+            </div>
+          </section>
+
+          <hr class="page-divider">
+
+          <!-- Supported Decision Making -->
+          <section class="guide-section" aria-labelledby="heading-sdm">
+            <span class="guide-section__anchor" id="sdm"></span>
+            <h2 id="heading-sdm" class="page-section-heading">Supported Decision Making</h2>
+            <div class="content-block">
+              <div class="sub-section">
+                <p class="intro-lede">Supported Decision Making is an approach that keeps the person at the centre of their own life.</p>
+                <p>It means supporting someone to make their own decisions. Not making decisions for them. This should be grounded in what is important to the person — sometimes called their "will and preference."</p>
+              </div>
+
+              <div class="sub-section">
+                <h3>Your role as a staff supporter</h3>
+                <p>Your role is to acknowledge, interpret, and respond to the person's expression of will and preference, whether communicated with words or behaviours.</p>
+                <p>This will often involve helping the person understand their options, the consequences, and act on their choices. Their voice comes first.</p>
+              </div>
+
+              <div class="card card--highlight">
+                <div class="card__title">Supported Decision Making is a human right</div>
+                <p>Recognised under the United Nations Convention on the Rights of Persons with Disabilities (UNCRPD), which New Zealand has ratified.</p>
+                <p>The UNCRPD says that:</p>
+                <ul class="guide-list">
+                  <li>Everyone has a right to make their own decisions</li>
+                  <li>Everyone has a right to access support to make their own decisions</li>
+                  <li>Everyone has a right to experience the outcomes of their decisions</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <hr class="page-divider">
+
+          <!-- Volition users -->
+          <section class="guide-section" aria-labelledby="heading-whos-who">
+            <span class="guide-section__anchor" id="whos-who"></span>
+            <h2 id="heading-whos-who" class="page-section-heading">Volition users</h2>
+            <p class="intro-lede">People with care and support needs — Decision Makers — may have a variety of people providing different support.</p>
+            <div class="role-list">
+              <div class="role-entry">
+                <h3 class="role-entry__label">Decision Makers</h3>
+                <p>The people whose preferences the app is built around. They own their data and control who sees it.</p>
+                <a class="role-entry__link" href="#"><span class="role-entry__link__text">Decision Makers' guide to Volition</span> <span aria-hidden="true">→</span></a>
+              </div>
+              <div class="role-entry">
+                <h3 class="role-entry__label">Supporters</h3>
+                <p>Family, friends, or personal carers the Decision Maker has chosen to invite. Not employed by your organisation.</p>
+                <a class="role-entry__link" href="#"><span class="role-entry__link__text">Supporters' guide to Volition</span> <span aria-hidden="true">→</span></a>
+              </div>
+              <div class="role-entry">
+                <h3 class="role-entry__label">Guest supporters</h3>
+                <p>People invited to view certain preferences via a share link or QR code. No account needed, and access expires after seven days.</p>
+                <a class="role-entry__link" href="#"><span class="role-entry__link__text">Guest supporters' guide to Volition</span> <span aria-hidden="true">→</span></a>
+              </div>
+              <div class="role-entry">
+                <h3 class="role-entry__label">Org staff supporters (this is you)</h3>
+                <p>Support workers and similar roles, with access to the preferences the Decision Maker has chosen to share with the organisation.</p>
+                <a class="role-entry__link" href="#"><span class="role-entry__link__text">Org staff supporters' guide to Volition</span> <span aria-hidden="true">→</span></a>
+              </div>
+              <div class="role-entry">
+                <h3 class="role-entry__label">Org managers</h3>
+                <p>Team leaders or coordinators who manage staff access within the organisation's Volition account.</p>
+                <a class="role-entry__link" href="#"><span class="role-entry__link__text">Org managers' guide to Volition</span> <span aria-hidden="true">→</span></a>
+              </div>
+              <div class="role-entry">
+                <h3 class="role-entry__label">Org account owners</h3>
+                <p>Responsible for the organisation's Volition account.</p>
+                <a class="role-entry__link" href="#"><span class="role-entry__link__text">Org account owners' guide to Volition</span> <span aria-hidden="true">→</span></a>
+              </div>
+            </div>
+          </section>
+
+          <!-- Footer -->
+          <div class="page-footer">
+            <hr class="page-footer__divider">
+            <div class="was-helpful">
+              <span class="was-helpful__label">Was this helpful?</span>
+              <div class="was-helpful__actions">
+                <button class="was-helpful__btn" type="button">Yes, thanks</button>
+                <button class="was-helpful__btn" type="button">Not really</button>
+              </div>
+            </div>
+            <hr class="page-footer__divider">
+          </div>
+          <button class="next-btn" type="button" data-next="getting-started">Next: Getting started <span aria-hidden="true">→</span></button>
+
+        </div>
+      </div><!-- /page-intro -->
+
+      <!-- ====================================================
+           PAGE 2: Getting started
+           ==================================================== -->
+      <div class="guide-page" id="page-getting-started">
+        <div class="page-body">
+
+        <h1 class="page-heading"><span class="page-heading__num">2.</span> Getting started</h1>
+
+        <div class="page-intro-callout">
+          <p class="page-intro-callout__quote">Your organisation's admin will email you an invitation to connect, from Volition.</p>
+          <p class="page-intro-callout__body">It is important to join using this invitation, so you are connected directly with your organisation.</p>
+        </div>
+
+        <!-- The basics -->
+        <section class="guide-section" aria-labelledby="heading-the-basics">
+          <span class="guide-section__anchor" id="the-basics"></span>
+
+          <div class="content-block">
+            <h2 class="sub-section-heading" id="heading-the-basics">The basics</h2>
+            <p class="intro-lede">You have 2 main areas in your Volition.</p>
+            <p>The <strong>Circle</strong> is your home screen — a list of the people you support. The <strong>Menu</strong> gives you access to your profile, check-in, and settings.</p>
+
+            <div class="nav-screen-pair">
+              <div class="nav-screen-item">
+                <div class="nav-screen-item__pill">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 24.0001C22.7 24.0001 23.851 21.9281 23.851 21.0371C23.851 20.3961 23.851 18.8941 16.81 18.2741C16.5492 18.2511 16.2899 18.3327 16.0892 18.501C15.8886 18.6692 15.7629 18.9102 15.74 19.1711C15.7171 19.4319 15.7987 19.6912 15.9669 19.8918C16.1351 20.0925 16.3762 20.2181 16.637 20.2411C17.9056 20.3372 19.1658 20.5234 20.408 20.7981C20.4623 20.8108 20.5106 20.8414 20.5452 20.8851C20.5799 20.9288 20.5987 20.9828 20.5987 21.0386C20.5987 21.0943 20.5799 21.1484 20.5452 21.192C20.5106 21.2357 20.4623 21.2664 20.408 21.2791C17.6406 21.8314 14.8214 22.0815 12 22.0251C9.17926 22.0815 6.36073 21.8313 3.594 21.2791C3.53975 21.2664 3.49138 21.2357 3.45676 21.192C3.42213 21.1484 3.40329 21.0943 3.40329 21.0386C3.40329 20.9828 3.42213 20.9288 3.45676 20.8851C3.49138 20.8414 3.53975 20.8108 3.594 20.7981C4.82308 20.5261 6.06986 20.3413 7.325 20.2451C7.58584 20.222 7.82683 20.0962 7.99496 19.8955C8.16309 19.6947 8.24458 19.4354 8.2215 19.1746C8.19843 18.9137 8.07268 18.6727 7.87192 18.5046C7.67116 18.3365 7.41184 18.255 7.151 18.2781C0.151001 18.9001 0.151001 20.3981 0.151001 21.0371C0.149001 23.7111 8.437 24.0001 12 24.0001Z" fill="currentColor"/><path d="M13.273 6.63008C13.2253 6.6136 13.1837 6.58308 13.1537 6.54254C13.1237 6.50199 13.1066 6.45331 13.1048 6.4029C13.103 6.35249 13.1164 6.3027 13.1434 6.26007C13.1704 6.21745 13.2096 6.18398 13.256 6.16408C13.9371 5.8745 14.4972 5.35848 14.8415 4.70336C15.1858 4.04824 15.2931 3.29428 15.1454 2.5691C14.9976 1.84391 14.6038 1.19207 14.0306 0.723898C13.4574 0.255729 12.7401 0 12 0C11.2599 0 10.5426 0.255729 9.96937 0.723898C9.39619 1.19207 9.00238 1.84391 8.85462 2.5691C8.70686 3.29428 8.81421 4.04824 9.15851 4.70336C9.50281 5.35848 10.0629 5.8745 10.744 6.16408C10.7903 6.18398 10.8296 6.21745 10.8566 6.26007C10.8836 6.3027 10.897 6.35249 10.8952 6.4029C10.8933 6.45331 10.8763 6.50199 10.8463 6.54254C10.8162 6.58308 10.7747 6.6136 10.727 6.63008C9.94671 6.89682 9.26927 7.40066 8.78931 8.0712C8.30936 8.74174 8.05087 9.54547 8.04999 10.3701V13.3331C8.04999 13.4638 8.10193 13.5892 8.19438 13.6817C8.28684 13.7741 8.41224 13.8261 8.54299 13.8261H9.42499C9.48707 13.8259 9.54692 13.8492 9.59255 13.8913C9.63817 13.9334 9.66619 13.9912 9.67099 14.0531L10.027 18.3121C10.0373 18.4354 10.0936 18.5504 10.1847 18.6341C10.2759 18.7179 10.3952 18.7643 10.519 18.7641H13.481C13.6048 18.7643 13.7241 18.7179 13.8152 18.6341C13.9064 18.5504 13.9627 18.4354 13.973 18.3121L14.329 14.0531C14.3338 13.9912 14.3618 13.9334 14.4074 13.8913C14.4531 13.8492 14.5129 13.8259 14.575 13.8261H15.457C15.5877 13.8261 15.7131 13.7741 15.8056 13.6817C15.898 13.5892 15.95 13.4638 15.95 13.3331V10.3701C15.9491 9.54547 15.6906 8.74174 15.2107 8.0712C14.7307 7.40066 14.0533 6.89682 13.273 6.63008Z" fill="currentColor"/><path d="M4.77899 7.61206C4.73264 7.59506 4.69234 7.56477 4.66313 7.52498C4.63391 7.48519 4.61707 7.43767 4.61473 7.38836C4.61238 7.33905 4.62462 7.29014 4.64992 7.24776C4.67523 7.20537 4.71247 7.17139 4.75699 7.15006C5.31684 6.88839 5.77072 6.44362 6.04369 5.88919C6.31665 5.33475 6.39237 4.7038 6.25835 4.10052C6.12432 3.49724 5.78857 2.95771 5.30653 2.571C4.82448 2.18429 4.22497 1.97354 3.60699 1.97354C2.989 1.97354 2.38949 2.18429 1.90745 2.571C1.4254 2.95771 1.08965 3.49724 0.955626 4.10052C0.821603 4.7038 0.897325 5.33475 1.17029 5.88919C1.44325 6.44362 1.89713 6.88839 2.45699 7.15006C2.50154 7.1713 2.53884 7.2052 2.56422 7.24753C2.58961 7.28985 2.60195 7.33872 2.59971 7.38803C2.59747 7.43733 2.58074 7.48488 2.55162 7.52472C2.5225 7.56457 2.48228 7.59495 2.43599 7.61206C1.7671 7.85356 1.18878 8.29513 0.779614 8.87677C0.370443 9.45841 0.150262 10.1519 0.148987 10.8631V12.3461C0.148987 12.4109 0.161772 12.4751 0.18661 12.535C0.211448 12.5948 0.247851 12.6492 0.293737 12.695C0.339622 12.7408 0.394088 12.7771 0.454017 12.8018C0.513946 12.8265 0.578161 12.8392 0.642987 12.8391H1.46199C1.52267 12.8394 1.58112 12.862 1.62627 12.9025C1.67142 12.9431 1.70014 12.9988 1.70699 13.0591L2.12699 16.8451C2.14154 16.9655 2.19936 17.0765 2.28969 17.1575C2.38002 17.2384 2.4967 17.2838 2.61799 17.2851H4.59299C4.71449 17.2851 4.83174 17.2403 4.92232 17.1593C5.0129 17.0783 5.07046 16.9668 5.08399 16.8461L5.50499 13.0591C5.51163 12.9987 5.54028 12.9429 5.58548 12.9023C5.63068 12.8617 5.68924 12.8392 5.74999 12.8391H6.56799C6.63281 12.8392 6.69703 12.8265 6.75696 12.8018C6.81689 12.7771 6.87135 12.7408 6.91724 12.695C6.96312 12.6492 6.99953 12.5948 7.02436 12.535C7.0492 12.4751 7.06199 12.4109 7.06199 12.3461V10.8621C7.06124 10.1515 6.84171 9.45833 6.43325 8.87686C6.02479 8.29539 5.4472 7.85379 4.77899 7.61206Z" fill="currentColor"/><path d="M21.567 7.61206C21.5207 7.59495 21.4805 7.56457 21.4513 7.52472C21.4222 7.48488 21.4055 7.43733 21.4033 7.38803C21.401 7.33872 21.4134 7.28985 21.4387 7.24753C21.4641 7.2052 21.5014 7.1713 21.546 7.15006C22.1058 6.88839 22.5597 6.44362 22.8327 5.88919C23.1056 5.33475 23.1814 4.7038 23.0473 4.10052C22.9133 3.49724 22.5776 2.95771 22.0955 2.571C21.6135 2.18429 21.014 1.97354 20.396 1.97354C19.778 1.97354 19.1785 2.18429 18.6964 2.571C18.2144 2.95771 17.8786 3.49724 17.7446 4.10052C17.6106 4.7038 17.6863 5.33475 17.9593 5.88919C18.2322 6.44362 18.6861 6.88839 19.246 7.15006C19.2905 7.1713 19.3278 7.2052 19.3532 7.24753C19.3786 7.28985 19.3909 7.33872 19.3887 7.38803C19.3865 7.43733 19.3697 7.48488 19.3406 7.52472C19.3115 7.56457 19.2713 7.59495 19.225 7.61206C18.5565 7.8538 17.9787 8.29552 17.57 8.87718C17.1614 9.45883 16.9417 10.1522 16.941 10.8631V12.3461C16.941 12.4109 16.9538 12.4751 16.9786 12.535C17.0034 12.5948 17.0398 12.6492 17.0857 12.695C17.1316 12.7408 17.1861 12.7771 17.246 12.8018C17.3059 12.8265 17.3702 12.8392 17.435 12.8391H18.253C18.3138 12.8392 18.3725 12.8616 18.4179 12.9022C18.4632 12.9428 18.4921 12.9986 18.499 13.0591L18.919 16.8451C18.9335 16.9655 18.9914 17.0765 19.0817 17.1575C19.172 17.2384 19.2887 17.2838 19.41 17.2851H21.385C21.5065 17.2851 21.6237 17.2403 21.7143 17.1593C21.8049 17.0783 21.8625 16.9668 21.876 16.8461L22.297 13.0591C22.3036 12.9987 22.3323 12.9429 22.3775 12.9023C22.4227 12.8617 22.4812 12.8392 22.542 12.8391H23.36C23.4248 12.8392 23.489 12.8265 23.5489 12.8018C23.6089 12.7771 23.6633 12.7408 23.7092 12.695C23.7551 12.6492 23.7915 12.5948 23.8164 12.535C23.8412 12.4751 23.854 12.4109 23.854 12.3461V10.8621C23.8529 10.151 23.6328 9.4575 23.2236 8.87598C22.8144 8.29445 22.2359 7.85313 21.567 7.61206Z" fill="currentColor"/></svg>
+                  <span class="nav-screen-item__label">Circle</span>
+                </div>
+                <img src="guide-assets/screen-circle.png" alt="Circle of support home screen showing people you support" width="479" height="995">
+              </div>
+              <div class="nav-screen-item">
+                <div class="nav-screen-item__pill">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M22.5 2.5H1.5C0.947715 2.5 0.5 2.94772 0.5 3.5V4.5C0.5 5.05228 0.947715 5.5 1.5 5.5H22.5C23.0523 5.5 23.5 5.05228 23.5 4.5V3.5C23.5 2.94772 23.0523 2.5 22.5 2.5Z" fill="currentColor"/><path d="M22.5 10.5H1.5C0.947715 10.5 0.5 10.9477 0.5 11.5V12.5C0.5 13.0523 0.947715 13.5 1.5 13.5H22.5C23.0523 13.5 23.5 13.0523 23.5 12.5V11.5C23.5 10.9477 23.0523 10.5 22.5 10.5Z" fill="currentColor"/><path d="M22.5 18.5H1.5C0.947715 18.5 0.5 18.9477 0.5 19.5V20.5C0.5 21.0523 0.947715 21.5 1.5 21.5H22.5C23.0523 21.5 23.5 21.0523 23.5 20.5V19.5C23.5 18.9477 23.0523 18.5 22.5 18.5Z" fill="currentColor"/></svg>
+                  <span class="nav-screen-item__label">Menu</span>
+                </div>
+                <img src="guide-assets/menu.png" alt="Menu screen showing profile, check-in, and settings options" width="479" height="995">
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Getting started steps -->
+        <section class="guide-section" aria-labelledby="heading-getting-started">
+          <span class="guide-section__anchor" id="getting-started"></span>
+
+          <div class="content-block">
+            <h2 class="sub-section-heading" id="heading-getting-started">Getting set up</h2>
+
+            <ol class="step-list">
+              <li>
+                <div class="step-header">
+                  <div class="step-num">1</div>
+                  <h3 class="step-title">Accept your invitation</h3>
+                </div>
+                <p class="step-body">Open the invitation email and click the 'Yes, I want to connect' link, to go to your Volition registration page.</p>
+              </li>
+              <li>
+                <div class="step-header">
+                  <div class="step-num">2</div>
+                  <h3 class="step-title">Register your account</h3>
+                </div>
+                <p class="step-body">Enter your name, work email and phone number, and if you agree to the terms of use, you can continue on.</p>
+                <div class="screen-pair" style="gap: 48px;">
+                  <img src="guide-assets/registration.png" alt="Join Volition registration screen on iPhone" width="479" height="995">
+                  <img src="guide-assets/registration_confirmation.png" alt="Registration confirmation — you are now connected with your organisation" width="479" height="995">
+                </div>
+                <div class="info-callout-group">
+                  <div class="info-callout">
+                    <div class="info-callout__icon" aria-hidden="true">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3.06247 4.59621V11.5757C3.06249 13.7818 3.73101 15.9361 4.97992 17.7547C6.22882 19.5731 7.99947 20.9706 10.0585 21.7626L11.0127 22.1293C11.6482 22.3737 12.3517 22.3737 12.9872 22.1293L13.9415 21.7626C16.0005 20.9706 17.7711 19.5731 19.02 17.7547C20.269 15.9361 20.9375 13.7818 20.9375 11.5757V4.59621C20.9392 4.33357 20.8651 4.07601 20.7239 3.85452C20.5827 3.63303 20.3806 3.45703 20.1418 3.34771C17.575 2.22735 14.8005 1.66165 12 1.68762C9.19942 1.66165 6.42495 2.22735 3.85814 3.34771C3.61933 3.45703 3.41718 3.63303 3.27603 3.85452C3.13488 4.07601 3.06072 4.33357 3.06247 4.59621Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 15V11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M10.5 9.5C10.5 9.89782 10.658 10.2794 10.9393 10.5607C11.2206 10.842 11.6022 11 12 11C12.3978 11 12.7794 10.842 13.0607 10.5607C13.342 10.2794 13.5 9.89782 13.5 9.5C13.5 9.10218 13.342 8.72064 13.0607 8.43934C12.7794 8.15804 12.3978 8 12 8C11.6022 8 11.2206 8.15804 10.9393 8.43934C10.658 8.72064 10.5 9.10218 10.5 9.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </div>
+                    <p>You do not need a password. Volition uses email login links and passkeys to stay secure.</p>
+                  </div>
+                  <div class="info-callout">
+                    <div class="info-callout__icon" aria-hidden="true">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.4375 1.6875H8.5625C7.04372 1.6875 5.8125 2.91872 5.8125 4.4375V19.5625C5.8125 21.0813 7.04372 22.3125 8.5625 22.3125H15.4375C16.9563 22.3125 18.1875 21.0813 18.1875 19.5625V4.4375C18.1875 2.91872 16.9563 1.6875 15.4375 1.6875Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M5.8125 17.2705H18.1875" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </div>
+                    <div class="info-callout__content">
+                      <p>Use the Volition app, or go to <strong>volition.tools</strong> on any web browser, using your work email.</p>
+                      <div class="store-badges">
+                        <a href="https://apps.apple.com/nz/app/volition/id6753151778" target="_blank" rel="noopener">
+                          <img src="guide-assets/badge-app-store.png" alt="Download on the App Store" width="135" height="45">
+                        </a>
+                        <a href="https://play.google.com/store/search?q=volition&c=apps" target="_blank" rel="noopener">
+                          <img src="guide-assets/badge-google-play.png" alt="Get it on Google Play" width="135" height="45">
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="info-callout">
+                    <div class="info-callout__icon" aria-hidden="true">
+                      <svg width="24" height="24" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 17.0625C12 18.5212 12.5795 19.9201 13.6109 20.9516C14.6424 21.983 16.0413 22.5625 17.5 22.5625C18.9587 22.5625 20.3576 21.983 21.3891 20.9516C22.4205 19.9201 23 18.5212 23 17.0625C23 15.6038 22.4205 14.2049 21.3891 13.1734C20.3576 12.142 18.9587 11.5625 17.5 11.5625C16.0413 11.5625 14.6424 12.142 13.6109 13.1734C12.5795 14.2049 12 15.6038 12 17.0625Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M19.931 17.0625H17.5V14.6324" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M8.5 17.5H2.5C2.10218 17.5 1.72064 17.342 1.43934 17.0607C1.15804 16.7794 1 16.3978 1 16V4.01501C1 3.61719 1.15804 3.23566 1.43934 2.95435C1.72064 2.67305 2.10218 2.51501 2.5 2.51501H16C16.3978 2.51501 16.7794 2.67305 17.0607 2.95435C17.342 3.23566 17.5 3.61719 17.5 4.01501V8.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M1 7H17.5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M5.493 4V1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12.993 4V1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </div>
+                    <p>You will remain logged in on that device for a year, unless you log yourself out sooner.</p>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="step-header">
+                  <div class="step-num">3</div>
+                  <h3 class="step-title">Review your circle of support</h3>
+                </div>
+                <p class="step-body">You are in! On the support circle page you will see the Decision Maker(s) you have been assigned to support.</p>
+                <p class="step-body">You can view their Volition library of preferences, their personal profile, and contact details. By default you have view access to all of their general preferences.</p>
+                <div class="screen-trio">
+                  <div class="screen-trio__item">
+                    <p class="screen-trio__label">No one assigned</p>
+                    <img src="guide-assets/circle_empty.png" alt="Circle of support with no one assigned yet" width="479" height="995">
+                  </div>
+                  <div class="screen-trio__item">
+                    <p class="screen-trio__label">One to support</p>
+                    <img src="guide-assets/circle_one_dm.png" alt="Support circle showing one Decision Maker, Jennifer Carington" width="479" height="995">
+                  </div>
+                  <div class="screen-trio__item">
+                    <p class="screen-trio__label">Many to support</p>
+                    <img src="guide-assets/circle_supporting3.png" alt="Circle of support showing multiple Decision Makers" width="479" height="995">
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="step-header">
+                  <div class="step-num">4</div>
+                  <h3 class="step-title">Complete your profile</h3>
+                </div>
+                <p class="step-body">Decision Makers will see your profile when you are added to their Circle of Support, so a clear photo and full name helps build trust.</p>
+                <div class="screen-shot">
+                  <img src="guide-assets/Profile.png" alt="Personal details screen on iPhone" width="479" height="995">
+                </div>
+              </li>
+              <li>
+                <div class="step-header">
+                  <div class="step-num">5</div>
+                  <h3 class="step-title">Complete your check-in</h3>
+                </div>
+                <p class="step-body">From the Menu again, tap 'Supporter check-in' and answer three questions about your experience as a supporter. Complete this at the start of your time with Volition to establish a baseline.</p>
+                <div class="screen-shot">
+                  <img src="guide-assets/statement.png" alt="Supporter check-in statement screen on iPhone" width="479" height="995">
+                </div>
+              </li>
+            </ol>
+
+            <div class="highlight-box">
+              <h3>Before visiting a person you support:</h3>
+              <ul class="guide-list">
+                <li>Check your permission level in their profile</li>
+                <li>Start a Support Session before you arrive</li>
+                <li>Review the preferences of the person</li>
+                <li>Note things you want to explore or ask about</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <div class="page-footer">
+          <hr class="page-footer__divider">
+          <div class="was-helpful">
+            <span class="was-helpful__label">Was this helpful?</span>
+            <div class="was-helpful__actions">
+              <button class="was-helpful__btn" type="button">Yes, thanks</button>
+              <button class="was-helpful__btn" type="button">Not really</button>
+            </div>
+          </div>
+          <hr class="page-footer__divider">
+        </div>
+        <button class="next-btn" type="button" data-next="basics">Next: Using the basics <span aria-hidden="true">→</span></button>
+
+        </div>
+      </div><!-- /page-getting-started -->
+
+      <!-- ====================================================
+           PAGE 3: Using the basics
+           ==================================================== -->
+      <div class="guide-page" id="page-basics">
+        <div class="page-body">
+
+        <h1 class="page-heading"><span class="page-heading__num">3.</span> Using the basics</h1>
+
+        <!-- Support view -->
+        <section class="guide-section">
+
+          <p class="page-intro-subhead">Here is what you see when you log in.</p>
+
+          <div class="content-block">
+
+            <div class="section-heading-with-icon">
+              <h2>Your Circle of Support</h2>
+              <span class="section-heading-icon" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/>
+                  <circle cx="5" cy="9" r="2.5" stroke="currentColor" stroke-width="1.5"/>
+                  <circle cx="19" cy="9" r="2.5" stroke="currentColor" stroke-width="1.5"/>
+                  <path d="M2 19c0-2.76 2.24-5 5-5h10c2.76 0 5 2.24 5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </span>
+            </div>
+            <p>When you have Decision Makers in your caseload, you can select a person's name or picture to see their profile, and explore their Volition.</p>
+
+            <!-- Circle of support screens: list + illustrated view side by side -->
+            <div class="screen-pair">
+              <img src="guide-assets/circle_supporting3.png" alt="Circle of support showing three Decision Makers" width="479" height="995">
+              <img src="guide-assets/circle_empty.png" alt="Circle of support illustrated view" width="479" height="995">
+            </div>
+            <!-- Person profile detail -->
+            <div class="screen-shot">
+              <img src="guide-assets/dm_profile.png" alt="Jennifer Carington's profile and Volition access on iPhone" width="479" height="995">
+            </div>
+
+            <div class="section-heading-with-icon">
+              <h2>Menu</h2>
+              <span class="section-heading-icon" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </span>
+            </div>
+            <p>Your Personal Details, activity log, passkey setup, feedback, and Supporter check-in.</p>
+
+            <!-- screen-menu image in Menu section -->
+            <div class="screen-shot">
+              <img src="guide-assets/menu.png" alt="Volition menu screen on iPhone" width="479" height="995">
+            </div>
+          </div>
+        </section>
+
+        <!-- The Vault -->
+        <section class="guide-section" aria-labelledby="heading-vault">
+          <span class="guide-section__anchor" id="vault"></span>
+          <div class="section-header">
+            <div class="section-number">8</div>
+            <h2 id="heading-vault">The Vault</h2>
+          </div>
+
+          <div class="content-block">
+            <p>The Vault is the provider portal you see when you log into Volition. <strong>Hint: it has a purple background.</strong></p>
+            <p>It is a secure web-based tool your organisation uses to manage staff access and view Decision Maker profiles. This is where you will see and interact with the preferences of the people you support.</p>
+            <p>The Vault can be accessed by downloading the Volition app, or by logging into <a href="https://volition.tools" target="_blank" rel="noopener">volition.tools</a> on any internet-connected device.</p>
+          </div>
+        </section>
+
+        <!-- The Volition App -->
+        <section class="guide-section" aria-labelledby="heading-app">
+          <span class="guide-section__anchor" id="app"></span>
+          <div class="section-header">
+            <div class="section-number">9</div>
+            <h2 id="heading-app">The Volition app</h2>
+          </div>
+
+          <div class="content-block">
+            <p>The app is what Decision Makers see when they log into Volition. <strong>Hint: it has a tan background.</strong></p>
+            <p>From time to time you may need to navigate the app alongside the person you support — for example, to help them find a preference or update information.</p>
+
+            <div class="highlight-box">
+              <p>Both the Vault and the Volition app are two sides of the same tool. The difference is the perspective: <strong>the Vault is yours, the app is theirs.</strong></p>
+            </div>
+          </div>
+        </section>
+
+        <div class="page-footer">
+          <hr class="page-footer__divider">
+          <div class="was-helpful">
+            <span class="was-helpful__label">Was this helpful?</span>
+            <div class="was-helpful__actions">
+              <button class="was-helpful__btn" type="button">Yes, thanks</button>
+              <button class="was-helpful__btn" type="button">Not really</button>
+            </div>
+          </div>
+          <hr class="page-footer__divider">
+        </div>
+        <button class="next-btn" type="button" data-next="sessions">Next: Support sessions <span aria-hidden="true">→</span></button>
+
+        </div>
+      </div><!-- /page-basics -->
+
+      <!-- ====================================================
+           PAGE 4: Support sessions
+           ==================================================== -->
+      <div class="guide-page" id="page-sessions">
+        <div class="page-body">
+
+        <h1 class="page-heading"><span class="page-heading__num">4.</span> Support sessions</h1>
+
+        <!-- What is a support session? -->
+        <section class="guide-section" aria-labelledby="heading-sessions-intro">
+          <span class="guide-section__anchor" id="sessions-intro"></span>
+          <div class="section-header">
+            <div class="section-number">12</div>
+            <h2 id="heading-sessions-intro">What is a support session?</h2>
+          </div>
+
+          <div class="content-block">
+            <p>A Support Session is a recorded digital interaction in Volition. When you start one, it logs the date and time, and connects your activity to the Decision Maker's record.</p>
+
+            <div class="highlight-box">
+              <p>Starting a session is important for the audit trail. It shows the Decision Maker exactly when and how you accessed their information.</p>
+            </div>
+
+            <p>Before your next visit, open the Vault and start a Support Session to spend a few minutes reading through the person's preferences. Arrive prepared. During or after your visit, check if they would like your support to add any more information into their preference library.</p>
+          </div>
+        </section>
+
+        <!-- During a session -->
+        <section class="guide-section" aria-labelledby="heading-sessions-during">
+          <span class="guide-section__anchor" id="sessions-during"></span>
+          <div class="section-header">
+            <div class="section-number">13</div>
+            <h2 id="heading-sessions-during">During a session</h2>
+          </div>
+
+          <div class="phase-grid">
+            <div class="phase-card">
+              <div class="phase-card__heading">Before you arrive</div>
+              <p>Open the Vault. Start a Support Session. Read their preferences. Note what is important, what has changed, what you want to explore together.</p>
+            </div>
+            <div class="phase-card">
+              <div class="phase-card__heading">In the moment</div>
+              <p>Let the person lead. Reference their preferences naturally in conversation. Listen for new information or updates they would like to make.</p>
+            </div>
+            <div class="phase-card">
+              <div class="phase-card__heading">After the visit</div>
+              <p>Close the session. Update any preferences if they asked you to. If something important came up that is not yet recorded, add it — with their knowledge.</p>
+            </div>
+          </div>
+
+          <div class="highlight-box">
+            <p>The more consistently you do this, the richer the preference library becomes. That library is their voice.</p>
+          </div>
+        </section>
+
+        <!-- How to start a session -->
+        <section class="guide-section" aria-labelledby="heading-sessions-how">
+          <span class="guide-section__anchor" id="sessions-how"></span>
+          <div class="section-header">
+            <div class="section-number">14</div>
+            <h2 id="heading-sessions-how">How to start a session</h2>
+          </div>
+
+          <div class="content-block">
+            <ol class="step-list">
+              <li>
+                <div class="step-header">
+                  <div class="step-num">1</div>
+                  <h3 class="step-title">Open the Vault and find the Decision Maker's profile</h3>
+                </div>
+              </li>
+              <li>
+                <div class="step-header">
+                  <div class="step-num">2</div>
+                  <h3 class="step-title">Tap "Explore their Volition"</h3>
+                </div>
+                <p class="step-body">Tap "Options" if needed, then tap "Explore their Volition."</p>
+              </li>
+              <li>
+                <div class="step-header">
+                  <div class="step-num">3</div>
+                  <h3 class="step-title">Confirm the session has started</h3>
+                </div>
+                <p class="step-body">A purple screen confirms the support session has started.</p>
+              </li>
+              <li>
+                <div class="step-header">
+                  <div class="step-num">4</div>
+                  <h3 class="step-title">Explore their preferences</h3>
+                </div>
+                <p class="step-body">Browse and view the preferences they have shared with you.</p>
+              </li>
+              <li>
+                <div class="step-header">
+                  <div class="step-num">5</div>
+                  <h3 class="step-title">Close the session when you're done</h3>
+                </div>
+                <p class="step-body">Tap × in the top right to end the session.</p>
+              </li>
+            </ol>
+
+            <div class="card">
+              <div class="card__title">Viewing preferences</div>
+              <p>Tap "Library" to see all preferences shared with you, organised into topics — "Communication", "About Me", "Health", and more. You can browse by topic or search. Some preferences include photos, recordings, or videos.</p>
+            </div>
+          </div>
+        </section>
+
+        <div class="page-footer">
+          <hr class="page-footer__divider">
+          <div class="was-helpful">
+            <span class="was-helpful__label">Was this helpful?</span>
+            <div class="was-helpful__actions">
+              <button class="was-helpful__btn" type="button">Yes, thanks</button>
+              <button class="was-helpful__btn" type="button">Not really</button>
+            </div>
+          </div>
+          <hr class="page-footer__divider">
+        </div>
+        <button class="next-btn" type="button" data-next="preferences">Next: Respecting preferences <span aria-hidden="true">→</span></button>
+
+        </div>
+      </div><!-- /page-sessions -->
+
+      <!-- ====================================================
+           PAGE 5: Respecting preferences
+           ==================================================== -->
+      <div class="guide-page" id="page-preferences">
+        <div class="page-body">
+
+        <h1 class="page-heading"><span class="page-heading__num">5.</span> Respecting preferences</h1>
+
+        <!-- Permissions: what you see -->
+        <section class="guide-section" aria-labelledby="heading-permissions-view">
+          <span class="guide-section__anchor" id="permissions-view"></span>
+          <div class="section-header">
+            <div class="section-number">10</div>
+            <h2 id="heading-permissions-view">Permissions — what you can see</h2>
+          </div>
+
+          <div class="content-block">
+            <p>Permission levels control what you can see and do. They are set by the Decision Maker — not your organisation.</p>
+            <p>There are two separate dimensions: what you see, and what you do. They each have levels, and they combine — for example, General View + Editor, or All Records + Contributor.</p>
+
+            <div class="perm-group">
+              <div class="perm-group__label">Visibility — what you see</div>
+              <div class="perm-item">
+                <span class="perm-badge perm-badge--default">General records <span class="perm-badge__default-tag">default</span></span>
+                <p class="perm-desc">You can see the Decision Maker's general preferences. You cannot see preferences they have marked as private.</p>
+              </div>
+              <div class="perm-item">
+                <span class="perm-badge perm-badge--elevated">All records<span class="sr-only"> (elevated)</span></span>
+                <p class="perm-desc">You can see all preferences, including private ones. The Decision Maker has specifically trusted you with this. Private means private — respect it.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Permissions: what you do -->
+        <section class="guide-section" aria-labelledby="heading-permissions-do">
+          <span class="guide-section__anchor" id="permissions-do"></span>
+          <div class="section-header">
+            <div class="section-number">11</div>
+            <h2 id="heading-permissions-do">Permissions — what you can do</h2>
+          </div>
+
+          <div class="content-block">
+            <div class="perm-group">
+              <div class="perm-group__label">Role — what you can do</div>
+              <div class="perm-item">
+                <span class="perm-badge perm-badge--default">Viewer <span class="perm-badge__default-tag">default</span></span>
+                <p class="perm-desc">You can only see records.</p>
+              </div>
+              <div class="perm-item">
+                <span class="perm-badge perm-badge--elevated">Contributor<span class="sr-only"> (elevated)</span></span>
+                <p class="perm-desc">You can add notes and media to existing preferences.</p>
+              </div>
+              <div class="perm-item">
+                <span class="perm-badge perm-badge--elevated">Editor<span class="sr-only"> (elevated)</span></span>
+                <p class="perm-desc">You can create and edit preferences on behalf of the Decision Maker, with their agreement.</p>
+              </div>
+            </div>
+
+            <div class="card card--highlight">
+              <div class="card__title">Requesting a permission change</div>
+              <p>If you believe you need a higher permission level, speak with your Manager. Do not ask the Decision Maker directly — this should go through your organisation's processes. The Decision Maker always has the final say.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Contributing -->
+        <section class="guide-section" aria-labelledby="heading-contributing">
+          <span class="guide-section__anchor" id="contributing"></span>
+          <div class="section-header">
+            <div class="section-number">15</div>
+            <h2 id="heading-contributing">Contributing notes and media</h2>
+          </div>
+
+          <div class="content-block">
+            <div class="card">
+              <div class="card__title">
+                <span class="perm-badge perm-badge--elevated">Contributors<span class="sr-only"> (elevated permission required)</span></span>
+              </div>
+              <p>As a Contributor you can add your own insights and observations.</p>
+            </div>
+
+            <p>Once in the Library, tap the preference you want to contribute to. You can:</p>
+            <ul class="guide-list">
+              <li>Add a note</li>
+              <li>Upload photos, videos, audio, and files</li>
+              <li>Search for photos to upload online</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Editing -->
+        <section class="guide-section" aria-labelledby="heading-editing">
+          <span class="guide-section__anchor" id="editing"></span>
+          <div class="section-header">
+            <div class="section-number">16</div>
+            <h2 id="heading-editing">Editing preferences</h2>
+          </div>
+
+          <div class="content-block">
+            <div class="card">
+              <div class="card__title">
+                <span class="perm-badge perm-badge--elevated">Editors<span class="sr-only"> (elevated permission required)</span></span>
+              </div>
+              <p>As an Editor you can also create, update, and modify preference records on behalf of a Decision Maker.</p>
+            </div>
+
+            <div class="sub-section">
+              <h3>Creating a new preference</h3>
+              <p>Tap "Create a Preference" from the home screen or library. Work through the steps together. Let them lead — your role is to help, not to decide.</p>
+            </div>
+
+            <div class="sub-section">
+              <h3>Updating a preference</h3>
+              <p>Tap the preference, tap "Edit," make the change together, then tap "Save." Do not edit without their direction.</p>
+            </div>
+
+            <div class="caution-box">
+              <p><strong>Made a mistake?</strong> Tell the Decision Maker. Work with them to correct it. Don't try to quietly revert without their knowledge. If you're unsure what to do, speak to your Manager.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Sharing -->
+        <section class="guide-section" aria-labelledby="heading-sharing">
+          <span class="guide-section__anchor" id="sharing"></span>
+          <div class="section-header">
+            <div class="section-number">17</div>
+            <h2 id="heading-sharing">Sharing information outside the Circle</h2>
+          </div>
+
+          <div class="content-block">
+            <p>Sometimes it may be helpful to share a preference with someone outside the Circle of Support — a health professional, a travel agent, a friend, or anyone else.</p>
+
+            <ol class="step-list">
+              <li>
+                <div class="step-header">
+                  <div class="step-num">1</div>
+                  <h3 class="step-title">Open the preference or group of preferences to share</h3>
+                </div>
+              </li>
+              <li>
+                <div class="step-header">
+                  <div class="step-num">2</div>
+                  <h3 class="step-title">Tap "Share this preference"</h3>
+                </div>
+              </li>
+              <li>
+                <div class="step-header">
+                  <div class="step-num">3</div>
+                  <h3 class="step-title">Choose "Link" or "QR code"</h3>
+                </div>
+                <p class="step-body">The recipient can view the preference without a Volition account. Access expires after 7 days.</p>
+              </li>
+            </ol>
+          </div>
+        </section>
+
+        <div class="page-footer">
+          <hr class="page-footer__divider">
+          <div class="was-helpful">
+            <span class="was-helpful__label">Was this helpful?</span>
+            <div class="was-helpful__actions">
+              <button class="was-helpful__btn" type="button">Yes, thanks</button>
+              <button class="was-helpful__btn" type="button">Not really</button>
+            </div>
+          </div>
+          <hr class="page-footer__divider">
+        </div>
+        <button class="next-btn" type="button" data-next="responsibilities">Next: Your responsibilities <span aria-hidden="true">→</span></button>
+
+        </div>
+      </div><!-- /page-preferences -->
+
+      <!-- ====================================================
+           PAGE 6: Your responsibilities
+           ==================================================== -->
+      <div class="guide-page" id="page-responsibilities">
+        <div class="page-body">
+
+        <h1 class="page-heading"><span class="page-heading__num">6.</span> Your responsibilities</h1>
+
+        <!-- Privacy -->
+        <section class="guide-section" aria-labelledby="heading-privacy">
+          <span class="guide-section__anchor" id="privacy"></span>
+          <div class="section-header">
+            <div class="section-number">18</div>
+            <h2 id="heading-privacy">Privacy and your responsibilities</h2>
+          </div>
+
+          <div class="content-block">
+            <p>When you access someone's preferences through Volition, you are handling personal information. This comes with responsibilities.</p>
+
+            <ul class="guide-list">
+              <li>Only access information you need to do your job</li>
+              <li>Do not share someone's preferences outside of Volition without their permission</li>
+              <li>Do not copy or store preference information in personal devices or unapproved systems</li>
+              <li>If you notice incorrect information, tell your manager — do not edit without discussing it with the Decision Maker</li>
+            </ul>
+
+            <div class="highlight-box">
+              <p>Volition complies with the New Zealand Privacy Act 2020. For data security concerns, contact your Account Owner or <a href="mailto:info@volition.org.nz">info@volition.org.nz</a>.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Activity Log -->
+        <section class="guide-section" aria-labelledby="heading-activity-log">
+          <span class="guide-section__anchor" id="activity-log"></span>
+          <div class="section-header">
+            <div class="section-number">19</div>
+            <h2 id="heading-activity-log">The Activity Log</h2>
+          </div>
+
+          <div class="content-block">
+            <p>The Activity Log is a record of every action taken in a Decision Maker's account — who viewed it, who added something, who edited something, and when.</p>
+            <p>As a staff member, your actions in the Vault and app are recorded in the Activity Log. This is visible to the Decision Maker. This transparency is intentional.</p>
+
+            <div class="caution-box">
+              <p><strong>Decision Makers can see your activity.</strong> They can see your name in their Activity Log whenever you view or interact with their profile or preferences. They can also see your profile — your name and photo — in their Circle of Support.</p>
+              <p>If you would not want the person to know you accessed their information, ask yourself whether you should be accessing it.</p>
+            </div>
+          </div>
+        </section>
+
+        <div class="page-footer">
+          <hr class="page-footer__divider">
+          <div class="was-helpful">
+            <span class="was-helpful__label">Was this helpful?</span>
+            <div class="was-helpful__actions">
+              <button class="was-helpful__btn" type="button">Yes, thanks</button>
+              <button class="was-helpful__btn" type="button">Not really</button>
+            </div>
+          </div>
+          <hr class="page-footer__divider">
+        </div>
+        <button class="next-btn" type="button" data-next="next">Next: What's next? <span aria-hidden="true">→</span></button>
+
+        </div>
+      </div><!-- /page-responsibilities -->
+
+      <!-- ====================================================
+           PAGE 7: What's next?
+           ==================================================== -->
+      <div class="guide-page" id="page-next">
+        <div class="page-body">
+
+        <h1 class="page-heading"><span class="page-heading__num">7.</span> What's next?</h1>
+
+        <!-- Coming soon -->
+        <section class="guide-section" aria-labelledby="heading-coming-soon">
+          <span class="guide-section__anchor" id="coming-soon"></span>
+          <div class="section-header">
+            <div class="section-number">20</div>
+            <h2 id="heading-coming-soon">Features coming soon</h2>
+          </div>
+
+          <div class="content-block">
+            <div class="sub-section">
+              <p>Volition is growing. You will be notified when new features are released. Your feedback helps shape what comes next.</p>
+              <div class="feature-list">
+              <div class="feature-item">
+                <div class="feature-dot"></div>
+                <div>
+                  <div class="feature-name">Goals module</div>
+                  <p class="feature-desc">View and contribute to a Decision Maker's goals.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-dot"></div>
+                <div>
+                  <div class="feature-name">Preference prompts</div>
+                  <p class="feature-desc">Suggested questions to help Decision Makers build their library.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-dot"></div>
+                <div>
+                  <div class="feature-name">My Health Passport</div>
+                  <p class="feature-desc">A portable health summary to share with any health professional.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-dot"></div>
+                <div>
+                  <div class="feature-name">My Advanced Care Plan</div>
+                  <p class="feature-desc">A tool for recording wishes about future health and care.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-dot"></div>
+                <div>
+                  <div class="feature-name">Speech to text and text to speech</div>
+                  <p class="feature-desc">To make the app more accessible.</p>
+                </div>
+              </div>
+            </div>
+            </div><!-- /sub-section -->
+          </div>
+        </section>
+
+        <!-- Support and feedback -->
+        <section class="guide-section" aria-labelledby="heading-support-feedback">
+          <span class="guide-section__anchor" id="support-feedback"></span>
+          <div class="section-header">
+            <div class="section-number">21</div>
+            <h2 id="heading-support-feedback">Support and feedback</h2>
+          </div>
+
+          <div class="content-block">
+            <div class="card card--highlight">
+              <div class="card__title">Give us your feedback</div>
+              <p>Your experience using Volition in a real support context is invaluable. If something is not working, is confusing, or could be better — we want to know. Send feedback via email or log it through the menu in the Vault.</p>
+            </div>
+
+            <div class="sub-section">
+              <h3>How to get support</h3>
+              <div class="contact-grid">
+              <div class="contact-card">
+                <div class="contact-card__heading">Technical issues or app questions</div>
+                <p>Email: <a href="mailto:info@volition.org.nz">info@volition.org.nz</a></p>
+                <p>Website: <a href="https://volition.org.nz" target="_blank" rel="noopener">volition.org.nz</a></p>
+              </div>
+              <div class="contact-card">
+                <div class="contact-card__heading">Organisation setup or access</div>
+                <p>Contact your organisation's Volition Account Owner or Manager.</p>
+              </div>
+              <div class="contact-card">
+                <div class="contact-card__heading">Supported Decision Making</div>
+                <p>Talk to your team leader, or visit <a href="https://supportmydecisions.nz" target="_blank" rel="noopener">supportmydecisions.nz</a> for general information and resources.</p>
+              </div>
+            </div><!-- /contact-grid -->
+            </div><!-- /sub-section -->
+          </div>
+        </section>
+
+        <!-- FAQs -->
+        <section class="guide-section" aria-labelledby="heading-faqs">
+          <span class="guide-section__anchor" id="faqs"></span>
+          <div class="section-header">
+            <div class="section-number">22</div>
+            <h2 id="heading-faqs">Frequently asked questions</h2>
+          </div>
+
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary class="faq-question">How do I log in?</summary>
+              <div class="faq-answer">Download the Volition app or go to <a href="https://volition.tools" target="_blank" rel="noopener">volition.tools</a>. Log in with your work email address. There is no password.</div>
+            </details>
+
+            <details class="faq-item">
+              <summary class="faq-question">What if I can't see someone's preferences?</summary>
+              <div class="faq-answer">Most likely because you haven't been connected to their Circle of Support yet, or the preferences are marked private. Check with your Manager.</div>
+            </details>
+
+            <details class="faq-item">
+              <summary class="faq-question">Can I edit a Decision Maker's preferences?</summary>
+              <div class="faq-answer">Only if you have Contributor or Editor access and the Decision Maker wants you to. Always work with the person, not for them.</div>
+            </details>
+
+            <details class="faq-item">
+              <summary class="faq-question">A Decision Maker does not want to use Volition. What should I do?</summary>
+              <div class="faq-answer">Respect their choice. Let your Manager know. You can still support the person well using your usual methods.</div>
+            </details>
+
+            <details class="faq-item">
+              <summary class="faq-question">Are my actions in the Vault visible to the Decision Maker?</summary>
+              <div class="faq-answer">Yes. The Activity Log shows them when you view or interact with their profile. Act accordingly.</div>
+            </details>
+
+            <details class="faq-item">
+              <summary class="faq-question">What happens when a Decision Maker leaves our organisation?</summary>
+              <div class="faq-answer">Their preferences remain in their Volition account — their data belongs to them. Your organisation's access will be removed. Contact your Account Owner.</div>
+            </details>
+          </div>
+        </section>
+
+        <div class="page-footer">
+          <hr class="page-footer__divider">
+          <div class="was-helpful">
+            <span class="was-helpful__label">Was this helpful?</span>
+            <div class="was-helpful__actions">
+              <button class="was-helpful__btn" type="button">Yes, thanks</button>
+              <button class="was-helpful__btn" type="button">Not really</button>
+            </div>
+          </div>
+          <hr class="page-footer__divider">
+        </div>
+
+        </div>
+      </div><!-- /page-next -->
+
+    </main>
+  </div><!-- /app-shell -->
+
+
+  <script>
+    // ============================================================
+    // PAGE NAVIGATION
+    // ============================================================
+    const pages = document.querySelectorAll('.guide-page');
+    const sectionLinks = document.querySelectorAll('.sidebar__section-link');
+
+    // Page titles for document.title updates
+    const pageTitles = {
+      'intro':            '1. Introduction',
+      'getting-started':  '2. Getting started',
+      'basics':           '3. Using the basics',
+      'sessions':         '4. Support sessions',
+      'preferences':      '5. Respecting preferences',
+      'responsibilities': '6. Your responsibilities',
+      'next':             '7. What\'s next?'
+    };
+
+    function showPage(pageId) {
+      // Hide all pages
+      pages.forEach(p => {
+        p.classList.remove('active');
+        p.hidden = true; // belt and braces
+      });
+      // Show target
+      const target = document.getElementById('page-' + pageId);
+      if (target) {
+        target.classList.add('active');
+        target.hidden = false;
+      }
+      // Update sidebar
+      sectionLinks.forEach(l => {
+        const isActive = l.dataset.page === pageId;
+        l.classList.toggle('active', isActive);
+        if (isActive) l.setAttribute('aria-current', 'page');
+        else l.removeAttribute('aria-current');
+      });
+      // Hide all sub-items, show the one for current page
+      document.querySelectorAll('.sidebar__sub-items').forEach(el => el.classList.remove('visible'));
+      const subItems = document.querySelector('[data-page="' + pageId + '"] + .sidebar__sub-items');
+      if (subItems) subItems.classList.add('visible');
+      // Update document title
+      const pageLabel = pageTitles[pageId] || pageId;
+      document.title = pageLabel + ' — Volition guide for org support staff';
+      // Update hash
+      history.pushState(null, '', '#' + pageId);
+      // Scroll to top of content and move focus for keyboard/screen reader users
+      const mainContent = document.getElementById('mainContent');
+      mainContent.scrollTo({ top: 0 });
+      window.scrollTo({ top: 0 });
+      mainContent.focus({ preventScroll: true });
+      // Close sidebar on mobile
+      if (window.innerWidth <= 768) closeSidebar();
+    }
+
+    // Initialise from hash
+    function initFromHash() {
+      const hash = location.hash.replace('#', '');
+      const valid = Array.from(sectionLinks).map(l => l.dataset.page);
+      if (hash && valid.includes(hash)) {
+        showPage(hash);
+      } else {
+        showPage('intro');
+      }
+    }
+
+    // Sidebar section links
+    sectionLinks.forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        showPage(link.dataset.page);
+      });
+    });
+
+    // Next-section buttons
+    document.querySelectorAll('.next-btn').forEach(btn => {
+      btn.addEventListener('click', () => showPage(btn.dataset.next));
+    });
+
+    // Was-helpful buttons (cosmetic)
+    document.querySelectorAll('.was-helpful__btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const group = btn.closest('.was-helpful');
+        group.querySelectorAll('.was-helpful__btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+      });
+    });
+
+    // Declare mobile vars here so closeSidebar() can reference them
+    // before initFromHash() fires (avoids TDZ crash on mobile viewports)
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+
+    window.addEventListener('popstate', initFromHash);
+    initFromHash();
+
+    // ============================================================
+    // GUIDE SELECTOR DROPDOWN
+    // ============================================================
+    const selectorBtn = document.getElementById('guideSelectorBtn');
+    const selectorDropdown = document.getElementById('guideSelectorDropdown');
+
+    function openDropdown() {
+      selectorDropdown.hidden = false;
+      selectorBtn.setAttribute('aria-expanded', 'true');
+      selectorDropdown.querySelector('a')?.focus();
+    }
+
+    function closeDropdown() {
+      selectorDropdown.hidden = true;
+      selectorBtn.setAttribute('aria-expanded', 'false');
+    }
+
+    selectorBtn.addEventListener('click', () => {
+      selectorDropdown.hidden ? openDropdown() : closeDropdown();
+    });
+
+    document.addEventListener('click', e => {
+      if (!selectorBtn.contains(e.target) && !selectorDropdown.contains(e.target)) {
+        closeDropdown();
+      }
+    });
+
+    selectorDropdown.querySelectorAll('a').forEach(opt => {
+      opt.addEventListener('click', e => {
+        e.preventDefault();
+        closeDropdown();
+        selectorBtn.focus();
+      });
+    });
+
+    // ============================================================
+    // MOBILE MENU
+    // ============================================================
+
+    function getSidebarFocusables() {
+      return Array.from(sidebar.querySelectorAll(
+        'a[href], button, input, [tabindex]:not([tabindex="-1"])'
+      )).filter(el => !el.hasAttribute('disabled'));
+    }
+
+    function openSidebar() {
+      sidebar.classList.add('open');
+      overlay.classList.add('visible');
+      menuToggle.setAttribute('aria-expanded', 'true');
+      menuToggle.setAttribute('aria-label', 'Close menu');
+      setTimeout(() => getSidebarFocusables()[0]?.focus(), 50);
+    }
+
+    function closeSidebar() {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('visible');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Open menu');
+      menuToggle.focus();
+    }
+
+    if (menuToggle) {
+      menuToggle.addEventListener('click', () => sidebar.classList.contains('open') ? closeSidebar() : openSidebar());
+      overlay.addEventListener('click', closeSidebar);
+    }
+
+    // Mobile header scroll shadow
+    const mobileHeader = document.getElementById('mobileHeader');
+    if (mobileHeader) {
+      const updateHeaderShadow = () => mobileHeader.classList.toggle('mobile-header--scrolled', window.scrollY > 0);
+      window.addEventListener('scroll', updateHeaderShadow, { passive: true });
+      updateHeaderShadow();
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        if (!selectorDropdown.hidden) { closeDropdown(); return; }
+        if (sidebar.classList.contains('open')) closeSidebar();
+      }
+      if (e.key === 'Tab' && sidebar.classList.contains('open') && window.innerWidth <= 768) {
+        const focusables = getSidebarFocusables();
+        if (!focusables.length) return;
+        const first = focusables[0], last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    });
+  </script>
+</body>
+</html>
