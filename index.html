@@ -1025,6 +1025,11 @@
       filter: drop-shadow(0 4px 12px rgba(0, 35, 43, 0.08));
     }
 
+    .step-nav-indicator {
+      display: flex;
+      justify-content: center;
+    }
+
     /* Page heading (pages 2–7) */
     .page-heading {
       font-size: 56px;
@@ -1533,6 +1538,12 @@
                   <p class="step-title">Review your circle of support</p>
                 </div>
                 <p class="step-body">You land on the support 'Circle' page, to see the Decision Maker(s) you have been assigned to support.</p>
+                <div class="step-nav-indicator">
+                  <div class="nav-screen-item__nav" aria-hidden="true">
+                    <span class="icon" style="-webkit-mask-image: url(volition-design-system/assets/icons/nav-circle-fill.svg); mask-image: url(volition-design-system/assets/icons/nav-circle-fill.svg);"></span>
+                    <span class="nav-screen-item__label">Circle</span>
+                  </div>
+                </div>
                 <p class="step-body">By default you can explore all of their general Volition preferences, their personal profile, and contact details.</p>
                 <div class="screen-trio">
                   <div class="screen-trio__item">
@@ -1555,8 +1566,15 @@
                   <p class="step-title">Complete your profile</p>
                 </div>
                 <p class="step-body">Select 'Menu', on the bottom right of the page, and choose 'Personal details' from your account options.</p>
+                <div class="step-nav-indicator">
+                  <div class="nav-screen-item__nav" aria-hidden="true">
+                    <span class="icon" style="-webkit-mask-image: url(volition-design-system/assets/icons/nav-menu-fill.svg); mask-image: url(volition-design-system/assets/icons/nav-menu-fill.svg);"></span>
+                    <span class="nav-screen-item__label">Menu</span>
+                  </div>
+                </div>
                 <p class="step-body">Decision Makers see your details when you are added to their Circle of Support. So a clear photo and full name can help build trust. Select 'Edit' to add your details.</p>
-                <div class="screen-shot">
+                <div class="screen-pair" style="gap: 48px;">
+                  <img src="ui_kits/guide-assets/menu.png" alt="Menu screen showing account options including Personal details" width="479" height="995">
                   <img src="ui_kits/guide-assets/Profile.png" alt="Personal details screen on iPhone" width="479" height="995">
                 </div>
               </li>
