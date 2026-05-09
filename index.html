@@ -435,6 +435,21 @@
 
     .guide-list li:last-child { margin-bottom: 0; }
 
+    /* Ordered numbered guide list */
+    .guide-list--ordered {
+      list-style: decimal;
+      padding-left: var(--space-5);
+      margin: 0;
+    }
+    .guide-list--ordered li {
+      margin-bottom: var(--space-2);
+    }
+    .guide-list--ordered li:last-child { margin-bottom: 0; }
+
+    /* Paragraph → list spacing (inside non-flex containers) */
+    p + ul, p + ol { margin-top: var(--sp-base); }
+    ul + p, ol + p { margin-top: var(--sp-base); }
+
     /* Info callout group (Getting started icons) */
     .info-callout-group {
       display: flex;
@@ -1359,8 +1374,7 @@
         <li><a class="sidebar__section-link" href="#" data-page="boundaries"><span class="sidebar__nav-num">3.</span><span class="sidebar__nav-label">Boundaries</span></a></li>
         <li><a class="sidebar__section-link" href="#" data-page="sessions"><span class="sidebar__nav-num">4.</span><span class="sidebar__nav-label">Support sessions</span></a></li>
         <li><a class="sidebar__section-link" href="#" data-page="preferences"><span class="sidebar__nav-num">5.</span><span class="sidebar__nav-label">Respecting preferences</span></a></li>
-        <li><a class="sidebar__section-link" href="#" data-page="responsibilities"><span class="sidebar__nav-num">6.</span><span class="sidebar__nav-label">Your responsibilities</span></a></li>
-        <li><a class="sidebar__section-link" href="#" data-page="next"><span class="sidebar__nav-num">7.</span><span class="sidebar__nav-label">What's next?</span></a></li>
+        <li><a class="sidebar__section-link" href="#" data-page="next"><span class="sidebar__nav-num">6.</span><span class="sidebar__nav-label">What's next?</span></a></li>
       </ol>
 
     </nav>
@@ -1801,102 +1815,107 @@
 
         <h1 class="page-heading">Support sessions</h1>
 
-        <!-- What is a support session? -->
-        <section class="guide-section" aria-labelledby="heading-sessions-intro">
-          <span class="guide-section__anchor" aria-hidden="true" id="sessions-intro"></span>
-          <div class="section-header">
-            <div class="section-number">12</div>
-            <h2 id="heading-sessions-intro">What is a support session?</h2>
-          </div>
+        <ul class="page-toc">
+          <li><a href="#how-to-start">How to start a session</a></li>
+          <li><a href="#placeholder">Placeholder</a></li>
+          <li><a href="#accounts-on-behalf">Accounts on behalf of a Decision Maker</a></li>
+        </ul>
 
-          <div class="content-block">
-            <p>A Support Session is a recorded digital interaction in Volition. When you start one, it logs the date and time, and connects your activity to the Decision Maker's record.</p>
-
-            <div class="highlight-box">
-              <p>Starting a session is important for the audit trail. It shows the Decision Maker exactly when and how you accessed their information.</p>
-            </div>
-
-            <p>Before your next visit, open the Vault and start a Support Session to spend a few minutes reading through the person's preferences. Arrive prepared. During or after your visit, check if they would like your support to add any more information into their preference library.</p>
-          </div>
-        </section>
-
-        <!-- During a session -->
-        <section class="guide-section" aria-labelledby="heading-sessions-during">
-          <span class="guide-section__anchor" aria-hidden="true" id="sessions-during"></span>
-          <div class="section-header">
-            <div class="section-number">13</div>
-            <h2 id="heading-sessions-during">During a session</h2>
-          </div>
-
-          <div class="phase-grid">
-            <div class="phase-card">
-              <div class="phase-card__heading">Before you arrive</div>
-              <p>Open the Vault. Start a Support Session. Read their preferences. Note what is important, what has changed, what you want to explore together.</p>
-            </div>
-            <div class="phase-card">
-              <div class="phase-card__heading">In the moment</div>
-              <p>Let the person lead. Reference their preferences naturally in conversation. Listen for new information or updates they would like to make.</p>
-            </div>
-            <div class="phase-card">
-              <div class="phase-card__heading">After the visit</div>
-              <p>Close the session. Update any preferences if they asked you to. If something important came up that is not yet recorded, add it — with their knowledge.</p>
-            </div>
-          </div>
-
-          <div class="highlight-box">
-            <p>The more consistently you do this, the richer the preference library becomes. That library is their voice.</p>
-          </div>
-        </section>
+        <hr class="content-divider">
 
         <!-- How to start a session -->
-        <section class="guide-section" aria-labelledby="heading-sessions-how">
-          <span class="guide-section__anchor" aria-hidden="true" id="sessions-how"></span>
-          <div class="section-header">
-            <div class="section-number">14</div>
-            <h2 id="heading-sessions-how">How to start a session</h2>
-          </div>
-
+        <section class="guide-section" aria-labelledby="heading-how-to-start">
+          <span class="guide-section__anchor" aria-hidden="true" id="how-to-start"></span>
           <div class="content-block">
-            <ol class="step-list">
-              <li>
-                <div class="step-header">
-                  <div class="step-num">1</div>
-                  <p class="step-title">Open the Vault and find the Decision Maker's profile</p>
-                </div>
-              </li>
-              <li>
-                <div class="step-header">
-                  <div class="step-num">2</div>
-                  <p class="step-title">Tap "Explore their Volition"</p>
-                </div>
-                <p class="step-body">Tap "Options" if needed, then tap "Explore their Volition."</p>
-              </li>
-              <li>
-                <div class="step-header">
-                  <div class="step-num">3</div>
-                  <p class="step-title">Confirm the session has started</p>
-                </div>
-                <p class="step-body">A purple screen confirms the support session has started.</p>
-              </li>
-              <li>
-                <div class="step-header">
-                  <div class="step-num">4</div>
-                  <p class="step-title">Explore their preferences</p>
-                </div>
-                <p class="step-body">Browse and view the preferences they have shared with you.</p>
-              </li>
-              <li>
-                <div class="step-header">
-                  <div class="step-num">5</div>
-                  <p class="step-title">Close the session when you're done</p>
-                </div>
-                <p class="step-body">Tap × in the top right to end the session.</p>
-              </li>
+            <h2 class="sub-section-heading" id="heading-how-to-start">How to start a session</h2>
+            <p class="page-intro-callout__quote">Access a Decision Maker's preferences at any time, from your Volition.</p>
+            <ol class="guide-list--ordered">
+              <li>Open your Volition and choose the Decision Maker's profile.</li>
+              <li>Select the big '<strong>[Name]'s Volition</strong>' button, and a purple screen will confirm that you are connecting to the Decision Maker's Volition.</li>
+              <li>You can now explore and view the preferences they have shared with you. Either use the search for specifics, or browse by category and topic.</li>
+              <li>Read their preferences and learn what is important to them. Consider how you can build this into the support you deliver. Look for updates. Arrive prepared. This is a simple approach to improving someone's experience of being supported.</li>
+              <li>If your permission set allows, you can also contribute or edit relevant information during your session. Please respect the Decision Maker's choices and only make changes when necessary and with consent.</li>
+              <li>When you are finished, close out by selecting '<strong>Exit</strong>' in the top right hand corner.</li>
             </ol>
+          </div>
+        </section>
 
-            <div class="card">
-              <h3 class="card__title">Viewing preferences</h3>
-              <p>Tap "Library" to see all preferences shared with you, organised into topics — "Communication", "About Me", "Health", and more. You can browse by topic or search. Some preferences include photos, recordings, or videos.</p>
+        <!-- Placeholder -->
+        <section class="guide-section" aria-labelledby="heading-placeholder">
+          <span class="guide-section__anchor" aria-hidden="true" id="placeholder"></span>
+          <div class="content-block">
+            <h2 class="sub-section-heading" id="heading-placeholder">Placeholder...</h2>
+
+            <div class="sub-section">
+              <p class="perm-type__label">Before each visit</p>
+              <p>Before each visit with a Decision Maker, open Volition and start a support session. Spend a few minutes becoming familiar with the preferences of the Decision Maker you are supporting.</p>
+            </div>
+
+            <div class="sub-section">
+              <p class="perm-type__label">During or after a visit</p>
+              <div>
+                <p>You can check if they would like your support to add any more information into their preference library.</p>
+                <p>If you have Contributor or Edit permissions, you will be able to do this on their behalf, or add your own insights in notes, add photos, and more.</p>
+              </div>
+            </div>
+
+            <div class="sub-section">
+              <h3>Viewers</h3>
+              <div>
+                <p>You can use the search to find specifics, or browse the categories and topics to see what's available.</p>
+                <p>Each category and sub topic shows a label if there are preferences available in there, and how many.</p>
+                <p>Tap any preference to read the full details.</p>
+                <p>Some preferences have photos, notes, voice recordings, or videos attached. These can give you a richer understanding of what the person is communicating.</p>
+                <p>Over time, the preference library also becomes an invaluable source of information and evidence to inform service planning and delivery.</p>
+              </div>
+            </div>
+
+            <div class="sub-section">
+              <h3>Contributors</h3>
+              <div>
+                <p>As a Contributor you can add your own insights and observations to the Decision Maker's Volition.</p>
+                <p>With the preference you want to contribute to, select 'Options' ...</p>
+              </div>
+              <ul class="guide-list">
+                <li>add a note</li>
+                <li>upload photos, videos, audio, and files from your device</li>
+                <li>search for photos to upload online</li>
+              </ul>
+            </div>
+
+            <div class="sub-section">
+              <h3>Editors:</h3>
+              <p>As an Editor you can do what Contributor can, and you can also create, update and modify preference records on behalf of a Decision Maker.</p>
+              <div class="highlight-box">
+                <p>Please respect a Decision Maker's choices and only make changes when necessary, with their consent.</p>
+              </div>
+              <div>
+                <p>If a Decision Maker wants to create a new preference, open a support session and tap "Create a Preference" from the home screen or library.</p>
+                <p>Work through the steps together. Let them lead — your role is to help, not to decide. Their preferences are their voice.</p>
+                <p>If you notice a preference that is out of date, during a support session you can also edit. Tap the preference that needs to be updated. Tap "Edit" at the bottom of the preference page. Make the change together with them — do not edit without their direction. Tap "Save" when done. Always discuss this with the Decision Maker first.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <hr class="content-divider">
+
+        <!-- Accounts on behalf -->
+        <section class="guide-section" aria-labelledby="heading-accounts-on-behalf">
+          <span class="guide-section__anchor" aria-hidden="true" id="accounts-on-behalf"></span>
+          <div class="content-block">
+            <h2 class="sub-section-heading" id="heading-accounts-on-behalf">Accounts on behalf</h2>
+            <div>
+              <p>If a Decision Maker needs support to get started with Volition, a Manager or Account Owner can create a profile on their behalf.</p>
+              <p>Creating a profile on behalf of a Decision Maker is a last resort. Before this happens the Manager or Account Owner should double check:</p>
+              <ul class="guide-list">
+                <li>If the Decision Maker already has a Volition profile</li>
+                <li>If the Decision Maker can create their own profile, with support.</li>
+              </ul>
+              <p>The organisation assumes the role of Admin, so in this situation, can assign viewer, contributor or editor roles. The Decision Maker is not actively using the app and is therefore unable to approve suggestions themselves.</p>
+            </div>
+            <div class="highlight-box">
+              <p>The organisation can invite the Decision Maker to take over their Profile at any point in the future.</p>
             </div>
           </div>
         </section>
@@ -2086,80 +2105,13 @@
           </div>
           <hr class="page-footer__divider">
         </div>
-        <button class="next-btn" type="button" data-next="responsibilities">Next: Your responsibilities <span aria-hidden="true">→</span></button>
+        <button class="next-btn" type="button" data-next="next">Next: What's next? <span aria-hidden="true">→</span></button>
 
         </div>
       </div><!-- /page-preferences -->
 
       <!-- ====================================================
-           PAGE 6: Your responsibilities
-           ==================================================== -->
-      <div class="guide-page" id="page-responsibilities">
-        <div class="page-body">
-
-        <h1 class="page-heading">Your responsibilities</h1>
-
-        <!-- Privacy -->
-        <section class="guide-section" aria-labelledby="heading-privacy">
-          <span class="guide-section__anchor" aria-hidden="true" id="privacy"></span>
-          <div class="section-header">
-            <div class="section-number">18</div>
-            <h2 id="heading-privacy">Privacy and your responsibilities</h2>
-          </div>
-
-          <div class="content-block">
-            <p>When you access someone's preferences through Volition, you are handling personal information. This comes with responsibilities.</p>
-
-            <ul class="guide-list">
-              <li>Only access information you need to do your job</li>
-              <li>Do not share someone's preferences outside of Volition without their permission</li>
-              <li>Do not copy or store preference information in personal devices or unapproved systems</li>
-              <li>If you notice incorrect information, tell your manager — do not edit without discussing it with the Decision Maker</li>
-            </ul>
-
-            <div class="highlight-box">
-              <p>Volition complies with the New Zealand Privacy Act 2020. For data security concerns, contact your Account Owner or <a href="mailto:info@volition.org.nz">info@volition.org.nz</a>.</p>
-            </div>
-          </div>
-        </section>
-
-        <!-- Activity Log -->
-        <section class="guide-section" aria-labelledby="heading-activity-log">
-          <span class="guide-section__anchor" aria-hidden="true" id="activity-log"></span>
-          <div class="section-header">
-            <div class="section-number">19</div>
-            <h2 id="heading-activity-log">The Activity Log</h2>
-          </div>
-
-          <div class="content-block">
-            <p>The Activity Log is a record of every action taken in a Decision Maker's account — who viewed it, who added something, who edited something, and when.</p>
-            <p>As a staff member, your actions in the Vault and app are recorded in the Activity Log. This is visible to the Decision Maker. This transparency is intentional.</p>
-
-            <div class="caution-box">
-              <p><strong>Decision Makers can see your activity.</strong> They can see your name in their Activity Log whenever you view or interact with their profile or preferences. They can also see your profile — your name and photo — in their Circle of Support.</p>
-              <p>If you would not want the person to know you accessed their information, ask yourself whether you should be accessing it.</p>
-            </div>
-          </div>
-        </section>
-
-        <div class="page-footer">
-          <hr class="page-footer__divider">
-          <div class="was-helpful">
-            <span class="was-helpful__label">Was this helpful?</span>
-            <div class="was-helpful__actions">
-              <button class="was-helpful__btn" type="button">Yes, thanks</button>
-              <button class="was-helpful__btn" type="button">Not really</button>
-            </div>
-          </div>
-          <hr class="page-footer__divider">
-        </div>
-        <button class="next-btn" type="button" data-next="next">Next: What's next? <span aria-hidden="true">→</span></button>
-
-        </div>
-      </div><!-- /page-responsibilities -->
-
-      <!-- ====================================================
-           PAGE 7: What's next?
+           PAGE 6: What's next?
            ==================================================== -->
       <div class="guide-page" id="page-next">
         <div class="page-body">
@@ -2327,8 +2279,7 @@
       'boundaries':       '3. Boundaries',
       'sessions':         '4. Support sessions',
       'preferences':      '5. Respecting preferences',
-      'responsibilities': '6. Your responsibilities',
-      'next':             '7. What\'s next?'
+      'next':             '6. What\'s next?'
     };
 
     function showPage(pageId) {
