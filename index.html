@@ -286,6 +286,48 @@
     }
     .role-entry__link:hover { color: var(--button-base); }
 
+    /* Page TOC (in-page anchor links) */
+    .page-toc {
+      list-style: disc;
+      padding-left: var(--space-5);
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+    .page-toc a {
+      color: var(--text-dark);
+      text-decoration: underline;
+      font-size: var(--fs-base);
+      line-height: var(--lh-base);
+    }
+
+    /* Content divider — between major sections */
+    .content-divider {
+      border: none;
+      border-top: 1px solid var(--divider-default);
+      margin: 0;
+    }
+
+    /* Permission type item (icon + label + description) */
+    .perm-type {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    .perm-type__header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+    .perm-type__label {
+      font-size: var(--fs-body-lg);
+      line-height: var(--lh-body-lg);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-dark);
+      margin: 0;
+    }
+
     /* Permission table */
     .perm-group {
       margin-bottom: 0;
@@ -1314,7 +1356,7 @@
           <a class="sidebar__section-link active" href="#" data-page="intro"><span class="sidebar__nav-num">1.</span><span class="sidebar__nav-label">Introduction</span></a>
         </li>
         <li><a class="sidebar__section-link" href="#" data-page="getting-started"><span class="sidebar__nav-num">2.</span><span class="sidebar__nav-label">Getting started</span></a></li>
-        <li><a class="sidebar__section-link" href="#" data-page="basics"><span class="sidebar__nav-num">3.</span><span class="sidebar__nav-label">Using the basics</span></a></li>
+        <li><a class="sidebar__section-link" href="#" data-page="boundaries"><span class="sidebar__nav-num">3.</span><span class="sidebar__nav-label">Boundaries</span></a></li>
         <li><a class="sidebar__section-link" href="#" data-page="sessions"><span class="sidebar__nav-num">4.</span><span class="sidebar__nav-label">Support sessions</span></a></li>
         <li><a class="sidebar__section-link" href="#" data-page="preferences"><span class="sidebar__nav-num">5.</span><span class="sidebar__nav-label">Respecting preferences</span></a></li>
         <li><a class="sidebar__section-link" href="#" data-page="responsibilities"><span class="sidebar__nav-num">6.</span><span class="sidebar__nav-label">Your responsibilities</span></a></li>
@@ -1604,95 +1646,129 @@
           </div>
           <hr class="page-footer__divider">
         </div>
-        <button class="next-btn" type="button" data-next="basics">Next: Using the basics <span aria-hidden="true">→</span></button>
+        <button class="next-btn" type="button" data-next="boundaries">Next: Boundaries <span aria-hidden="true">→</span></button>
 
         </div>
       </div><!-- /page-getting-started -->
 
       <!-- ====================================================
-           PAGE 3: Using the basics
+           PAGE 3: Boundaries
            ==================================================== -->
-      <div class="guide-page" id="page-basics">
+      <div class="guide-page" id="page-boundaries">
         <div class="page-body">
 
-        <h1 class="page-heading">Using the basics</h1>
+        <h1 class="page-heading">Boundaries</h1>
 
-        <!-- Support view -->
-        <section class="guide-section">
+        <ul class="page-toc">
+          <li><a href="#your-responsibility">Your responsibility</a></li>
+          <li><a href="#accountability">Accountability</a></li>
+          <li><a href="#permissions">Permissions</a></li>
+        </ul>
 
-          <p class="page-intro-subhead">Here is what you see when you log in.</p>
-
+        <!-- Your responsibility -->
+        <section class="guide-section" aria-labelledby="heading-your-responsibility">
+          <span class="guide-section__anchor" aria-hidden="true" id="your-responsibility"></span>
           <div class="content-block">
-
-            <div class="section-heading-with-icon">
-              <h2>Your Circle of Support</h2>
-              <span class="section-heading-icon" aria-hidden="true">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <circle cx="12" cy="8" r="3" stroke="currentColor" stroke-width="1.5"/>
-                  <circle cx="5" cy="9" r="2.5" stroke="currentColor" stroke-width="1.5"/>
-                  <circle cx="19" cy="9" r="2.5" stroke="currentColor" stroke-width="1.5"/>
-                  <path d="M2 19c0-2.76 2.24-5 5-5h10c2.76 0 5 2.24 5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                </svg>
-              </span>
+            <h2 class="sub-section-heading" id="heading-your-responsibility">Your responsibility</h2>
+            <p class="page-intro-callout__quote">When you access someone's preferences, you are handling personal information. This comes with responsibilities.</p>
+            <ul class="guide-list">
+              <li>Only access information you need to do your job.</li>
+              <li>Do not share someone's preferences outside of Volition without their permission.</li>
+              <li>Do not copy or store preference information in personal devices or unapproved systems.</li>
+              <li>If you notice information that seems incorrect, tell your manager — do not attempt to edit it without discussing it with the Decision Maker.</li>
+            </ul>
+            <div class="highlight-box">
+              <p>If you have any concern about data security, contact your organisation's Account Owner, or Volition at <a href="mailto:info@volition.org.nz">info@volition.org.nz</a>.</p>
             </div>
-            <p>When you have Decision Makers in your caseload, you can select a person's name or picture to see their profile, and explore their Volition.</p>
+            <p>Volition complies with the New Zealand Privacy Act 2020. Your organisation's agreement with Volition also sets out obligations for how data is handled.</p>
+          </div>
+        </section>
 
-            <!-- Circle of support screens: list + illustrated view side by side -->
-            <div class="screen-pair">
-              <img src="ui_kits/guide-assets/circle_supporting3.png" alt="Circle of support showing three Decision Makers" width="479" height="995">
-              <img src="ui_kits/guide-assets/circle_empty.png" alt="Circle of support illustrated view" width="479" height="995">
-            </div>
-            <!-- Person profile detail -->
-            <div class="screen-shot">
-              <img src="ui_kits/guide-assets/dm_profile.png" alt="Jennifer Carington's profile and Volition access on iPhone" width="479" height="995">
-            </div>
+        <hr class="content-divider">
 
-            <div class="section-heading-with-icon">
-              <h2>Menu</h2>
-              <span class="section-heading-icon" aria-hidden="true">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                </svg>
-              </span>
-            </div>
-            <p>Your Personal Details, activity log, passkey setup, feedback, and Supporter check-in.</p>
-
-            <!-- screen-menu image in Menu section -->
-            <div class="screen-shot">
-              <img src="ui_kits/guide-assets/menu.png" alt="Volition menu screen on iPhone" width="479" height="995">
+        <!-- Accountability -->
+        <section class="guide-section" aria-labelledby="heading-accountability">
+          <span class="guide-section__anchor" aria-hidden="true" id="accountability"></span>
+          <div class="content-block">
+            <h2 class="sub-section-heading" id="heading-accountability">Accountability</h2>
+            <p class="page-intro-callout__quote">Every action taken in a Decision Maker's account is recorded — who viewed, added or edited something, and when.</p>
+            <p>Recent activity is displayed at the bottom of each preference record, and a complete Activity section is available for each account, accessed from the Menu.</p>
+            <p>This transparency builds trust and gives Decision Makers visibility over how their information is being used. It also provides oversight for your organisation.</p>
+            <p>If a Decision Maker has questions about any activity in their Volition, please be ready to explain.</p>
+            <div class="highlight-box">
+              <p>If you would not want the person to know you accessed their information, ask yourself whether you should be accessing it.</p>
             </div>
           </div>
         </section>
 
-        <!-- The Vault -->
-        <section class="guide-section" aria-labelledby="heading-vault">
-          <span class="guide-section__anchor" aria-hidden="true" id="vault"></span>
-          <div class="section-header">
-            <div class="section-number">8</div>
-            <h2 id="heading-vault">The Vault</h2>
-          </div>
+        <hr class="content-divider">
 
+        <!-- Permissions -->
+        <section class="guide-section" aria-labelledby="heading-permissions">
+          <span class="guide-section__anchor" aria-hidden="true" id="permissions"></span>
           <div class="content-block">
-            <p>The Vault is the provider portal you see when you log into Volition. <strong>Hint: it has a purple background.</strong></p>
-            <p>It is a secure web-based tool your organisation uses to manage staff access and view Decision Maker profiles. This is where you will see and interact with the preferences of the people you support.</p>
-            <p>The Vault can be accessed by downloading the Volition app, or by logging into <a href="https://volition.tools" target="_blank" rel="noopener">volition.tools</a> on any internet-connected device.</p>
-          </div>
-        </section>
+            <h2 class="sub-section-heading" id="heading-permissions">Permissions</h2>
+            <p class="page-intro-callout__quote">Decision Makers control what you can see and do in their Volition.</p>
+            <p>As a supporter in their circle of support, by default you can view a Decision Maker's general preferences.</p>
+            <p>Ask your Manager if you need more access, as they can request different permissions on your behalf.</p>
+            <p>The Decision Maker can choose to approve or decline these requests. Do not ask a Decision Maker directly.</p>
 
-        <!-- The Volition App -->
-        <section class="guide-section" aria-labelledby="heading-app">
-          <span class="guide-section__anchor" aria-hidden="true" id="app"></span>
-          <div class="section-header">
-            <div class="section-number">9</div>
-            <h2 id="heading-app">The Volition app</h2>
-          </div>
+            <h3>What you see</h3>
 
-          <div class="content-block">
-            <p>The app is what Decision Makers see when they log into Volition. <strong>Hint: it has a tan background.</strong></p>
-            <p>From time to time you may need to navigate the app alongside the person you support — for example, to help them find a preference or update information.</p>
+            <div class="perm-type">
+              <div class="perm-type__header">
+                <span class="icon" aria-hidden="true" style="-webkit-mask-image: url(volition-design-system/assets/icons/visibility.svg); mask-image: url(volition-design-system/assets/icons/visibility.svg);"></span>
+                <p class="perm-type__label">General</p>
+              </div>
+              <p>By default you can view the Decision Maker's general preferences. You cannot see preferences they have marked as private.</p>
+            </div>
+
+            <div class="perm-type">
+              <div class="perm-type__header">
+                <span class="icon" aria-hidden="true" style="-webkit-mask-image: url(volition-design-system/assets/icons/library.svg); mask-image: url(volition-design-system/assets/icons/library.svg);"></span>
+                <p class="perm-type__label">All records</p>
+              </div>
+              <p>You can see all preferences, including private ones. The Decision Maker has specifically trusted you with this.</p>
+            </div>
 
             <div class="highlight-box">
-              <p>Both the Vault and the Volition app are two sides of the same tool. The difference is the perspective: <strong>the Vault is yours, the app is theirs.</strong></p>
+              <p>You cannot see someone's private preferences unless they specifically give you access.</p>
+              <p>Respect this boundary — private means private.</p>
+            </div>
+
+            <h3>What you do</h3>
+
+            <div class="perm-type">
+              <div class="perm-type__header">
+                <span class="icon" aria-hidden="true" style="-webkit-mask-image: url(volition-design-system/assets/icons/visibility.svg); mask-image: url(volition-design-system/assets/icons/visibility.svg);"></span>
+                <p class="perm-type__label">Viewer</p>
+              </div>
+              <p>By default, you can only view records.</p>
+            </div>
+
+            <div class="perm-type">
+              <div class="perm-type__header">
+                <span class="icon" aria-hidden="true" style="-webkit-mask-image: url(volition-design-system/assets/icons/note-add.svg); mask-image: url(volition-design-system/assets/icons/note-add.svg);"></span>
+                <p class="perm-type__label">Contributor</p>
+              </div>
+              <p>You can add notes and media to existing preferences.</p>
+            </div>
+
+            <div class="perm-type">
+              <div class="perm-type__header">
+                <span class="icon" aria-hidden="true" style="-webkit-mask-image: url(volition-design-system/assets/icons/edit.svg); mask-image: url(volition-design-system/assets/icons/edit.svg);"></span>
+                <p class="perm-type__label">Editor</p>
+              </div>
+              <p>You can create and edit preferences on behalf of the Decision Maker, with their agreement. The Decision Maker has specifically trusted you with this.</p>
+            </div>
+
+            <div class="highlight-box">
+              <p>What you see, and what you do, are separate permissions, so different combinations are possible to help you provide the right support.</p>
+              <p>For example, you could get:</p>
+              <ul class="guide-list">
+                <li>General editor access</li>
+                <li>All records contributor access</li>
+              </ul>
             </div>
           </div>
         </section>
@@ -1702,8 +1778,8 @@
           <div class="was-helpful">
             <span class="was-helpful__label">Was this helpful?</span>
             <div class="was-helpful__actions">
-              <button class="was-helpful__btn" type="button">Yes, thanks</button>
-              <button class="was-helpful__btn" type="button">Not really</button>
+              <button class="was-helpful__btn" type="button" aria-label="Yes, this page was helpful">Yes, thanks</button>
+              <button class="was-helpful__btn" type="button" aria-label="No, this page was not helpful">Not really</button>
             </div>
           </div>
           <hr class="page-footer__divider">
@@ -1711,7 +1787,7 @@
         <button class="next-btn" type="button" data-next="sessions">Next: Support sessions <span aria-hidden="true">→</span></button>
 
         </div>
-      </div><!-- /page-basics -->
+      </div><!-- /page-boundaries -->
 
       <!-- ====================================================
            PAGE 4: Support sessions
@@ -2244,7 +2320,7 @@
     const pageTitles = {
       'intro':            '1. Introduction',
       'getting-started':  '2. Getting started',
-      'basics':           '3. Using the basics',
+      'boundaries':       '3. Boundaries',
       'sessions':         '4. Support sessions',
       'preferences':      '5. Respecting preferences',
       'responsibilities': '6. Your responsibilities',
