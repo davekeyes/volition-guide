@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap">
-  <link rel="stylesheet" href="../volition-design-system/colors_and_type.css">
+  <link rel="stylesheet" href="volition-design-system/colors_and_type.css">
   <style>
     /* ============================================================
        WCAG AA CONTRAST AUDIT — Supporter theme (data-theme="supporter")
@@ -186,7 +186,8 @@
       line-height: var(--lh-body-lg);
       font-weight: var(--font-weight-semibold);
       color: var(--text-dark);
-      margin-bottom: var(--space-2);
+      margin: 0 0 var(--space-2);
+      padding: 0;
     }
 
     .card p + p { margin-top: var(--space-2); }
@@ -254,7 +255,7 @@
     .role-list {
       display: flex;
       flex-direction: column;
-      gap: var(--space-6);
+      gap: var(--space-4);
     }
 
     .role-entry__label {
@@ -262,12 +263,12 @@
       line-height: var(--lh-body-lg);
       font-weight: var(--font-weight-semibold);
       color: var(--text-dark);
-      margin: 0 0 var(--space-2);
+      margin: 0 0 var(--space-1);
       padding: 0;
     }
 
     .role-entry p {
-      margin: 0 0 var(--space-2);
+      margin: 0;
     }
 
     .role-entry__link {
@@ -875,12 +876,28 @@
       padding: 0;
     }
 
-    /* Intro illustration — full width */
-    .intro-illustration {
-      display: block;
+    /* Illustration frame — full width, fixed height, lavender fill */
+    .illustration-frame {
       width: 100%;
-      height: auto;
-      margin: 0;
+      height: 200px;
+      background: var(--bg-200);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .illustration-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .illustration-frame--tall {
+      height: 240px;
+    }
+    .illustration-frame--tall img {
+      width: auto;
+      height: 200px;
     }
 
     /* App screenshots */
@@ -942,10 +959,76 @@
       box-shadow: var(--elev-3);
     }
 
-    /* Page heading (pages 2–7) */
-    .page-heading {
+    /* Sub-section heading — "The basics", "Getting set up" etc. */
+    .sub-section-heading {
       font-size: var(--fs-hero);
       line-height: var(--lh-hero);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-dark);
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Icon — mask-based, inherits currentColor, references external SVG */
+    .icon {
+      display: block;
+      width: 24px;
+      height: 24px;
+      background-color: currentColor;
+      -webkit-mask-size: contain;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      mask-size: contain;
+      mask-repeat: no-repeat;
+      mask-position: center;
+      flex-shrink: 0;
+    }
+
+    /* Nav screen pair — two phones with icon pill + label above each */
+    .nav-screen-pair {
+      display: flex;
+      gap: 48px;
+      justify-content: center;
+      align-items: flex-start;
+      margin: 0;
+    }
+
+    .nav-screen-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .nav-screen-item__nav {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-dark);
+    }
+
+    .nav-screen-item__label {
+      font-size: var(--fs-body-lg);
+      line-height: var(--lh-body-lg);
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-dark);
+      margin: 0;
+      text-align: center;
+    }
+
+    .nav-screen-item img {
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 4px 12px rgba(0, 35, 43, 0.08));
+    }
+
+    /* Page heading (pages 2–7) */
+    .page-heading {
+      font-size: 56px;
+      line-height: 56px;
       font-weight: var(--font-weight-semibold);
       color: var(--text-dark);
       margin: 0;
@@ -1238,6 +1321,9 @@
     <!-- Main content -->
     <main class="main-content" id="mainContent" tabindex="-1">
 
+      <!-- Screen reader page-transition announcer (visually hidden) -->
+      <div id="pageAnnouncer" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+
       <!-- No results message -->
       <div class="no-results" id="noResults" aria-live="polite">
         No results found. Try a different search term.
@@ -1259,10 +1345,12 @@
 
           <!-- 1. Introduction -->
           <section class="guide-section" aria-labelledby="heading-intro">
-            <span class="guide-section__anchor" id="welcome-detail"></span>
+            <span class="guide-section__anchor" aria-hidden="true" id="welcome-detail"></span>
             <h2 id="heading-intro" class="page-section-heading">1. Introduction</h2>
             <p class="intro-lede">Volition is a digital preference app and tool for Supported Decision Making.</p>
-            <img src="guide-assets/volguidestaff_intro_illustration.png" alt="Volition brand illustration" class="intro-illustration" width="1307" height="876">
+            <div class="illustration-frame">
+              <img src="ui_kits/guide-assets/illust_supporter_and_decisionmaker.svg" alt="Illustration of a supporter and a Decision Maker looking at Volition together">
+            </div>
             <div class="content-block">
               <div class="sub-section">
                 <h3>For Decision Makers</h3>
@@ -1286,22 +1374,25 @@
 
           <!-- Supported Decision Making -->
           <section class="guide-section" aria-labelledby="heading-sdm">
-            <span class="guide-section__anchor" id="sdm"></span>
+            <span class="guide-section__anchor" aria-hidden="true" id="sdm"></span>
             <h2 id="heading-sdm" class="page-section-heading">Supported Decision Making</h2>
             <div class="content-block">
+              <p class="intro-lede">Supported Decision Making is an approach that keeps the person at the centre of their own life.</p>
+              <div class="illustration-frame">
+                <img src="ui_kits/guide-assets/illust_supported_decision_making.svg" alt="Illustration of Supported Decision Making — a person at the centre of their circle of support">
+              </div>
               <div class="sub-section">
-                <p class="intro-lede">Supported Decision Making is an approach that keeps the person at the centre of their own life.</p>
                 <p>It means supporting someone to make their own decisions. Not making decisions for them. This should be grounded in what is important to the person — sometimes called their "will and preference."</p>
               </div>
 
               <div class="sub-section">
-                <h3>Your role as a staff supporter</h3>
+                <h3>As a staff supporter</h3>
                 <p>Your role is to acknowledge, interpret, and respond to the person's expression of will and preference, whether communicated with words or behaviours.</p>
                 <p>This will often involve helping the person understand their options, the consequences, and act on their choices. Their voice comes first.</p>
               </div>
 
               <div class="card card--highlight">
-                <div class="card__title">Supported Decision Making is a human right</div>
+                <h3 class="card__title">Supported Decision Making is a human right</h3>
                 <p>Recognised under the United Nations Convention on the Rights of Persons with Disabilities (UNCRPD), which New Zealand has ratified.</p>
                 <p>The UNCRPD says that:</p>
                 <ul class="guide-list">
@@ -1317,39 +1408,37 @@
 
           <!-- Volition users -->
           <section class="guide-section" aria-labelledby="heading-whos-who">
-            <span class="guide-section__anchor" id="whos-who"></span>
+            <span class="guide-section__anchor" aria-hidden="true" id="whos-who"></span>
             <h2 id="heading-whos-who" class="page-section-heading">Volition users</h2>
-            <p class="intro-lede">People with care and support needs — Decision Makers — may have a variety of people providing different support.</p>
+            <p class="intro-lede">People with care and support needs — Decision Makers — often have a variety of people providing support.</p>
+            <div class="illustration-frame">
+              <img src="ui_kits/guide-assets/illust_volition_users.svg" alt="Illustration showing the different types of Volition users in a person's circle of support">
+            </div>
+            <p>Family, friends, professionals, organisations, providing constant, regular, occasional, or situational support.<br>There are a range of roles in Volition to cater for all.</p>
             <div class="role-list">
               <div class="role-entry">
                 <h3 class="role-entry__label">Decision Makers</h3>
                 <p>The people whose preferences the app is built around. They own their data and control who sees it.</p>
-                <a class="role-entry__link" href="#"><span class="role-entry__link__text">Decision Makers' guide to Volition</span> <span aria-hidden="true">→</span></a>
               </div>
               <div class="role-entry">
                 <h3 class="role-entry__label">Supporters</h3>
                 <p>Family, friends, or personal carers the Decision Maker has chosen to invite. Not employed by your organisation.</p>
-                <a class="role-entry__link" href="#"><span class="role-entry__link__text">Supporters' guide to Volition</span> <span aria-hidden="true">→</span></a>
               </div>
               <div class="role-entry">
                 <h3 class="role-entry__label">Guest supporters</h3>
-                <p>People invited to view certain preferences via a share link or QR code. No account needed, and access expires after seven days.</p>
-                <a class="role-entry__link" href="#"><span class="role-entry__link__text">Guest supporters' guide to Volition</span> <span aria-hidden="true">→</span></a>
+                <p>People invited temporarily to view certain preferences via a share link or QR code. No account needed, and access expires after seven days.</p>
               </div>
               <div class="role-entry">
-                <h3 class="role-entry__label">Org staff supporters (this is you)</h3>
-                <p>Support workers and similar roles, with access to the preferences the Decision Maker has chosen to share with the organisation.</p>
-                <a class="role-entry__link" href="#"><span class="role-entry__link__text">Org staff supporters' guide to Volition</span> <span aria-hidden="true">→</span></a>
+                <h3 class="role-entry__label">Org support staff (this guide is for you)</h3>
+                <p>Support workers with access to the preferences their allocated Decision Makers have chosen to share with the organisation.</p>
               </div>
               <div class="role-entry">
                 <h3 class="role-entry__label">Org managers</h3>
                 <p>Team leaders or coordinators who manage staff access within the organisation's Volition account.</p>
-                <a class="role-entry__link" href="#"><span class="role-entry__link__text">Org managers' guide to Volition</span> <span aria-hidden="true">→</span></a>
               </div>
               <div class="role-entry">
                 <h3 class="role-entry__label">Org account owners</h3>
                 <p>Responsible for the organisation's Volition account.</p>
-                <a class="role-entry__link" href="#"><span class="role-entry__link__text">Org account owners' guide to Volition</span> <span aria-hidden="true">→</span></a>
               </div>
             </div>
           </section>
@@ -1360,8 +1449,8 @@
             <div class="was-helpful">
               <span class="was-helpful__label">Was this helpful?</span>
               <div class="was-helpful__actions">
-                <button class="was-helpful__btn" type="button">Yes, thanks</button>
-                <button class="was-helpful__btn" type="button">Not really</button>
+                <button class="was-helpful__btn" type="button" aria-label="Yes, this page was helpful">Yes, thanks</button>
+                <button class="was-helpful__btn" type="button" aria-label="No, this page was not helpful">Not really</button>
               </div>
             </div>
             <hr class="page-footer__divider">
@@ -1377,77 +1466,92 @@
       <div class="guide-page" id="page-getting-started">
         <div class="page-body">
 
-        <h1 class="page-heading"><span class="page-heading__num">2.</span> Getting started</h1>
+        <h1 class="page-heading">Getting started</h1>
 
-        <div class="page-intro-callout">
-          <p class="page-intro-callout__quote">Your organisation's admin will email you an invitation to connect, from Volition.</p>
-          <p class="page-intro-callout__body">It is important to join using this invitation, so you are connected directly with your organisation.</p>
-        </div>
+        <!-- The basics -->
+        <section class="guide-section" aria-labelledby="heading-the-basics">
+          <span class="guide-section__anchor" aria-hidden="true" id="the-basics"></span>
+
+          <div class="content-block">
+            <h2 class="sub-section-heading" id="heading-the-basics">The basics</h2>
+            <p class="intro-lede">You have 2 main areas in your Volition.</p>
+            <p>Your '<strong>Circle</strong>' of Support links you to the people you are assigned to support, and '<strong>Menu</strong>' holds account options.</p>
+
+            <div class="nav-screen-pair">
+              <div class="nav-screen-item">
+                <div class="nav-screen-item__nav" aria-hidden="true">
+                  <span class="icon" style="-webkit-mask-image: url(volition-design-system/assets/icons/nav-circle-fill.svg); mask-image: url(volition-design-system/assets/icons/nav-circle-fill.svg);"></span>
+                  <span class="nav-screen-item__label">Circle</span>
+                </div>
+                <img src="ui_kits/guide-assets/circle_supporting3.png" alt="Circle of support home screen showing people you support" width="479" height="995">
+              </div>
+              <div class="nav-screen-item">
+                <div class="nav-screen-item__nav" aria-hidden="true">
+                  <span class="icon" style="-webkit-mask-image: url(volition-design-system/assets/icons/nav-menu-fill.svg); mask-image: url(volition-design-system/assets/icons/nav-menu-fill.svg);"></span>
+                  <span class="nav-screen-item__label">Menu</span>
+                </div>
+                <img src="ui_kits/guide-assets/menu.png" alt="Menu screen showing profile, check-in, and settings options" width="479" height="995">
+              </div>
+            </div>
+          </div>
+        </section>
 
         <!-- Getting started steps -->
         <section class="guide-section" aria-labelledby="heading-getting-started">
-          <span class="guide-section__anchor" id="getting-started"></span>
+          <span class="guide-section__anchor" aria-hidden="true" id="getting-started"></span>
 
           <div class="content-block">
+            <h2 class="sub-section-heading" id="heading-getting-started">Get set up</h2>
+
+            <div class="page-intro-callout">
+              <p class="page-intro-callout__quote">Your organisation's admin will email you an invitation to connect, from Volition.</p>
+              <p class="page-intro-callout__body">It is important to join using this invitation, so you are connected directly with your organisation.</p>
+            </div>
 
             <ol class="step-list">
               <li>
                 <div class="step-header">
                   <div class="step-num">1</div>
-                  <h3 class="step-title">Accept your invitation</h3>
+                  <p class="step-title">Accept your invitation</p>
                 </div>
                 <p class="step-body">Open the invitation email and click the 'Yes, I want to connect' link, to go to your Volition registration page.</p>
               </li>
               <li>
                 <div class="step-header">
                   <div class="step-num">2</div>
-                  <h3 class="step-title">Register your account</h3>
+                  <p class="step-title">Register your account</p>
                 </div>
-                <p class="step-body">Enter your name, work email and phone number, and if you agree to the terms of use, you can continue on.</p>
+                <p class="step-body">Enter your name, work email and phone number, agree to the terms of service, and continue. Okay! You are in.</p>
                 <div class="screen-pair" style="gap: 48px;">
-                  <img src="guide-assets/registration.png" alt="Join Volition registration screen on iPhone" width="479" height="995">
-                  <img src="guide-assets/registration_confirmation.png" alt="Registration confirmation — you are now connected with your organisation" width="479" height="995">
+                  <img src="ui_kits/guide-assets/registration.png" alt="Join Volition registration screen on iPhone" width="479" height="995">
+                  <img src="ui_kits/guide-assets/registration_confirmation.png" alt="Registration confirmation — you are now connected with your organisation" width="479" height="995">
                 </div>
                 <div class="info-callout-group">
                   <div class="info-callout">
                     <div class="info-callout__icon" aria-hidden="true">
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M3.06247 4.59621V11.5757C3.06249 13.7818 3.73101 15.9361 4.97992 17.7547C6.22882 19.5731 7.99947 20.9706 10.0585 21.7626L11.0127 22.1293C11.6482 22.3737 12.3517 22.3737 12.9872 22.1293L13.9415 21.7626C16.0005 20.9706 17.7711 19.5731 19.02 17.7547C20.269 15.9361 20.9375 13.7818 20.9375 11.5757V4.59621C20.9392 4.33357 20.8651 4.07601 20.7239 3.85452C20.5827 3.63303 20.3806 3.45703 20.1418 3.34771C17.575 2.22735 14.8005 1.66165 12 1.68762C9.19942 1.66165 6.42495 2.22735 3.85814 3.34771C3.61933 3.45703 3.41718 3.63303 3.27603 3.85452C3.13488 4.07601 3.06072 4.33357 3.06247 4.59621Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M12 15V11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M10.5 9.5C10.5 9.89782 10.658 10.2794 10.9393 10.5607C11.2206 10.842 11.6022 11 12 11C12.3978 11 12.7794 10.842 13.0607 10.5607C13.342 10.2794 13.5 9.89782 13.5 9.5C13.5 9.10218 13.342 8.72064 13.0607 8.43934C12.7794 8.15804 12.3978 8 12 8C11.6022 8 11.2206 8.15804 10.9393 8.43934C10.658 8.72064 10.5 9.10218 10.5 9.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                      </svg>
+                      <span class="icon" style="-webkit-mask-image: url(volition-design-system/assets/icons/shield-with-keyhole.svg); mask-image: url(volition-design-system/assets/icons/shield-with-keyhole.svg);"></span>
                     </div>
                     <p>You do not need a password. Volition uses email login links and passkeys to stay secure.</p>
                   </div>
                   <div class="info-callout">
                     <div class="info-callout__icon" aria-hidden="true">
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M15.4375 1.6875H8.5625C7.04372 1.6875 5.8125 2.91872 5.8125 4.4375V19.5625C5.8125 21.0813 7.04372 22.3125 8.5625 22.3125H15.4375C16.9563 22.3125 18.1875 21.0813 18.1875 19.5625V4.4375C18.1875 2.91872 16.9563 1.6875 15.4375 1.6875Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M5.8125 17.2705H18.1875" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                      </svg>
+                      <span class="icon" style="-webkit-mask-image: url(volition-design-system/assets/icons/phone.svg); mask-image: url(volition-design-system/assets/icons/phone.svg);"></span>
                     </div>
                     <div class="info-callout__content">
                       <p>Use the Volition app, or go to <strong>volition.tools</strong> on any web browser, using your work email.</p>
                       <div class="store-badges">
                         <a href="https://apps.apple.com/nz/app/volition/id6753151778" target="_blank" rel="noopener">
-                          <img src="guide-assets/badge-app-store.png" alt="Download on the App Store" width="135" height="45">
+                          <img src="ui_kits/guide-assets/badge-app-store.png" alt="Download on the App Store" width="135" height="45">
                         </a>
                         <a href="https://play.google.com/store/search?q=volition&c=apps" target="_blank" rel="noopener">
-                          <img src="guide-assets/badge-google-play.png" alt="Get it on Google Play" width="135" height="45">
+                          <img src="ui_kits/guide-assets/badge-google-play.png" alt="Get it on Google Play" width="135" height="45">
                         </a>
                       </div>
                     </div>
                   </div>
                   <div class="info-callout">
                     <div class="info-callout__icon" aria-hidden="true">
-                      <svg width="24" height="24" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 17.0625C12 18.5212 12.5795 19.9201 13.6109 20.9516C14.6424 21.983 16.0413 22.5625 17.5 22.5625C18.9587 22.5625 20.3576 21.983 21.3891 20.9516C22.4205 19.9201 23 18.5212 23 17.0625C23 15.6038 22.4205 14.2049 21.3891 13.1734C20.3576 12.142 18.9587 11.5625 17.5 11.5625C16.0413 11.5625 14.6424 12.142 13.6109 13.1734C12.5795 14.2049 12 15.6038 12 17.0625Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M19.931 17.0625H17.5V14.6324" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M8.5 17.5H2.5C2.10218 17.5 1.72064 17.342 1.43934 17.0607C1.15804 16.7794 1 16.3978 1 16V4.01501C1 3.61719 1.15804 3.23566 1.43934 2.95435C1.72064 2.67305 2.10218 2.51501 2.5 2.51501H16C16.3978 2.51501 16.7794 2.67305 17.0607 2.95435C17.342 3.23566 17.5 3.61719 17.5 4.01501V8.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M1 7H17.5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-                        <path d="M5.493 4V1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M12.993 4V1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                      </svg>
+                      <span class="icon" style="-webkit-mask-image: url(volition-design-system/assets/icons/calendar-clock.svg); mask-image: url(volition-design-system/assets/icons/calendar-clock.svg);"></span>
                     </div>
                     <p>You will remain logged in on that device for a year, unless you log yourself out sooner.</p>
                   </div>
@@ -1456,43 +1560,44 @@
               <li>
                 <div class="step-header">
                   <div class="step-num">3</div>
-                  <h3 class="step-title">Review your circle of support</h3>
+                  <p class="step-title">Review your circle of support</p>
                 </div>
-                <p class="step-body">You are in! On the support circle page you will see the Decision Maker(s) you have been assigned to support.</p>
-                <p class="step-body">You can view their Volition library of preferences, their personal profile, and contact details. By default you have view access to all of their general preferences.</p>
+                <p class="step-body">You land on the support 'Circle' page, to see the Decision Maker(s) you have been assigned to support.</p>
+                <p class="step-body">By default you can explore all of their general Volition preferences, their personal profile, and contact details.</p>
                 <div class="screen-trio">
                   <div class="screen-trio__item">
                     <p class="screen-trio__label">No one assigned</p>
-                    <img src="guide-assets/circle_empty.png" alt="Circle of support with no one assigned yet" width="479" height="995">
+                    <img src="ui_kits/guide-assets/circle_empty.png" alt="Circle of support with no one assigned yet" width="479" height="995">
                   </div>
                   <div class="screen-trio__item">
                     <p class="screen-trio__label">One to support</p>
-                    <img src="guide-assets/circle_one_dm.png" alt="Support circle showing one Decision Maker, Jennifer Carington" width="479" height="995">
+                    <img src="ui_kits/guide-assets/circle_one_dm.png" alt="Support circle showing one Decision Maker, Jennifer Carington" width="479" height="995">
                   </div>
                   <div class="screen-trio__item">
                     <p class="screen-trio__label">Many to support</p>
-                    <img src="guide-assets/circle_supporting3.png" alt="Circle of support showing multiple Decision Makers" width="479" height="995">
+                    <img src="ui_kits/guide-assets/circle_supporting3.png" alt="Circle of support showing multiple Decision Makers" width="479" height="995">
                   </div>
                 </div>
               </li>
               <li>
                 <div class="step-header">
                   <div class="step-num">4</div>
-                  <h3 class="step-title">Complete your profile</h3>
+                  <p class="step-title">Complete your profile</p>
                 </div>
-                <p class="step-body">From the Menu, navigate to your Personal details page. As Decision Makers will see your profile when you are added to their Circle of Support, a clear photo and full name helps build trust. Select 'Edit' to add your details.</p>
+                <p class="step-body">Select 'Menu', on the bottom right of the page, and choose 'Personal details' from your account options.</p>
+                <p class="step-body">Decision Makers see your details when you are added to their Circle of Support. So a clear photo and full name can help build trust. Select 'Edit' to add your details.</p>
                 <div class="screen-shot">
-                  <img src="guide-assets/Profile.png" alt="Personal details screen on iPhone" width="479" height="995">
+                  <img src="ui_kits/guide-assets/Profile.png" alt="Personal details screen on iPhone" width="479" height="995">
                 </div>
               </li>
               <li>
                 <div class="step-header">
                   <div class="step-num">5</div>
-                  <h3 class="step-title">Complete your check-in</h3>
+                  <p class="step-title">Complete your check-in</p>
                 </div>
-                <p class="step-body">From the Menu again, tap 'Supporter check-in' and answer three questions about your experience as a supporter. Complete this at the start of your time with Volition to establish a baseline.</p>
+                <p class="step-body">Back to the Menu, choose 'Supporter check-in' to answer 3 questions about your experience as a supporter. Complete this at the start of your time with Volition as something to build on and reflect on later.</p>
                 <div class="screen-shot">
-                  <img src="guide-assets/statement.png" alt="Supporter check-in statement screen on iPhone" width="479" height="995">
+                  <img src="ui_kits/guide-assets/statement.png" alt="Supporter check-in statement screen on iPhone" width="479" height="995">
                 </div>
               </li>
             </ol>
@@ -1531,7 +1636,7 @@
       <div class="guide-page" id="page-basics">
         <div class="page-body">
 
-        <h1 class="page-heading"><span class="page-heading__num">3.</span> Using the basics</h1>
+        <h1 class="page-heading">Using the basics</h1>
 
         <!-- Support view -->
         <section class="guide-section">
@@ -1555,12 +1660,12 @@
 
             <!-- Circle of support screens: list + illustrated view side by side -->
             <div class="screen-pair">
-              <img src="guide-assets/circle_supporting3.png" alt="Circle of support showing three Decision Makers" width="479" height="995">
-              <img src="guide-assets/circle_empty.png" alt="Circle of support illustrated view" width="479" height="995">
+              <img src="ui_kits/guide-assets/circle_supporting3.png" alt="Circle of support showing three Decision Makers" width="479" height="995">
+              <img src="ui_kits/guide-assets/circle_empty.png" alt="Circle of support illustrated view" width="479" height="995">
             </div>
             <!-- Person profile detail -->
             <div class="screen-shot">
-              <img src="guide-assets/dm_profile.png" alt="Jennifer Carington's profile and Volition access on iPhone" width="479" height="995">
+              <img src="ui_kits/guide-assets/dm_profile.png" alt="Jennifer Carington's profile and Volition access on iPhone" width="479" height="995">
             </div>
 
             <div class="section-heading-with-icon">
@@ -1575,14 +1680,14 @@
 
             <!-- screen-menu image in Menu section -->
             <div class="screen-shot">
-              <img src="guide-assets/menu.png" alt="Volition menu screen on iPhone" width="479" height="995">
+              <img src="ui_kits/guide-assets/menu.png" alt="Volition menu screen on iPhone" width="479" height="995">
             </div>
           </div>
         </section>
 
         <!-- The Vault -->
         <section class="guide-section" aria-labelledby="heading-vault">
-          <span class="guide-section__anchor" id="vault"></span>
+          <span class="guide-section__anchor" aria-hidden="true" id="vault"></span>
           <div class="section-header">
             <div class="section-number">8</div>
             <h2 id="heading-vault">The Vault</h2>
@@ -1597,7 +1702,7 @@
 
         <!-- The Volition App -->
         <section class="guide-section" aria-labelledby="heading-app">
-          <span class="guide-section__anchor" id="app"></span>
+          <span class="guide-section__anchor" aria-hidden="true" id="app"></span>
           <div class="section-header">
             <div class="section-number">9</div>
             <h2 id="heading-app">The Volition app</h2>
@@ -1635,11 +1740,11 @@
       <div class="guide-page" id="page-sessions">
         <div class="page-body">
 
-        <h1 class="page-heading"><span class="page-heading__num">4.</span> Support sessions</h1>
+        <h1 class="page-heading">Support sessions</h1>
 
         <!-- What is a support session? -->
         <section class="guide-section" aria-labelledby="heading-sessions-intro">
-          <span class="guide-section__anchor" id="sessions-intro"></span>
+          <span class="guide-section__anchor" aria-hidden="true" id="sessions-intro"></span>
           <div class="section-header">
             <div class="section-number">12</div>
             <h2 id="heading-sessions-intro">What is a support session?</h2>
@@ -1658,7 +1763,7 @@
 
         <!-- During a session -->
         <section class="guide-section" aria-labelledby="heading-sessions-during">
-          <span class="guide-section__anchor" id="sessions-during"></span>
+          <span class="guide-section__anchor" aria-hidden="true" id="sessions-during"></span>
           <div class="section-header">
             <div class="section-number">13</div>
             <h2 id="heading-sessions-during">During a session</h2>
@@ -1686,7 +1791,7 @@
 
         <!-- How to start a session -->
         <section class="guide-section" aria-labelledby="heading-sessions-how">
-          <span class="guide-section__anchor" id="sessions-how"></span>
+          <span class="guide-section__anchor" aria-hidden="true" id="sessions-how"></span>
           <div class="section-header">
             <div class="section-number">14</div>
             <h2 id="heading-sessions-how">How to start a session</h2>
@@ -1697,41 +1802,41 @@
               <li>
                 <div class="step-header">
                   <div class="step-num">1</div>
-                  <h3 class="step-title">Open the Vault and find the Decision Maker's profile</h3>
+                  <p class="step-title">Open the Vault and find the Decision Maker's profile</p>
                 </div>
               </li>
               <li>
                 <div class="step-header">
                   <div class="step-num">2</div>
-                  <h3 class="step-title">Tap "Explore their Volition"</h3>
+                  <p class="step-title">Tap "Explore their Volition"</p>
                 </div>
                 <p class="step-body">Tap "Options" if needed, then tap "Explore their Volition."</p>
               </li>
               <li>
                 <div class="step-header">
                   <div class="step-num">3</div>
-                  <h3 class="step-title">Confirm the session has started</h3>
+                  <p class="step-title">Confirm the session has started</p>
                 </div>
                 <p class="step-body">A purple screen confirms the support session has started.</p>
               </li>
               <li>
                 <div class="step-header">
                   <div class="step-num">4</div>
-                  <h3 class="step-title">Explore their preferences</h3>
+                  <p class="step-title">Explore their preferences</p>
                 </div>
                 <p class="step-body">Browse and view the preferences they have shared with you.</p>
               </li>
               <li>
                 <div class="step-header">
                   <div class="step-num">5</div>
-                  <h3 class="step-title">Close the session when you're done</h3>
+                  <p class="step-title">Close the session when you're done</p>
                 </div>
                 <p class="step-body">Tap × in the top right to end the session.</p>
               </li>
             </ol>
 
             <div class="card">
-              <div class="card__title">Viewing preferences</div>
+              <h3 class="card__title">Viewing preferences</h3>
               <p>Tap "Library" to see all preferences shared with you, organised into topics — "Communication", "About Me", "Health", and more. You can browse by topic or search. Some preferences include photos, recordings, or videos.</p>
             </div>
           </div>
@@ -1759,11 +1864,11 @@
       <div class="guide-page" id="page-preferences">
         <div class="page-body">
 
-        <h1 class="page-heading"><span class="page-heading__num">5.</span> Respecting preferences</h1>
+        <h1 class="page-heading">Respecting preferences</h1>
 
         <!-- Permissions: what you see -->
         <section class="guide-section" aria-labelledby="heading-permissions-view">
-          <span class="guide-section__anchor" id="permissions-view"></span>
+          <span class="guide-section__anchor" aria-hidden="true" id="permissions-view"></span>
           <div class="section-header">
             <div class="section-number">10</div>
             <h2 id="heading-permissions-view">Permissions — what you can see</h2>
@@ -1789,7 +1894,7 @@
 
         <!-- Permissions: what you do -->
         <section class="guide-section" aria-labelledby="heading-permissions-do">
-          <span class="guide-section__anchor" id="permissions-do"></span>
+          <span class="guide-section__anchor" aria-hidden="true" id="permissions-do"></span>
           <div class="section-header">
             <div class="section-number">11</div>
             <h2 id="heading-permissions-do">Permissions — what you can do</h2>
@@ -1813,7 +1918,7 @@
             </div>
 
             <div class="card card--highlight">
-              <div class="card__title">Requesting a permission change</div>
+              <h3 class="card__title">Requesting a permission change</h3>
               <p>If you believe you need a higher permission level, speak with your Manager. Do not ask the Decision Maker directly — this should go through your organisation's processes. The Decision Maker always has the final say.</p>
             </div>
           </div>
@@ -1821,7 +1926,7 @@
 
         <!-- Contributing -->
         <section class="guide-section" aria-labelledby="heading-contributing">
-          <span class="guide-section__anchor" id="contributing"></span>
+          <span class="guide-section__anchor" aria-hidden="true" id="contributing"></span>
           <div class="section-header">
             <div class="section-number">15</div>
             <h2 id="heading-contributing">Contributing notes and media</h2>
@@ -1829,9 +1934,9 @@
 
           <div class="content-block">
             <div class="card">
-              <div class="card__title">
+              <p class="card__title">
                 <span class="perm-badge perm-badge--elevated">Contributors<span class="sr-only"> (elevated permission required)</span></span>
-              </div>
+              </p>
               <p>As a Contributor you can add your own insights and observations.</p>
             </div>
 
@@ -1846,7 +1951,7 @@
 
         <!-- Editing -->
         <section class="guide-section" aria-labelledby="heading-editing">
-          <span class="guide-section__anchor" id="editing"></span>
+          <span class="guide-section__anchor" aria-hidden="true" id="editing"></span>
           <div class="section-header">
             <div class="section-number">16</div>
             <h2 id="heading-editing">Editing preferences</h2>
@@ -1854,9 +1959,9 @@
 
           <div class="content-block">
             <div class="card">
-              <div class="card__title">
+              <p class="card__title">
                 <span class="perm-badge perm-badge--elevated">Editors<span class="sr-only"> (elevated permission required)</span></span>
-              </div>
+              </p>
               <p>As an Editor you can also create, update, and modify preference records on behalf of a Decision Maker.</p>
             </div>
 
@@ -1878,7 +1983,7 @@
 
         <!-- Sharing -->
         <section class="guide-section" aria-labelledby="heading-sharing">
-          <span class="guide-section__anchor" id="sharing"></span>
+          <span class="guide-section__anchor" aria-hidden="true" id="sharing"></span>
           <div class="section-header">
             <div class="section-number">17</div>
             <h2 id="heading-sharing">Sharing information outside the Circle</h2>
@@ -1891,19 +1996,19 @@
               <li>
                 <div class="step-header">
                   <div class="step-num">1</div>
-                  <h3 class="step-title">Open the preference or group of preferences to share</h3>
+                  <p class="step-title">Open the preference or group of preferences to share</p>
                 </div>
               </li>
               <li>
                 <div class="step-header">
                   <div class="step-num">2</div>
-                  <h3 class="step-title">Tap "Share this preference"</h3>
+                  <p class="step-title">Tap "Share this preference"</p>
                 </div>
               </li>
               <li>
                 <div class="step-header">
                   <div class="step-num">3</div>
-                  <h3 class="step-title">Choose "Link" or "QR code"</h3>
+                  <p class="step-title">Choose "Link" or "QR code"</p>
                 </div>
                 <p class="step-body">The recipient can view the preference without a Volition account. Access expires after 7 days.</p>
               </li>
@@ -1933,11 +2038,11 @@
       <div class="guide-page" id="page-responsibilities">
         <div class="page-body">
 
-        <h1 class="page-heading"><span class="page-heading__num">6.</span> Your responsibilities</h1>
+        <h1 class="page-heading">Your responsibilities</h1>
 
         <!-- Privacy -->
         <section class="guide-section" aria-labelledby="heading-privacy">
-          <span class="guide-section__anchor" id="privacy"></span>
+          <span class="guide-section__anchor" aria-hidden="true" id="privacy"></span>
           <div class="section-header">
             <div class="section-number">18</div>
             <h2 id="heading-privacy">Privacy and your responsibilities</h2>
@@ -1961,7 +2066,7 @@
 
         <!-- Activity Log -->
         <section class="guide-section" aria-labelledby="heading-activity-log">
-          <span class="guide-section__anchor" id="activity-log"></span>
+          <span class="guide-section__anchor" aria-hidden="true" id="activity-log"></span>
           <div class="section-header">
             <div class="section-number">19</div>
             <h2 id="heading-activity-log">The Activity Log</h2>
@@ -2000,11 +2105,11 @@
       <div class="guide-page" id="page-next">
         <div class="page-body">
 
-        <h1 class="page-heading"><span class="page-heading__num">7.</span> What's next?</h1>
+        <h1 class="page-heading">What's next?</h1>
 
         <!-- Coming soon -->
         <section class="guide-section" aria-labelledby="heading-coming-soon">
-          <span class="guide-section__anchor" id="coming-soon"></span>
+          <span class="guide-section__anchor" aria-hidden="true" id="coming-soon"></span>
           <div class="section-header">
             <div class="section-number">20</div>
             <h2 id="heading-coming-soon">Features coming soon</h2>
@@ -2056,7 +2161,7 @@
 
         <!-- Support and feedback -->
         <section class="guide-section" aria-labelledby="heading-support-feedback">
-          <span class="guide-section__anchor" id="support-feedback"></span>
+          <span class="guide-section__anchor" aria-hidden="true" id="support-feedback"></span>
           <div class="section-header">
             <div class="section-number">21</div>
             <h2 id="heading-support-feedback">Support and feedback</h2>
@@ -2064,7 +2169,7 @@
 
           <div class="content-block">
             <div class="card card--highlight">
-              <div class="card__title">Give us your feedback</div>
+              <h3 class="card__title">Give us your feedback</h3>
               <p>Your experience using Volition in a real support context is invaluable. If something is not working, is confusing, or could be better — we want to know. Send feedback via email or log it through the menu in the Vault.</p>
             </div>
 
@@ -2091,7 +2196,7 @@
 
         <!-- FAQs -->
         <section class="guide-section" aria-labelledby="heading-faqs">
-          <span class="guide-section__anchor" id="faqs"></span>
+          <span class="guide-section__anchor" aria-hidden="true" id="faqs"></span>
           <div class="section-header">
             <div class="section-number">22</div>
             <h2 id="heading-faqs">Frequently asked questions</h2>
@@ -2195,6 +2300,12 @@
       document.title = pageLabel + ' — Volition guide for org support staff';
       // Update hash
       history.pushState(null, '', '#' + pageId);
+      // Announce page change to screen readers via aria-live region
+      const announcer = document.getElementById('pageAnnouncer');
+      if (announcer) {
+        announcer.textContent = '';                                    // reset so repeat nav re-fires
+        requestAnimationFrame(() => { announcer.textContent = pageLabel; });
+      }
       // Scroll to top of content and move focus for keyboard/screen reader users
       const mainContent = document.getElementById('mainContent');
       mainContent.scrollTo({ top: 0 });
