@@ -2369,6 +2369,19 @@
       btn.addEventListener('click', () => showPage(btn.dataset.next));
     });
 
+    // Page TOC anchor links — scroll without changing the URL hash
+    // (hash changes can trigger popstate → initFromHash → wrong page shown)
+    document.querySelectorAll('.page-toc a[href^="#"]').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.getElementById(link.getAttribute('href').slice(1));
+        if (!target) return;
+        const section = target.closest('.guide-section') || target;
+        const y = section.getBoundingClientRect().top + window.scrollY - 24;
+        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+      });
+    });
+
     // Was-helpful buttons (cosmetic)
     document.querySelectorAll('.was-helpful__btn').forEach(btn => {
       btn.addEventListener('click', () => {
