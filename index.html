@@ -186,7 +186,8 @@
       line-height: var(--lh-body-lg);
       font-weight: var(--font-weight-semibold);
       color: var(--text-dark);
-      margin-bottom: var(--space-2);
+      margin: 0 0 var(--space-2);
+      padding: 0;
     }
 
     .card p + p { margin-top: var(--space-2); }
@@ -254,7 +255,7 @@
     .role-list {
       display: flex;
       flex-direction: column;
-      gap: var(--space-4);
+      gap: var(--space-3);
     }
 
     .role-entry__label {
@@ -1320,6 +1321,9 @@
     <!-- Main content -->
     <main class="main-content" id="mainContent" tabindex="-1">
 
+      <!-- Screen reader page-transition announcer (visually hidden) -->
+      <div id="pageAnnouncer" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+
       <!-- No results message -->
       <div class="no-results" id="noResults" aria-live="polite">
         No results found. Try a different search term.
@@ -1341,7 +1345,7 @@
 
           <!-- 1. Introduction -->
           <section class="guide-section" aria-labelledby="heading-intro">
-            <span class="guide-section__anchor" id="welcome-detail"></span>
+            <span class="guide-section__anchor" aria-hidden="true" id="welcome-detail"></span>
             <h2 id="heading-intro" class="page-section-heading">1. Introduction</h2>
             <p class="intro-lede">Volition is a digital preference app and tool for Supported Decision Making.</p>
             <div class="illustration-frame">
@@ -1370,7 +1374,7 @@
 
           <!-- Supported Decision Making -->
           <section class="guide-section" aria-labelledby="heading-sdm">
-            <span class="guide-section__anchor" id="sdm"></span>
+            <span class="guide-section__anchor" aria-hidden="true" id="sdm"></span>
             <h2 id="heading-sdm" class="page-section-heading">Supported Decision Making</h2>
             <div class="content-block">
               <p class="intro-lede">Supported Decision Making is an approach that keeps the person at the centre of their own life.</p>
@@ -1388,7 +1392,7 @@
               </div>
 
               <div class="card card--highlight">
-                <div class="card__title">Supported Decision Making is a human right</div>
+                <h3 class="card__title">Supported Decision Making is a human right</h3>
                 <p>Recognised under the United Nations Convention on the Rights of Persons with Disabilities (UNCRPD), which New Zealand has ratified.</p>
                 <p>The UNCRPD says that:</p>
                 <ul class="guide-list">
@@ -1404,7 +1408,7 @@
 
           <!-- Volition users -->
           <section class="guide-section" aria-labelledby="heading-whos-who">
-            <span class="guide-section__anchor" id="whos-who"></span>
+            <span class="guide-section__anchor" aria-hidden="true" id="whos-who"></span>
             <h2 id="heading-whos-who" class="page-section-heading">Volition users</h2>
             <p class="intro-lede">People with care and support needs — Decision Makers — may have a variety of people providing different support.</p>
             <div class="role-list">
@@ -1441,8 +1445,8 @@
             <div class="was-helpful">
               <span class="was-helpful__label">Was this helpful?</span>
               <div class="was-helpful__actions">
-                <button class="was-helpful__btn" type="button">Yes, thanks</button>
-                <button class="was-helpful__btn" type="button">Not really</button>
+                <button class="was-helpful__btn" type="button" aria-label="Yes, this page was helpful">Yes, thanks</button>
+                <button class="was-helpful__btn" type="button" aria-label="No, this page was not helpful">Not really</button>
               </div>
             </div>
             <hr class="page-footer__divider">
@@ -1462,7 +1466,7 @@
 
         <!-- The basics -->
         <section class="guide-section" aria-labelledby="heading-the-basics">
-          <span class="guide-section__anchor" id="the-basics"></span>
+          <span class="guide-section__anchor" aria-hidden="true" id="the-basics"></span>
 
           <div class="content-block">
             <h2 class="sub-section-heading" id="heading-the-basics">The basics</h2>
@@ -1471,14 +1475,14 @@
 
             <div class="nav-screen-pair">
               <div class="nav-screen-item">
-                <div class="nav-screen-item__nav">
+                <div class="nav-screen-item__nav" aria-hidden="true">
                   <span class="icon" style="-webkit-mask-image: url(volition-design-system/assets/icons/nav-circle-fill.svg); mask-image: url(volition-design-system/assets/icons/nav-circle-fill.svg);"></span>
                   <span class="nav-screen-item__label">Circle</span>
                 </div>
                 <img src="ui_kits/guide-assets/circle_supporting3.png" alt="Circle of support home screen showing people you support" width="479" height="995">
               </div>
               <div class="nav-screen-item">
-                <div class="nav-screen-item__nav">
+                <div class="nav-screen-item__nav" aria-hidden="true">
                   <span class="icon" style="-webkit-mask-image: url(volition-design-system/assets/icons/nav-menu-fill.svg); mask-image: url(volition-design-system/assets/icons/nav-menu-fill.svg);"></span>
                   <span class="nav-screen-item__label">Menu</span>
                 </div>
@@ -1490,7 +1494,7 @@
 
         <!-- Getting started steps -->
         <section class="guide-section" aria-labelledby="heading-getting-started">
-          <span class="guide-section__anchor" id="getting-started"></span>
+          <span class="guide-section__anchor" aria-hidden="true" id="getting-started"></span>
 
           <div class="content-block">
             <h2 class="sub-section-heading" id="heading-getting-started">Getting set up</h2>
@@ -1504,14 +1508,14 @@
               <li>
                 <div class="step-header">
                   <div class="step-num">1</div>
-                  <h3 class="step-title">Accept your invitation</h3>
+                  <p class="step-title">Accept your invitation</p>
                 </div>
                 <p class="step-body">Open the invitation email and click the 'Yes, I want to connect' link, to go to your Volition registration page.</p>
               </li>
               <li>
                 <div class="step-header">
                   <div class="step-num">2</div>
-                  <h3 class="step-title">Register your account</h3>
+                  <p class="step-title">Register your account</p>
                 </div>
                 <p class="step-body">Enter your name, work email and phone number, and if you agree to the terms of use, you can continue on.</p>
                 <div class="screen-pair" style="gap: 48px;">
@@ -1552,7 +1556,7 @@
               <li>
                 <div class="step-header">
                   <div class="step-num">3</div>
-                  <h3 class="step-title">Review your circle of support</h3>
+                  <p class="step-title">Review your circle of support</p>
                 </div>
                 <p class="step-body">You are in! On the support circle page you will see the Decision Maker(s) you have been assigned to support.</p>
                 <p class="step-body">You can view their Volition library of preferences, their personal profile, and contact details. By default you have view access to all of their general preferences.</p>
@@ -1574,7 +1578,7 @@
               <li>
                 <div class="step-header">
                   <div class="step-num">4</div>
-                  <h3 class="step-title">Complete your profile</h3>
+                  <p class="step-title">Complete your profile</p>
                 </div>
                 <p class="step-body">From the Menu, navigate to your Personal details page. Decision Makers will see your profile when you are added to their Circle of Support, so a clear photo and full name helps build trust.</p>
                 <div class="screen-shot">
@@ -1584,7 +1588,7 @@
               <li>
                 <div class="step-header">
                   <div class="step-num">5</div>
-                  <h3 class="step-title">Complete your check-in</h3>
+                  <p class="step-title">Complete your check-in</p>
                 </div>
                 <p class="step-body">From the Menu again, tap 'Supporter check-in' and answer three questions about your experience as a supporter. Complete this at the start of your time with Volition to establish a baseline.</p>
                 <div class="screen-shot">
@@ -1678,7 +1682,7 @@
 
         <!-- The Vault -->
         <section class="guide-section" aria-labelledby="heading-vault">
-          <span class="guide-section__anchor" id="vault"></span>
+          <span class="guide-section__anchor" aria-hidden="true" id="vault"></span>
           <div class="section-header">
             <div class="section-number">8</div>
             <h2 id="heading-vault">The Vault</h2>
@@ -1693,7 +1697,7 @@
 
         <!-- The Volition App -->
         <section class="guide-section" aria-labelledby="heading-app">
-          <span class="guide-section__anchor" id="app"></span>
+          <span class="guide-section__anchor" aria-hidden="true" id="app"></span>
           <div class="section-header">
             <div class="section-number">9</div>
             <h2 id="heading-app">The Volition app</h2>
@@ -1735,7 +1739,7 @@
 
         <!-- What is a support session? -->
         <section class="guide-section" aria-labelledby="heading-sessions-intro">
-          <span class="guide-section__anchor" id="sessions-intro"></span>
+          <span class="guide-section__anchor" aria-hidden="true" id="sessions-intro"></span>
           <div class="section-header">
             <div class="section-number">12</div>
             <h2 id="heading-sessions-intro">What is a support session?</h2>
@@ -1754,7 +1758,7 @@
 
         <!-- During a session -->
         <section class="guide-section" aria-labelledby="heading-sessions-during">
-          <span class="guide-section__anchor" id="sessions-during"></span>
+          <span class="guide-section__anchor" aria-hidden="true" id="sessions-during"></span>
           <div class="section-header">
             <div class="section-number">13</div>
             <h2 id="heading-sessions-during">During a session</h2>
@@ -1782,7 +1786,7 @@
 
         <!-- How to start a session -->
         <section class="guide-section" aria-labelledby="heading-sessions-how">
-          <span class="guide-section__anchor" id="sessions-how"></span>
+          <span class="guide-section__anchor" aria-hidden="true" id="sessions-how"></span>
           <div class="section-header">
             <div class="section-number">14</div>
             <h2 id="heading-sessions-how">How to start a session</h2>
@@ -1793,41 +1797,41 @@
               <li>
                 <div class="step-header">
                   <div class="step-num">1</div>
-                  <h3 class="step-title">Open the Vault and find the Decision Maker's profile</h3>
+                  <p class="step-title">Open the Vault and find the Decision Maker's profile</p>
                 </div>
               </li>
               <li>
                 <div class="step-header">
                   <div class="step-num">2</div>
-                  <h3 class="step-title">Tap "Explore their Volition"</h3>
+                  <p class="step-title">Tap "Explore their Volition"</p>
                 </div>
                 <p class="step-body">Tap "Options" if needed, then tap "Explore their Volition."</p>
               </li>
               <li>
                 <div class="step-header">
                   <div class="step-num">3</div>
-                  <h3 class="step-title">Confirm the session has started</h3>
+                  <p class="step-title">Confirm the session has started</p>
                 </div>
                 <p class="step-body">A purple screen confirms the support session has started.</p>
               </li>
               <li>
                 <div class="step-header">
                   <div class="step-num">4</div>
-                  <h3 class="step-title">Explore their preferences</h3>
+                  <p class="step-title">Explore their preferences</p>
                 </div>
                 <p class="step-body">Browse and view the preferences they have shared with you.</p>
               </li>
               <li>
                 <div class="step-header">
                   <div class="step-num">5</div>
-                  <h3 class="step-title">Close the session when you're done</h3>
+                  <p class="step-title">Close the session when you're done</p>
                 </div>
                 <p class="step-body">Tap × in the top right to end the session.</p>
               </li>
             </ol>
 
             <div class="card">
-              <div class="card__title">Viewing preferences</div>
+              <h3 class="card__title">Viewing preferences</h3>
               <p>Tap "Library" to see all preferences shared with you, organised into topics — "Communication", "About Me", "Health", and more. You can browse by topic or search. Some preferences include photos, recordings, or videos.</p>
             </div>
           </div>
@@ -1859,7 +1863,7 @@
 
         <!-- Permissions: what you see -->
         <section class="guide-section" aria-labelledby="heading-permissions-view">
-          <span class="guide-section__anchor" id="permissions-view"></span>
+          <span class="guide-section__anchor" aria-hidden="true" id="permissions-view"></span>
           <div class="section-header">
             <div class="section-number">10</div>
             <h2 id="heading-permissions-view">Permissions — what you can see</h2>
@@ -1885,7 +1889,7 @@
 
         <!-- Permissions: what you do -->
         <section class="guide-section" aria-labelledby="heading-permissions-do">
-          <span class="guide-section__anchor" id="permissions-do"></span>
+          <span class="guide-section__anchor" aria-hidden="true" id="permissions-do"></span>
           <div class="section-header">
             <div class="section-number">11</div>
             <h2 id="heading-permissions-do">Permissions — what you can do</h2>
@@ -1909,7 +1913,7 @@
             </div>
 
             <div class="card card--highlight">
-              <div class="card__title">Requesting a permission change</div>
+              <h3 class="card__title">Requesting a permission change</h3>
               <p>If you believe you need a higher permission level, speak with your Manager. Do not ask the Decision Maker directly — this should go through your organisation's processes. The Decision Maker always has the final say.</p>
             </div>
           </div>
@@ -1917,7 +1921,7 @@
 
         <!-- Contributing -->
         <section class="guide-section" aria-labelledby="heading-contributing">
-          <span class="guide-section__anchor" id="contributing"></span>
+          <span class="guide-section__anchor" aria-hidden="true" id="contributing"></span>
           <div class="section-header">
             <div class="section-number">15</div>
             <h2 id="heading-contributing">Contributing notes and media</h2>
@@ -1925,9 +1929,9 @@
 
           <div class="content-block">
             <div class="card">
-              <div class="card__title">
+              <p class="card__title">
                 <span class="perm-badge perm-badge--elevated">Contributors<span class="sr-only"> (elevated permission required)</span></span>
-              </div>
+              </p>
               <p>As a Contributor you can add your own insights and observations.</p>
             </div>
 
@@ -1942,7 +1946,7 @@
 
         <!-- Editing -->
         <section class="guide-section" aria-labelledby="heading-editing">
-          <span class="guide-section__anchor" id="editing"></span>
+          <span class="guide-section__anchor" aria-hidden="true" id="editing"></span>
           <div class="section-header">
             <div class="section-number">16</div>
             <h2 id="heading-editing">Editing preferences</h2>
@@ -1950,9 +1954,9 @@
 
           <div class="content-block">
             <div class="card">
-              <div class="card__title">
+              <p class="card__title">
                 <span class="perm-badge perm-badge--elevated">Editors<span class="sr-only"> (elevated permission required)</span></span>
-              </div>
+              </p>
               <p>As an Editor you can also create, update, and modify preference records on behalf of a Decision Maker.</p>
             </div>
 
@@ -1974,7 +1978,7 @@
 
         <!-- Sharing -->
         <section class="guide-section" aria-labelledby="heading-sharing">
-          <span class="guide-section__anchor" id="sharing"></span>
+          <span class="guide-section__anchor" aria-hidden="true" id="sharing"></span>
           <div class="section-header">
             <div class="section-number">17</div>
             <h2 id="heading-sharing">Sharing information outside the Circle</h2>
@@ -1987,19 +1991,19 @@
               <li>
                 <div class="step-header">
                   <div class="step-num">1</div>
-                  <h3 class="step-title">Open the preference or group of preferences to share</h3>
+                  <p class="step-title">Open the preference or group of preferences to share</p>
                 </div>
               </li>
               <li>
                 <div class="step-header">
                   <div class="step-num">2</div>
-                  <h3 class="step-title">Tap "Share this preference"</h3>
+                  <p class="step-title">Tap "Share this preference"</p>
                 </div>
               </li>
               <li>
                 <div class="step-header">
                   <div class="step-num">3</div>
-                  <h3 class="step-title">Choose "Link" or "QR code"</h3>
+                  <p class="step-title">Choose "Link" or "QR code"</p>
                 </div>
                 <p class="step-body">The recipient can view the preference without a Volition account. Access expires after 7 days.</p>
               </li>
@@ -2033,7 +2037,7 @@
 
         <!-- Privacy -->
         <section class="guide-section" aria-labelledby="heading-privacy">
-          <span class="guide-section__anchor" id="privacy"></span>
+          <span class="guide-section__anchor" aria-hidden="true" id="privacy"></span>
           <div class="section-header">
             <div class="section-number">18</div>
             <h2 id="heading-privacy">Privacy and your responsibilities</h2>
@@ -2057,7 +2061,7 @@
 
         <!-- Activity Log -->
         <section class="guide-section" aria-labelledby="heading-activity-log">
-          <span class="guide-section__anchor" id="activity-log"></span>
+          <span class="guide-section__anchor" aria-hidden="true" id="activity-log"></span>
           <div class="section-header">
             <div class="section-number">19</div>
             <h2 id="heading-activity-log">The Activity Log</h2>
@@ -2100,7 +2104,7 @@
 
         <!-- Coming soon -->
         <section class="guide-section" aria-labelledby="heading-coming-soon">
-          <span class="guide-section__anchor" id="coming-soon"></span>
+          <span class="guide-section__anchor" aria-hidden="true" id="coming-soon"></span>
           <div class="section-header">
             <div class="section-number">20</div>
             <h2 id="heading-coming-soon">Features coming soon</h2>
@@ -2152,7 +2156,7 @@
 
         <!-- Support and feedback -->
         <section class="guide-section" aria-labelledby="heading-support-feedback">
-          <span class="guide-section__anchor" id="support-feedback"></span>
+          <span class="guide-section__anchor" aria-hidden="true" id="support-feedback"></span>
           <div class="section-header">
             <div class="section-number">21</div>
             <h2 id="heading-support-feedback">Support and feedback</h2>
@@ -2160,7 +2164,7 @@
 
           <div class="content-block">
             <div class="card card--highlight">
-              <div class="card__title">Give us your feedback</div>
+              <h3 class="card__title">Give us your feedback</h3>
               <p>Your experience using Volition in a real support context is invaluable. If something is not working, is confusing, or could be better — we want to know. Send feedback via email or log it through the menu in the Vault.</p>
             </div>
 
@@ -2187,7 +2191,7 @@
 
         <!-- FAQs -->
         <section class="guide-section" aria-labelledby="heading-faqs">
-          <span class="guide-section__anchor" id="faqs"></span>
+          <span class="guide-section__anchor" aria-hidden="true" id="faqs"></span>
           <div class="section-header">
             <div class="section-number">22</div>
             <h2 id="heading-faqs">Frequently asked questions</h2>
@@ -2291,6 +2295,12 @@
       document.title = pageLabel + ' — Volition guide for org support staff';
       // Update hash
       history.pushState(null, '', '#' + pageId);
+      // Announce page change to screen readers via aria-live region
+      const announcer = document.getElementById('pageAnnouncer');
+      if (announcer) {
+        announcer.textContent = '';                                    // reset so repeat nav re-fires
+        requestAnimationFrame(() => { announcer.textContent = pageLabel; });
+      }
       // Scroll to top of content and move focus for keyboard/screen reader users
       const mainContent = document.getElementById('mainContent');
       mainContent.scrollTo({ top: 0 });
