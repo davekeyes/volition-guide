@@ -486,46 +486,6 @@
       padding-top: var(--space-3);
     }
 
-    /* Coming soon chips */
-    .feature-list {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-3);
-      margin-bottom: 0;
-    }
-
-    .feature-item {
-      display: flex;
-      align-items: flex-start;
-      gap: var(--space-3);
-      background: var(--panel-highlight);
-      border: 1px solid var(--divider-default);
-      border-radius: var(--radius-md);
-      padding: var(--space-4);
-    }
-
-    .feature-dot {
-      width: 8px;
-      height: 8px;
-      min-width: 8px;
-      background: var(--divider-default);
-      border-radius: 50%;
-      margin-top: 6px;
-    }
-
-    .feature-name {
-      font-size: var(--fs-small);
-      font-weight: var(--font-weight-medium);
-      color: var(--text-dark);
-    }
-
-    .feature-desc {
-      font-size: var(--fs-small);
-      color: var(--text-mid);
-      margin: 0;
-      line-height: var(--lh-small);
-    }
-
     /* Search highlight */
     mark {
       background: var(--bg-200);
@@ -1850,46 +1810,47 @@
           <h2 class="sub-section-heading" id="heading-coming-soon">Features coming soon</h2>
 
           <div class="content-block">
-            <div class="sub-section">
-              <p>Volition is growing. You will be notified when new features are released. Your feedback helps shape what comes next.</p>
-              <div class="feature-list">
-              <div class="feature-item">
-                <div class="feature-dot"></div>
-                <div>
-                  <h3 class="feature-name">Goals module</h3>
-                  <p class="feature-desc">View and contribute to a Decision Maker's goals.</p>
-                </div>
+            <p>Volition is growing. You will be notified when new features are released. Your feedback helps shape what comes next.</p>
+
+            <div class="perm-type">
+              <div class="perm-type__header">
+                <span class="icon" aria-hidden="true" style="-webkit-mask-image: url(volition-design-system/assets/icons/decision.svg); mask-image: url(volition-design-system/assets/icons/decision.svg);"></span>
+                <h3 class="perm-type__label">Preference prompts</h3>
               </div>
-              <div class="feature-item">
-                <div class="feature-dot"></div>
-                <div>
-                  <h3 class="feature-name">Preference prompts</h3>
-                  <p class="feature-desc">Suggested questions to help Decision Makers build their library.</p>
-                </div>
-              </div>
-              <div class="feature-item">
-                <div class="feature-dot"></div>
-                <div>
-                  <h3 class="feature-name">My Health Passport</h3>
-                  <p class="feature-desc">A portable health summary to share with any health professional.</p>
-                </div>
-              </div>
-              <div class="feature-item">
-                <div class="feature-dot"></div>
-                <div>
-                  <h3 class="feature-name">My Advanced Care Plan</h3>
-                  <p class="feature-desc">A tool for recording wishes about future health and care.</p>
-                </div>
-              </div>
-              <div class="feature-item">
-                <div class="feature-dot"></div>
-                <div>
-                  <h3 class="feature-name">Speech to text and text to speech</h3>
-                  <p class="feature-desc">To make the app more accessible.</p>
-                </div>
-              </div>
+              <p>Suggested questions to help Decision Makers build their library.</p>
             </div>
-            </div><!-- /sub-section -->
+
+            <div class="perm-type">
+              <div class="perm-type__header">
+                <span class="icon" aria-hidden="true" style="-webkit-mask-image: url(volition-design-system/assets/icons/trophy.svg); mask-image: url(volition-design-system/assets/icons/trophy.svg);"></span>
+                <h3 class="perm-type__label">Goals module</h3>
+              </div>
+              <p>View and contribute to a Decision Maker's goals.</p>
+            </div>
+
+            <div class="perm-type">
+              <div class="perm-type__header">
+                <span class="icon" aria-hidden="true" style="-webkit-mask-image: url(volition-design-system/assets/icons/volunteer-activism.svg); mask-image: url(volition-design-system/assets/icons/volunteer-activism.svg);"></span>
+                <h3 class="perm-type__label">My Health Passport</h3>
+              </div>
+              <p>A portable health summary to share with any health professional.</p>
+            </div>
+
+            <div class="perm-type">
+              <div class="perm-type__header">
+                <span class="icon" aria-hidden="true" style="-webkit-mask-image: url(volition-design-system/assets/icons/shield-with-heart.svg); mask-image: url(volition-design-system/assets/icons/shield-with-heart.svg);"></span>
+                <h3 class="perm-type__label">My Advanced Care Plan</h3>
+              </div>
+              <p>A tool for recording wishes about future health and care.</p>
+            </div>
+
+            <div class="perm-type">
+              <div class="perm-type__header">
+                <span class="icon" aria-hidden="true" style="-webkit-mask-image: url(volition-design-system/assets/icons/record-voice-over.svg); mask-image: url(volition-design-system/assets/icons/record-voice-over.svg);"></span>
+                <h3 class="perm-type__label">Speech to text and text to speech</h3>
+              </div>
+              <p>To make the app more accessible.</p>
+            </div>
           </div>
         </section>
 
