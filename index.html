@@ -20,19 +20,18 @@
          #4E4285 (--text-mid / lavender-600) on #F0EEE9 (--sand-100):    7.42:1
          #4E4285 (--text-mid) on #FAF9F7 (--panel-highlight):            8.17:1
          #FAF9F7 (--text-inverted) on #43396F (--button-base):           9.72:1  (sidebar active, step-num)
-         #6F1900 (--rose-800) on #F5E6E6 (--rose-100 / caution-box bg): 9.56:1
          #7567B8 (--text-light / lavender-500) on #FAF9F7 (panel-highlight): 4.55:1 (just passes)
 
        FIXED:
-         .no-results and .phase-card__heading changed from --text-light to --text-mid (7.42:1).
+         .no-results changed from --text-light to --text-mid (7.42:1).
 
        FIXED — UI component borders (WCAG 1.4.11, non-text contrast, 3:1 required):
          Interactive element borders (.menu-toggle, .faq-item, .next-btn) changed to
          --button-mid (#7567B8 = lavender-500, 4.13:1 on sand-100). Passes 3:1. ✓
 
        DECORATIVE (exempt from 1.4.11 — visual separators, non-interactive containers):
-         --divider-default (#B6ACE3, 1.81:1): sidebar border-right, section-header, perm-group,
-         perm-item, phase-card, contact-card, faq-answer, guide-selector dropdown & options.
+         --divider-default (#B6ACE3, 1.81:1): sidebar border-right, contact-card, faq-answer,
+         guide-selector dropdown & options.
          These are not the sole visual indicator of an interactive component.
        ============================================================ */
 
@@ -321,65 +320,6 @@
       margin: 0;
     }
 
-    /* Permission table */
-    .perm-group {
-      margin-bottom: 0;
-    }
-
-    .perm-group__label {
-      font-size: var(--fs-small);
-      font-weight: var(--font-weight-semibold);
-      color: var(--text-mid);
-      margin-bottom: var(--space-3);
-      padding-bottom: var(--space-2);
-      border-bottom: 1px solid var(--divider-default);
-    }
-
-    .perm-item {
-      display: flex;
-      gap: var(--space-4);
-      padding: var(--space-3) 0;
-      border-bottom: 1px solid var(--divider-default);
-      align-items: flex-start;
-    }
-
-    .perm-item:last-child { border-bottom: none; }
-
-    .perm-badge {
-      display: inline-flex;
-      align-items: center;
-      min-width: 120px;
-      padding: var(--space-1) var(--space-3);
-      border-radius: var(--radius-pill);
-      font-size: var(--fs-caption);
-      font-weight: var(--font-weight-semibold);
-      white-space: nowrap;
-    }
-
-    .perm-badge--default {
-      background: var(--bg-200);
-      color: var(--button-base);
-    }
-
-    .perm-badge--elevated {
-      background: var(--bg-200);
-      color: var(--button-base);
-    }
-
-    .perm-badge__default-tag {
-      margin-left: 4px;
-      opacity: 0.7;
-      font-size: var(--fs-caption);
-      font-weight: var(--font-weight-regular);
-    }
-
-    .perm-desc {
-      font-size: var(--fs-small);
-      color: var(--text-mid);
-      flex: 1;
-      line-height: var(--lh-small);
-    }
-
     /* Highlight box */
     .highlight-box {
       background: var(--panel-highlight);
@@ -399,23 +339,6 @@
     .highlight-box p + p { margin-top: var(--space-2); }
     .highlight-box ul { padding-left: var(--space-5); margin-top: var(--space-2); }
 
-    /* Warning box */
-    .caution-box {
-      background: var(--status-danger-bg);
-      border-left: 4px solid var(--error-default);
-      border-radius: 0 var(--radius-md) var(--radius-md) 0;
-      padding: var(--space-4) var(--space-5);
-      margin: 0;
-    }
-
-    .caution-box p {
-      font-size: var(--fs-small);
-      color: var(--rose-800);
-      margin: 0;
-      line-height: var(--lh-small);
-    }
-    .caution-box p + p { margin-top: var(--space-2); }
-
     /* Bullet list */
     .guide-list {
       padding-left: var(--space-5);
@@ -428,18 +351,7 @@
 
     .guide-list li:last-child { margin-bottom: 0; }
 
-    /* Ordered numbered guide list */
     .guide-list--top-space { margin-top: var(--space-4); }
-
-    .guide-list--ordered {
-      list-style: decimal;
-      padding-left: var(--space-5);
-      margin: 0;
-    }
-    .guide-list--ordered li {
-      margin-bottom: var(--space-2);
-    }
-    .guide-list--ordered li:last-child { margin-bottom: 0; }
 
     /* Paragraph → list spacing (inside non-flex containers) */
     p + ul, p + ol { margin-top: var(--sp-base); }
@@ -485,35 +397,6 @@
       margin-top: 0;
     }
     .store-badges img { display: block; }
-
-    /* Phase cards (before/during/after) */
-    .phase-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--space-3);
-      margin-bottom: var(--space-4);
-    }
-
-    .phase-card {
-      background: var(--panel-highlight);
-      border: 1px solid var(--divider-default);
-      border-radius: var(--radius-md);
-      padding: var(--space-4);
-    }
-
-    .phase-card__heading {
-      font-size: var(--fs-small);
-      font-weight: var(--font-weight-semibold);
-      color: var(--text-mid);
-      margin-bottom: var(--space-3);
-    }
-
-    .phase-card p {
-      font-size: var(--fs-small);
-      color: var(--text-mid);
-      margin: 0;
-      line-height: var(--lh-small);
-    }
 
     /* Contact cards */
     .contact-grid {
@@ -793,25 +676,6 @@
     }
     .sidebar__section-link.active:hover { background: var(--bg-800); color: var(--text-inverted); opacity: 1; }
 
-    /* Sidebar sub-items */
-    .sidebar__sub-items {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: none;
-    }
-    .sidebar__sub-items.visible { display: block; }
-    .sidebar__sub-link {
-      display: flex;
-      align-items: center;
-      height: 44px;
-      padding: 0 24px 0 48px;
-      font-size: var(--fs-body-lg);
-      color: var(--text-mid);
-      text-decoration: none;
-    }
-    .sidebar__sub-link:hover { background: var(--panel-highlight); }
-
     /* Guide pages */
     .guide-page { display: none; }
     .guide-page.active { display: block; }
@@ -843,42 +707,6 @@
       margin: 0;
     }
 
-    /* Page 3 intro heading */
-    .page-intro-subhead {
-      font-size: var(--fs-xl);
-      line-height: var(--lh-xl);
-      font-weight: var(--font-weight-semibold);
-      color: var(--text-dark);
-      margin: 0;
-    }
-
-    /* Circle of support heading with inline icon */
-    .section-heading-with-icon {
-      display: flex;
-      align-items: center;
-      gap: var(--space-4);
-      margin-bottom: 0;
-    }
-    .section-heading-with-icon h2 {
-      margin: 0;
-      font-size: var(--fs-body-lg);
-      font-weight: var(--font-weight-semibold);
-      line-height: var(--lh-body-lg);
-      color: var(--text-dark);
-    }
-    .section-heading-icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 56px;
-      height: 56px;
-      flex-shrink: 0;
-      background: var(--panel-highlight);
-      border-radius: 50%;
-      padding: 16px;
-      color: var(--text-dark);
-    }
-
     .page-divider {
       border: none;
       height: 1px;
@@ -886,9 +714,6 @@
       border-radius: var(--radius-pill);
       margin: 0;  /* page-body gap handles spacing */
     }
-
-    /* Page 1 intro header */
-    .page-intro-header { /* padding handled by page-body */ }
 
     .guide-title {
       font-size: 56px;
@@ -944,14 +769,6 @@
       height: 100%;
       object-fit: contain;
     }
-    .illustration-frame--tall {
-      height: 240px;
-    }
-    .illustration-frame--tall img {
-      width: auto;
-      height: 200px;
-    }
-
     /* App screenshots */
     .screen-shot {
       display: flex;
@@ -964,7 +781,7 @@
       border-radius: 16px;
       box-shadow: var(--elev-3);
     }
-    .screen-shot--wide img { max-width: 450px; }
+    .screen-pair--wide { gap: 48px; }
 
     /* Two phones side by side */
     .screen-pair {
@@ -1037,52 +854,6 @@
       flex-shrink: 0;
     }
 
-    /* Nav screen pair — two phones with icon pill + label above each */
-    .nav-screen-pair {
-      display: flex;
-      gap: 48px;
-      justify-content: center;
-      align-items: flex-start;
-      margin: 0;
-    }
-
-    .nav-screen-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-      flex: 1;
-      min-width: 0;
-    }
-
-    .nav-screen-item__nav {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      color: var(--text-dark);
-    }
-
-    .nav-screen-item__label {
-      font-size: var(--fs-body-lg);
-      line-height: var(--lh-body-lg);
-      font-weight: var(--font-weight-semibold);
-      color: var(--text-dark);
-      margin: 0;
-      text-align: center;
-    }
-
-    .nav-screen-item img {
-      width: 100%;
-      height: auto;
-      filter: drop-shadow(0 4px 12px rgba(0, 35, 43, 0.08));
-    }
-
-    .step-nav-indicator {
-      display: flex;
-      justify-content: center;
-    }
-
     /* Page heading (pages 2–7) */
     .page-heading {
       font-size: 56px;
@@ -1092,8 +863,6 @@
       margin: 0;
       padding: 0;  /* page-body handles padding */
     }
-    .page-heading__num { margin-right: var(--space-1); }
-
     /* Page footer */
     .page-footer {
       padding: 0;
@@ -1223,15 +992,6 @@
       .guide-title { font-size: var(--fs-hero); line-height: var(--lh-hero); }
       .page-heading { font-size: var(--fs-xxl); line-height: var(--lh-xxl); }
 
-      /* Permission badge + description wrap on narrow screens */
-      .perm-item { flex-wrap: wrap; }
-
-      /* Phase cards: 2-column at tablet, 1-column handled at 480px */
-      .phase-grid { grid-template-columns: repeat(2, 1fr); }
-
-      /* Wide screenshot (circle of support) fits mobile width */
-      .screen-shot--wide img { max-width: 100%; }
-
       /* Screen pair tightens gap on narrow screens */
       .screen-pair { gap: var(--space-2); }
       .screen-pair img { width: 140px; }
@@ -1248,13 +1008,10 @@
       .was-helpful { text-align: center; }
       .was-helpful__label { text-align: left; }
 
-      /* Section-heading-with-icon — keep readable at narrow width */
-      .section-heading-with-icon { flex-wrap: wrap; }
     }
 
     @media (max-width: 480px) {
       .contact-grid { grid-template-columns: 1fr; }
-      .phase-grid { grid-template-columns: 1fr; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1536,15 +1293,15 @@
         <h1 class="page-heading">Getting started</h1>
 
         <ul class="page-toc">
-          <li><a href="#heading-getting-started">Get set up</a></li>
+          <li><a href="#get-set-up">Get set up</a></li>
           <li><a href="#get-connected">Get connected</a></li>
         </ul>
 
         <hr class="content-divider">
 
         <!-- Getting started steps -->
-        <section class="guide-section" aria-labelledby="heading-getting-started">
-          <h2 id="heading-getting-started" class="sub-section-heading">Get set up</h2>
+        <section class="guide-section" aria-labelledby="get-set-up">
+          <h2 id="get-set-up" class="sub-section-heading">Get set up</h2>
 
           <div class="content-block">
             <div class="page-intro-callout">
@@ -1566,7 +1323,7 @@
                   <p class="step-title">Register your account</p>
                 </div>
                 <p class="step-body">Enter your name, work email and phone number, agree to the terms of service, and continue. Okay! You are in.</p>
-                <div class="screen-pair" style="gap: 48px;">
+                <div class="screen-pair screen-pair--wide">
                   <img src="ui_kits/guide-assets/registration.png" alt="Join Volition registration screen on iPhone" width="479" height="995">
                   <img src="ui_kits/guide-assets/registration_confirmation.png" alt="Registration confirmation — you are now connected with your organisation" width="479" height="995">
                 </div>
@@ -1635,7 +1392,7 @@
                   <span class="icon" aria-hidden="true" style="-webkit-mask-image: url(volition-design-system/assets/icons/nav-menu-fill.svg); mask-image: url(volition-design-system/assets/icons/nav-menu-fill.svg);"></span>
                 </div>
                 <p class="step-body">Decision Makers see your details when you are added to their Circle of Support. So a clear photo and full name can help build trust. Select 'Edit' to add your details.</p>
-                <div class="screen-pair" style="gap: 48px;">
+                <div class="screen-pair screen-pair--wide">
                   <img src="ui_kits/guide-assets/menu.png" alt="Menu screen showing account options including Personal details" width="479" height="995">
                   <img src="ui_kits/guide-assets/Profile.png" alt="Personal details screen on iPhone" width="479" height="995">
                 </div>
@@ -2021,7 +1778,7 @@
                 <li><strong>Use camera</strong> (if on mobile) to take photos or video</li>
                 <li><strong>Upload files</strong>, like photos, video, or audio</li>
               </ul>
-              <div class="screen-pair" style="gap: 48px;">
+              <div class="screen-pair screen-pair--wide">
                 <img src="ui_kits/guide-assets/contributors1.png" alt="Preference detail screen in a support session" width="479" height="1039">
                 <img src="ui_kits/guide-assets/contributors2.png" alt="Options dialog showing Add a note, Find a photo, Use camera and Upload files" width="479" height="995">
               </div>
@@ -2046,7 +1803,7 @@
                 </div>
               </div>
               <p>Work through the steps together. Let them lead — your role is to help. Their preferences are their voice. If a Decision Maker wants to add, update or simply change details in a preference, you are able edit it. Select the preference and select the '<strong>Options</strong>' button, then select '<strong>Edit</strong>'.</p>
-              <div class="screen-pair" style="gap: 48px;">
+              <div class="screen-pair screen-pair--wide">
                 <img src="ui_kits/guide-assets/editors4.png" alt="Preference detail screen showing a completed preference with the Options button" width="479" height="1039">
                 <img src="ui_kits/guide-assets/editors5.png" alt="Preference options dialog showing Edit, Add a note, Find a photo, Use camera, and Upload files" width="479" height="1039">
               </div>
@@ -2264,10 +2021,6 @@
         if (isActive) l.setAttribute('aria-current', 'page');
         else l.removeAttribute('aria-current');
       });
-      // Hide all sub-items, show the one for current page
-      document.querySelectorAll('.sidebar__sub-items').forEach(el => el.classList.remove('visible'));
-      const subItems = document.querySelector('[data-page="' + pageId + '"] + .sidebar__sub-items');
-      if (subItems) subItems.classList.add('visible');
       // Update document title
       const pageLabel = pageTitles[pageId] || pageId;
       document.title = pageLabel + ' — Volition guide for org support staff';
