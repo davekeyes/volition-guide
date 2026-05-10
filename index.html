@@ -874,6 +874,48 @@
     .was-helpful__btn:hover { color: var(--button-base); }
     .was-helpful__btn.selected { color: var(--button-base); font-weight: var(--font-weight-semibold); }
 
+    .was-helpful__extra {
+      margin-top: var(--space-3);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: var(--space-2);
+    }
+    .was-helpful__extra[hidden] { display: none; }
+    .was-helpful__textarea {
+      width: 100%;
+      min-height: 80px;
+      padding: var(--space-3) var(--space-4);
+      border: 1px solid var(--button-mid);
+      border-radius: var(--radius-md);
+      font-family: var(--font-family);
+      font-size: var(--fs-small);
+      line-height: var(--lh-small);
+      color: var(--text-dark);
+      background: var(--panel-highlight);
+      resize: vertical;
+      box-sizing: border-box;
+    }
+    .was-helpful__textarea::placeholder { color: var(--text-light); }
+    .was-helpful__textarea:focus {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+      border-radius: var(--radius-md);
+    }
+    .was-helpful__send {
+      background: var(--button-base);
+      color: var(--text-inverted);
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: var(--space-2) var(--space-4);
+      font-family: var(--font-family);
+      font-size: var(--fs-small);
+      font-weight: var(--font-weight-semibold);
+      cursor: pointer;
+      transition: opacity var(--dur-fast) var(--ease-standard);
+    }
+    .was-helpful__send:hover { opacity: 0.8; }
+
     /* Next button — outline pill, no fill */
     .next-btn {
       display: inline-flex;
@@ -1234,8 +1276,8 @@
             <div class="was-helpful">
               <span class="was-helpful__label">Was this helpful?</span>
               <div class="was-helpful__actions">
-                <button class="was-helpful__btn" type="button" aria-label="Yes, this page was helpful">Yes, thanks</button>
-                <button class="was-helpful__btn" type="button" aria-label="No, this page was not helpful">Not really</button>
+                <button class="was-helpful__btn" type="button" aria-label="Yes, this page was helpful" data-helpful="yes">Yes, thanks</button>
+                <button class="was-helpful__btn" type="button" aria-label="No, this page was not helpful" data-helpful="no">Not really</button>
               </div>
             </div>
             <hr class="page-footer__divider">
@@ -1407,8 +1449,8 @@
           <div class="was-helpful">
             <span class="was-helpful__label">Was this helpful?</span>
             <div class="was-helpful__actions">
-              <button class="was-helpful__btn" type="button" aria-label="Yes, this page was helpful">Yes, thanks</button>
-              <button class="was-helpful__btn" type="button" aria-label="No, this page was not helpful">Not really</button>
+              <button class="was-helpful__btn" type="button" aria-label="Yes, this page was helpful" data-helpful="yes">Yes, thanks</button>
+              <button class="was-helpful__btn" type="button" aria-label="No, this page was not helpful" data-helpful="no">Not really</button>
             </div>
           </div>
           <hr class="page-footer__divider">
@@ -1574,8 +1616,8 @@
           <div class="was-helpful">
             <span class="was-helpful__label">Was this helpful?</span>
             <div class="was-helpful__actions">
-              <button class="was-helpful__btn" type="button" aria-label="Yes, this page was helpful">Yes, thanks</button>
-              <button class="was-helpful__btn" type="button" aria-label="No, this page was not helpful">Not really</button>
+              <button class="was-helpful__btn" type="button" aria-label="Yes, this page was helpful" data-helpful="yes">Yes, thanks</button>
+              <button class="was-helpful__btn" type="button" aria-label="No, this page was not helpful" data-helpful="no">Not really</button>
             </div>
           </div>
           <hr class="page-footer__divider">
@@ -1778,8 +1820,8 @@
           <div class="was-helpful">
             <span class="was-helpful__label">Was this helpful?</span>
             <div class="was-helpful__actions">
-              <button class="was-helpful__btn" type="button" aria-label="Yes, this page was helpful">Yes, thanks</button>
-              <button class="was-helpful__btn" type="button" aria-label="No, this page was not helpful">Not really</button>
+              <button class="was-helpful__btn" type="button" aria-label="Yes, this page was helpful" data-helpful="yes">Yes, thanks</button>
+              <button class="was-helpful__btn" type="button" aria-label="No, this page was not helpful" data-helpful="no">Not really</button>
             </div>
           </div>
           <hr class="page-footer__divider">
@@ -1934,8 +1976,8 @@
           <div class="was-helpful">
             <span class="was-helpful__label">Was this helpful?</span>
             <div class="was-helpful__actions">
-              <button class="was-helpful__btn" type="button" aria-label="Yes, this page was helpful">Yes, thanks</button>
-              <button class="was-helpful__btn" type="button" aria-label="No, this page was not helpful">Not really</button>
+              <button class="was-helpful__btn" type="button" aria-label="Yes, this page was helpful" data-helpful="yes">Yes, thanks</button>
+              <button class="was-helpful__btn" type="button" aria-label="No, this page was not helpful" data-helpful="no">Not really</button>
             </div>
           </div>
           <hr class="page-footer__divider">
@@ -2030,12 +2072,47 @@
       btn.addEventListener('click', () => showPage(btn.dataset.gotoPage));
     });
 
-    // Was-helpful buttons (cosmetic)
-    document.querySelectorAll('.was-helpful__btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const group = btn.closest('.was-helpful');
-        group.querySelectorAll('.was-helpful__btn').forEach(b => b.classList.remove('selected'));
+    // Was-helpful — mailto feedback
+    document.querySelectorAll('.was-helpful').forEach(widget => {
+      const extra = document.createElement('div');
+      extra.className = 'was-helpful__extra';
+      extra.hidden = true;
+      extra.innerHTML = '<textarea class="was-helpful__textarea" placeholder="Any additional thoughts? (optional)" aria-label="Additional feedback"></textarea>' +
+        '<button type="button" class="was-helpful__send">Send feedback</button>';
+      widget.appendChild(extra);
+
+      const yesBtn = widget.querySelector('[data-helpful="yes"]');
+      const noBtn  = widget.querySelector('[data-helpful="no"]');
+      const textarea = extra.querySelector('.was-helpful__textarea');
+      const sendBtn  = extra.querySelector('.was-helpful__send');
+
+      function getPageLabel() {
+        const hash = location.hash.replace('#', '');
+        return pageTitles[hash] || document.title;
+      }
+      function markSelected(btn) {
+        widget.querySelectorAll('.was-helpful__btn').forEach(b => b.classList.remove('selected'));
         btn.classList.add('selected');
+      }
+
+      yesBtn.addEventListener('click', () => {
+        markSelected(yesBtn);
+        extra.hidden = true;
+        const body = encodeURIComponent('Page: ' + getPageLabel() + '\nWas this helpful: Yes');
+        window.location.href = 'mailto:info@volition.org.nz?subject=' + encodeURIComponent('Guide feedback') + '&body=' + body;
+      });
+
+      noBtn.addEventListener('click', () => {
+        markSelected(noBtn);
+        extra.hidden = false;
+        textarea.focus();
+      });
+
+      sendBtn.addEventListener('click', () => {
+        const comment = textarea.value.trim();
+        const body = encodeURIComponent('Page: ' + getPageLabel() + '\nWas this helpful: No' +
+          (comment ? '\n\nAdditional feedback:\n' + comment : ''));
+        window.location.href = 'mailto:info@volition.org.nz?subject=' + encodeURIComponent('Guide feedback') + '&body=' + body;
       });
     });
 
