@@ -1135,7 +1135,7 @@
     .was-helpful__btn {
       background: none;
       border: none;
-      padding: 0;
+      padding: var(--space-2) 0;
       font-size: var(--fs-base);
       line-height: var(--lh-base);
       color: var(--text-dark);
@@ -1657,7 +1657,7 @@
             <p class="page-intro-callout__quote">Before you can see someone's preferences in Volition, you need to be connected to their Circle of Support.</p>
             <div>
               <p>Your organisation will make connections for you, so you at least have general view access.</p>
-              <a href="#" class="role-entry__link" onclick="event.preventDefault(); showPage('boundaries')"><span class="role-entry__link__text">Learn more about permissions</span> →</a>
+              <button type="button" class="role-entry__link" onclick="showPage('boundaries')"><span class="role-entry__link__text">Learn more about permissions</span> →</button>
               <p>Decision Makers can also invite you directly — they can share a link or QR code from their app. Once you click it or scan it, you are in their circle. They can choose what permission level they want you to have.</p>
               <p>If you connect with a Decision Maker that has not yet set up their account, they will not have preferences to view. You can support them to get started — see the Decision Maker Guide for steps on how to do this.</p>
             </div>
@@ -1679,8 +1679,8 @@
           <div class="was-helpful">
             <span class="was-helpful__label">Was this helpful?</span>
             <div class="was-helpful__actions">
-              <button class="was-helpful__btn" type="button">Yes, thanks</button>
-              <button class="was-helpful__btn" type="button">Not really</button>
+              <button class="was-helpful__btn" type="button" aria-label="Yes, this page was helpful">Yes, thanks</button>
+              <button class="was-helpful__btn" type="button" aria-label="No, this page was not helpful">Not really</button>
             </div>
           </div>
           <hr class="page-footer__divider">
@@ -1880,7 +1880,7 @@
             <p>Open your Volition and choose the Decision Maker's profile. Select the big '<strong>[Name]'s Volition</strong>' button, and a purple screen will confirm that you are connecting to the Decision Maker's Volition.</p>
             <div class="screen-trio">
               <div class="screen-trio__item">
-                <img src="ui_kits/guide-assets/start_session1.png" alt="Decision Maker's profile in Volition showing the Explore button" width="479" height="1039">
+                <img src="ui_kits/guide-assets/start_session1.png" alt="Decision Maker's supporter profile in Volition, showing the 'Jennifer's Volition' button to start a support session" width="479" height="1039">
               </div>
               <div class="screen-trio__item">
                 <img src="ui_kits/guide-assets/start_session2.png" alt="Connecting to Jennifer's Volition — purple confirmation screen" width="479" height="1039">
@@ -1954,13 +1954,23 @@
               <div class="highlight-box">
                 <p>Please respect a Decision Maker's choices and only make changes when necessary, with their consent.</p>
               </div>
-              <div>
-                <p>If a Decision Maker wants to create a new preference, open a support session and tap "Create a Preference" from the home screen or library.</p>
-                <p>Work through the steps together. Let them lead — your role is to help, not to decide. Their preferences are their voice.</p>
-                <p>If you notice a preference that is out of date, during a support session you can also edit. Tap the preference that needs to be updated. Tap "Edit" at the bottom of the preference page. Make the change together with them — do not edit without their direction. Tap "Save" when done. Always discuss this with the Decision Maker first.</p>
+              <p>If a Decision Maker wants to create a new preference, open a support session and tap "Add something" from the home screen or library.</p>
+              <div class="screen-trio">
+                <div class="screen-trio__item">
+                  <img src="ui_kits/guide-assets/editors1.png" alt="Preference library showing the 'Add something' button to start creating a new preference" width="479" height="1039">
+                </div>
+                <div class="screen-trio__item">
+                  <img src="ui_kits/guide-assets/editors2.png" alt="Step 1 — Describe your preference, with fields for a title, feeling, and details" width="479" height="1039">
+                </div>
+                <div class="screen-trio__item">
+                  <img src="ui_kits/guide-assets/editors3.png" alt="Add to library — choosing topics to categorise the new preference" width="479" height="1039">
+                </div>
               </div>
-              <div class="screen-shot">
-                <img src="ui_kits/guide-assets/editors1.png" alt="Preference editing screen in a support session" width="479" height="1039">
+              <p>Work through the steps together. Let them lead — your role is to help, not to decide. Their preferences are their voice.</p>
+              <p>If you notice a preference that is out of date, during a support session you can also edit. Tap the preference, select 'Options', then 'Edit'. Make the change together with them — do not edit without their direction. Always discuss this with the Decision Maker first.</p>
+              <div class="screen-pair" style="gap: 48px;">
+                <img src="ui_kits/guide-assets/editors4.png" alt="Preference detail screen showing a completed preference with the Options button" width="479" height="1039">
+                <img src="ui_kits/guide-assets/editors5.png" alt="Preference options dialog showing Edit, Add a note, Find a photo, Use camera, and Upload files" width="479" height="1039">
               </div>
             </div>
           </div>
@@ -1971,8 +1981,8 @@
           <div class="was-helpful">
             <span class="was-helpful__label">Was this helpful?</span>
             <div class="was-helpful__actions">
-              <button class="was-helpful__btn" type="button">Yes, thanks</button>
-              <button class="was-helpful__btn" type="button">Not really</button>
+              <button class="was-helpful__btn" type="button" aria-label="Yes, this page was helpful">Yes, thanks</button>
+              <button class="was-helpful__btn" type="button" aria-label="No, this page was not helpful">Not really</button>
             </div>
           </div>
           <hr class="page-footer__divider">
@@ -2129,8 +2139,8 @@
           <div class="was-helpful">
             <span class="was-helpful__label">Was this helpful?</span>
             <div class="was-helpful__actions">
-              <button class="was-helpful__btn" type="button">Yes, thanks</button>
-              <button class="was-helpful__btn" type="button">Not really</button>
+              <button class="was-helpful__btn" type="button" aria-label="Yes, this page was helpful">Yes, thanks</button>
+              <button class="was-helpful__btn" type="button" aria-label="No, this page was not helpful">Not really</button>
             </div>
           </div>
           <hr class="page-footer__divider">
