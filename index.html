@@ -139,24 +139,6 @@
       visibility: hidden;
     }
 
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: var(--space-3);
-      padding-bottom: var(--space-3);
-    }
-
-    .section-number {
-      display: none;
-    }
-
-    .section-header h2 {
-      font-size: var(--fs-xxl);
-      line-height: var(--lh-xxl);
-      font-weight: var(--font-weight-semibold);
-      color: var(--text-dark);
-      margin: 0;
-    }
 
     /* Content blocks — 24px between sub-blocks */
     .content-block {
@@ -446,6 +428,8 @@
     .guide-list li:last-child { margin-bottom: 0; }
 
     /* Ordered numbered guide list */
+    .guide-list--top-space { margin-top: var(--space-4); }
+
     .guide-list--ordered {
       list-style: decimal;
       padding-left: var(--space-5);
@@ -1357,7 +1341,7 @@
 
       <!-- Guide selector -->
       <div class="guide-selector">
-        <button class="guide-selector__btn" id="guideSelectorBtn" aria-haspopup="true" aria-expanded="false">
+        <button class="guide-selector__btn" id="guideSelectorBtn" aria-label="Guide to Volition for org support staff" aria-haspopup="true" aria-expanded="false">
           <span class="guide-selector__title">Guide to Volition</span>
           <span class="guide-selector__sub">
             for org support staff
@@ -1678,7 +1662,7 @@
             <p class="page-intro-callout__quote">Before you can see someone's preferences in Volition, you need to be connected to their Circle of Support.</p>
             <div>
               <p>Your organisation will make connections for you, so you at least have general view access.</p>
-              <p><button type="button" class="role-entry__link" onclick="showPage('boundaries')"><span class="role-entry__link__text">Learn more about permissions</span><span class="icon" aria-hidden="true" style="-webkit-mask-image: url(volition-design-system/assets/icons/arrow-right.svg); mask-image: url(volition-design-system/assets/icons/arrow-right.svg);"></span></button></p>
+              <p><button type="button" class="role-entry__link" data-goto-page="boundaries"><span class="role-entry__link__text">Learn more about permissions</span><span class="icon" aria-hidden="true" style="-webkit-mask-image: url(volition-design-system/assets/icons/arrow-right.svg); mask-image: url(volition-design-system/assets/icons/arrow-right.svg);"></span></button></p>
               <p>Decision Makers can also invite you directly — they can share a link or QR code from their app. Once you click it or scan it, you are in their circle. They can choose what permission level they want you to have.</p>
               <p>If you connect with a Decision Maker that has not yet set up their account, they will not have preferences to view. You can support them to get started — see the Decision Maker Guide for steps on how to do this.</p>
             </div>
@@ -1850,7 +1834,7 @@
             <div>
               <p>If a Decision Maker needs support to get started with Volition, a Manager or Account Owner can create a profile on their behalf.</p>
               <p>Creating a profile on behalf of a Decision Maker is a last resort. Before this happens the Manager or Account Owner should double check:</p>
-              <ul class="guide-list" style="margin-top: var(--space-4);">
+              <ul class="guide-list guide-list--top-space">
                 <li>If the Decision Maker already has a Volition profile</li>
                 <li>If the Decision Maker can create their own profile, with support.</li>
               </ul>
@@ -2101,10 +2085,7 @@
         <!-- Coming soon -->
         <section class="guide-section" aria-labelledby="heading-coming-soon">
           <span class="guide-section__anchor" aria-hidden="true" id="coming-soon"></span>
-          <div class="section-header">
-            <div class="section-number">20</div>
-            <h2 id="heading-coming-soon">Features coming soon</h2>
-          </div>
+          <h2 class="sub-section-heading" id="heading-coming-soon">Features coming soon</h2>
 
           <div class="content-block">
             <div class="sub-section">
@@ -2113,35 +2094,35 @@
               <div class="feature-item">
                 <div class="feature-dot"></div>
                 <div>
-                  <div class="feature-name">Goals module</div>
+                  <h3 class="feature-name">Goals module</h3>
                   <p class="feature-desc">View and contribute to a Decision Maker's goals.</p>
                 </div>
               </div>
               <div class="feature-item">
                 <div class="feature-dot"></div>
                 <div>
-                  <div class="feature-name">Preference prompts</div>
+                  <h3 class="feature-name">Preference prompts</h3>
                   <p class="feature-desc">Suggested questions to help Decision Makers build their library.</p>
                 </div>
               </div>
               <div class="feature-item">
                 <div class="feature-dot"></div>
                 <div>
-                  <div class="feature-name">My Health Passport</div>
+                  <h3 class="feature-name">My Health Passport</h3>
                   <p class="feature-desc">A portable health summary to share with any health professional.</p>
                 </div>
               </div>
               <div class="feature-item">
                 <div class="feature-dot"></div>
                 <div>
-                  <div class="feature-name">My Advanced Care Plan</div>
+                  <h3 class="feature-name">My Advanced Care Plan</h3>
                   <p class="feature-desc">A tool for recording wishes about future health and care.</p>
                 </div>
               </div>
               <div class="feature-item">
                 <div class="feature-dot"></div>
                 <div>
-                  <div class="feature-name">Speech to text and text to speech</div>
+                  <h3 class="feature-name">Speech to text and text to speech</h3>
                   <p class="feature-desc">To make the app more accessible.</p>
                 </div>
               </div>
@@ -2155,10 +2136,7 @@
         <!-- Support and feedback -->
         <section class="guide-section" aria-labelledby="heading-support-feedback">
           <span class="guide-section__anchor" aria-hidden="true" id="support-feedback"></span>
-          <div class="section-header">
-            <div class="section-number">21</div>
-            <h2 id="heading-support-feedback">Support and feedback</h2>
-          </div>
+          <h2 class="sub-section-heading" id="heading-support-feedback">Support and feedback</h2>
 
           <div class="content-block">
             <div class="card card--highlight">
@@ -2170,16 +2148,16 @@
               <h3>How to get support</h3>
               <div class="contact-grid">
               <div class="contact-card">
-                <div class="contact-card__heading">Technical issues or app questions</div>
+                <h4 class="contact-card__heading">Technical issues or app questions</h4>
                 <p>Email: <a href="mailto:info@volition.org.nz">info@volition.org.nz</a></p>
                 <p>Website: <a href="https://volition.org.nz" target="_blank" rel="noopener">volition.org.nz</a></p>
               </div>
               <div class="contact-card">
-                <div class="contact-card__heading">Organisation setup or access</div>
+                <h4 class="contact-card__heading">Organisation setup or access</h4>
                 <p>Contact your organisation's Volition Account Owner or Manager.</p>
               </div>
               <div class="contact-card">
-                <div class="contact-card__heading">Supported Decision Making</div>
+                <h4 class="contact-card__heading">Supported Decision Making</h4>
                 <p>Talk to your team leader, or visit <a href="https://supportmydecisions.nz" target="_blank" rel="noopener">supportmydecisions.nz</a> for general information and resources.</p>
               </div>
             </div><!-- /contact-grid -->
@@ -2192,10 +2170,7 @@
         <!-- FAQs -->
         <section class="guide-section" aria-labelledby="heading-faqs">
           <span class="guide-section__anchor" aria-hidden="true" id="faqs"></span>
-          <div class="section-header">
-            <div class="section-number">22</div>
-            <h2 id="heading-faqs">Frequently asked questions</h2>
-          </div>
+          <h2 class="sub-section-heading" id="heading-faqs">Frequently asked questions</h2>
 
           <div class="faq-list">
             <details class="faq-item">
@@ -2328,6 +2303,11 @@
     // Next-section buttons
     document.querySelectorAll('.next-btn').forEach(btn => {
       btn.addEventListener('click', () => showPage(btn.dataset.next));
+    });
+
+    // In-content page links (data-goto-page)
+    document.querySelectorAll('[data-goto-page]').forEach(btn => {
+      btn.addEventListener('click', () => showPage(btn.dataset.gotoPage));
     });
 
     // Was-helpful buttons (cosmetic)
