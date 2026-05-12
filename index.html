@@ -5,11 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Volition — Organisation staff supporter guide</title>
   <link rel="icon" type="image/png" href="ui_kits/guide-assets/favicon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap">
+  <meta name="description" content="A guide for Volition organisation support staff — getting started, understanding your role, boundaries, running support sessions, and what's coming next.">
   <link rel="stylesheet" href="volition-design-system/colors_and_type.css">
   <style>
+    @font-face {
+      font-family: 'Outfit';
+      src: url('volition-design-system/fonts/Outfit-Regular.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Outfit';
+      src: url('volition-design-system/fonts/Outfit-Medium.ttf') format('truetype');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Outfit';
+      src: url('volition-design-system/fonts/Outfit-SemiBold.ttf') format('truetype');
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+    }
+
     /* ============================================================
        WCAG AA CONTRAST AUDIT — Supporter theme (data-theme="supporter")
        Checked: 2026-05-08. Hex values from colors_and_type.css.
@@ -1102,7 +1122,7 @@
 
       <!-- Guide selector -->
       <div class="guide-selector">
-        <button class="guide-selector__btn" id="guideSelectorBtn" aria-label="Guide to Volition for org support staff" aria-haspopup="true" aria-expanded="false">
+        <button class="guide-selector__btn" id="guideSelectorBtn" aria-label="Guide to Volition for org support staff" aria-haspopup="menu" aria-expanded="false">
           <span class="guide-selector__title">Guide to Volition</span>
           <span class="guide-selector__sub">
             for org support staff
@@ -1111,12 +1131,12 @@
             </svg>
           </span>
         </button>
-        <ul class="guide-selector__dropdown" id="guideSelectorDropdown" role="listbox" hidden>
-          <li><a class="guide-selector__option guide-selector__option--active" href="#" role="option" aria-selected="true">For org support staff</a></li>
-          <li><a class="guide-selector__option" href="#" role="option">For Decision Makers</a></li>
-          <li><a class="guide-selector__option" href="#" role="option">For Supporters</a></li>
-          <li><a class="guide-selector__option" href="#" role="option">For Guest users</a></li>
-          <li><a class="guide-selector__option" href="#" role="option">For Managers</a></li>
+        <ul class="guide-selector__dropdown" id="guideSelectorDropdown" role="menu" hidden>
+          <li><a class="guide-selector__option guide-selector__option--active" href="#" role="menuitem" aria-current="true">For org support staff</a></li>
+          <li><a class="guide-selector__option" href="#" role="menuitem">For Decision Makers</a></li>
+          <li><a class="guide-selector__option" href="#" role="menuitem">For Supporters</a></li>
+          <li><a class="guide-selector__option" href="#" role="menuitem">For Guest users</a></li>
+          <li><a class="guide-selector__option" href="#" role="menuitem">For Managers</a></li>
         </ul>
       </div>
 
